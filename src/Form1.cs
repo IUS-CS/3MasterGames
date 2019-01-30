@@ -17,13 +17,30 @@ namespace C246SpellBook_V_2
             InitializeComponent();
         }
 
+        /*
+         * Make the dtSpells at the class level so it can be used throughout the program.
+         */
+
         private DataTable dtSpells;
+
+        /* 
+         * Generating a form load data table to display the spells.
+         * This method is creating a data source for the listBox1, which is the list that will contain our spells.
+         * In order to actually display the spell name, I created a Display Member which takes the Data Table variable dtSpells, and looks for the
+         * column "Spells" and displays the members in that row.
+         */
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             listBox1.DataSource = GetData();
             listBox1.DisplayMember = "Spell";
         }
+
+        /*
+         * The DataTable method is what populates the listBox1 with the spells, another method can be created to create other attributes to the spell.
+         * Inside the method, I created a column named "Spell" which holds the attributes spell name. For this column each row that I add will be a spell name.
+         */
 
         private DataTable GetData()
         {
@@ -66,6 +83,15 @@ namespace C246SpellBook_V_2
 
             return dtSpells;
         }
+
+        /*
+         * This method effects the Search bar, and how it will be filtered.
+         * So, first I added the data from the dtSpells to the new DataView dvSpells, which will help display the spell name.
+         * To filter the string that you type in it must be comared to the Spells that we have. In order to do that, I used 
+         * rowFilter and our column "Spell" and used the term "LIKE" to compare similar characters and '%. By doing this I can 
+         * compare the Spell to the Search bar value with SearchTextBox.Text.
+         */
+
 
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
