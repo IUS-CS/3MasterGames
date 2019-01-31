@@ -30,9 +30,9 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.DisplayPanel = new System.Windows.Forms.Panel();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.label2 = new System.Windows.Forms.Label();
             this.SearchPanel.SuspendLayout();
             this.DisplayPanel.SuspendLayout();
@@ -56,17 +56,9 @@
             this.SearchTextBox.TabIndex = 1;
             this.SearchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(19, 84);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(289, 290);
-            this.listBox1.TabIndex = 2;
-            // 
             // SearchPanel
             // 
-            this.SearchPanel.Controls.Add(this.listBox1);
+            this.SearchPanel.Controls.Add(this.listView1);
             this.SearchPanel.Controls.Add(this.SearchTextBox);
             this.SearchPanel.Controls.Add(this.label1);
             this.SearchPanel.Location = new System.Drawing.Point(22, 18);
@@ -81,6 +73,14 @@
             this.DisplayPanel.Name = "DisplayPanel";
             this.DisplayPanel.Size = new System.Drawing.Size(355, 407);
             this.DisplayPanel.TabIndex = 4;
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(15, 78);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(306, 285);
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // label2
             // 
@@ -117,10 +117,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox SearchTextBox;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Panel SearchPanel;
         private System.Windows.Forms.Panel DisplayPanel;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 
