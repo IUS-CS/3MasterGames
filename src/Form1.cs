@@ -150,49 +150,7 @@ namespace C246SpellBook_V_2
             populateListView(dvSpells);
         }
 
-          private void checkBox1_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox2_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox3_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox4_CheckedChanged(object sender, EventArgs e)
-          {
-
-
-          }
-          private void checkBox5_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox6_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox7_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox8_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox9_CheckedChanged_1(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox10_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-
-     }
+    }
 }
 
 
