@@ -85,6 +85,7 @@
             this.label1.Size = new System.Drawing.Size(137, 42);
             this.label1.TabIndex = 0;
             this.label1.Text = "Search";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // SearchTextBox
             // 
@@ -100,10 +101,10 @@
             this.SearchPanel.Controls.Add(this.listView1);
             this.SearchPanel.Controls.Add(this.SearchTextBox);
             this.SearchPanel.Controls.Add(this.label1);
-            this.SearchPanel.Location = new System.Drawing.Point(501, 35);
+            this.SearchPanel.Location = new System.Drawing.Point(501, 83);
             this.SearchPanel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.SearchPanel.Name = "SearchPanel";
-            this.SearchPanel.Size = new System.Drawing.Size(649, 753);
+            this.SearchPanel.Size = new System.Drawing.Size(649, 705);
             this.SearchPanel.TabIndex = 3;
             // 
             // listView1
@@ -118,10 +119,10 @@
             // DisplayPanel
             // 
             this.DisplayPanel.Controls.Add(this.label2);
-            this.DisplayPanel.Location = new System.Drawing.Point(1188, 35);
+            this.DisplayPanel.Location = new System.Drawing.Point(1188, 83);
             this.DisplayPanel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.DisplayPanel.Name = "DisplayPanel";
-            this.DisplayPanel.Size = new System.Drawing.Size(651, 751);
+            this.DisplayPanel.Size = new System.Drawing.Size(651, 703);
             this.DisplayPanel.TabIndex = 4;
             // 
             // label2
@@ -148,10 +149,10 @@
             this.panel1.Controls.Add(this.checkBox2);
             this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(22, 35);
+            this.panel1.Location = new System.Drawing.Point(22, 83);
             this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(440, 751);
+            this.panel1.Size = new System.Drawing.Size(440, 703);
             this.panel1.TabIndex = 2;
             // 
             // checkBox10
