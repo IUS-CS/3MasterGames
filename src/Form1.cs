@@ -16,7 +16,7 @@ namespace C246SpellBook_V_2
     public partial class Form1 : Form
     {
 
-
+        
         /*
          * The three variables will be used to obtain data from the list of spells and
          * be able to view the data that has been placed inside the list. Also List spellType is the
@@ -36,6 +36,10 @@ namespace C246SpellBook_V_2
         public Form1()
         {
             InitializeComponent();
+
+            //sets the maximize and minimize box to on
+            this.MaximizeBox = true;
+            this.MinimizeBox = true;
 
             //ListView Properties
             listView1.View = View.Details;
@@ -190,7 +194,28 @@ namespace C246SpellBook_V_2
           {
 
           }
-     }
+
+        private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aboutThisApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+    }
 }
 
 
