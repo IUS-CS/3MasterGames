@@ -200,6 +200,16 @@ namespace C246SpellBook_V_2
         {
 
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aboutThisApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var about = new About
+        }
     }
 }
 

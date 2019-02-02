@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace C246SpellBook_V_2
 {
     /// <summary>
-    /// Interaction logic for UpdateW.xaml
+    /// Interaction logic for dataEditor.xaml
     /// </summary>
-    public partial class UpdateW : UserControl
+    public partial class dataEditor : UserControl
     {
-        public UpdateW()
+        public dataEditor()
         {
             InitializeComponent();
         }
