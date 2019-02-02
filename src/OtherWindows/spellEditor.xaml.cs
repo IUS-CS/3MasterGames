@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace C246SpellBook_V_2
+namespace C246SpellBook_V_2.OtherWindows
 {
     /// <summary>
-    /// Interaction logic for dataEditor.xaml
+    /// Interaction logic for spellEditor.xaml
     /// </summary>
-    public partial class dataEditor : UserControl
+    public partial class spellEditor : UserControl
     {
-        public dataEditor()
+        public spellEditor()
         {
             InitializeComponent();
         }

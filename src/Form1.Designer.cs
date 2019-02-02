@@ -7,6 +7,7 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,6 +20,8 @@
             }
             base.Dispose(disposing);
         }
+
+        
 
         #region Windows Form Designer generated code
 
@@ -480,7 +483,8 @@
         }
 
         #endregion
-
+        public bool MaximizeBox { get; set; }
+        public bool MinimizeBox { get; set; }
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox SearchTextBox;
         private System.Windows.Forms.Panel SearchPanel;
