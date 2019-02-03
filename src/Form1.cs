@@ -218,7 +218,15 @@ namespace C246SpellBook_V_2
 
         private void DisplayPanel_Paint(object sender, PaintEventArgs e)
         {
+           
 
+
+        
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //DisplayPanel_Paint();
         }
     }
 }
