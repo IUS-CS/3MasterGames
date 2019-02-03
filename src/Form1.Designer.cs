@@ -483,8 +483,8 @@
         }
 
         #endregion
-        public bool MaximizeBox { get; set; }
-        public bool MinimizeBox { get; set; }
+        public new bool MaximizeBox { get; set; }
+        public new bool MinimizeBox { get; set; }
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox SearchTextBox;
         private System.Windows.Forms.Panel SearchPanel;

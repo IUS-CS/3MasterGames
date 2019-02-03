@@ -53,7 +53,7 @@ namespace C246SpellBook_V_2
             dtSpells.Columns.Add("Name");
 
             //Fill datatable
-            fillDataTable(generateData());
+            fillDataTable(GenerateData());
             dvSpells = new DataView(dtSpells);
             populateListView(dvSpells);
 
@@ -65,7 +65,7 @@ namespace C246SpellBook_V_2
          * This creates a new list named spells and generates all the spells manually, late this
          * will need to change in order to hold more attribtes other than name.
          */
-        private List<spellType> generateData()
+        private List<spellType> GenerateData()
         {
             spells = new List<spellType>()
             {
