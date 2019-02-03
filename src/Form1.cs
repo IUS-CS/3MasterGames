@@ -19,12 +19,12 @@ namespace C246SpellBook_V_2
         
         /*
          * The three variables will be used to obtain data from the list of spells and
-         * be able to view the data that has been placed inside the list. Also List spellType is the
+         * be able to view the data that has been placed inside the list. Also List SpellType is the
          * list of spells.
          */
         private DataTable dtSpells;
         private DataView dvSpells;
-        private List<spellType> spells;
+        private List<SpellType> spells;
 
 
         /*
@@ -53,9 +53,9 @@ namespace C246SpellBook_V_2
             dtSpells.Columns.Add("Name");
 
             //Fill datatable
-            fillDataTable(GenerateData());
+            FillDataTable(GenerateData());
             dvSpells = new DataView(dtSpells);
-            populateListView(dvSpells);
+            PopulateListView(dvSpells);
 
         }
 
@@ -65,39 +65,39 @@ namespace C246SpellBook_V_2
          * This creates a new list named spells and generates all the spells manually, late this
          * will need to change in order to hold more attribtes other than name.
          */
-        private List<spellType> GenerateData()
+        private List<SpellType> GenerateData()
         {
-            spells = new List<spellType>()
+            spells = new List<SpellType>()
             {
-                new spellType("Abi-Dalzim's Horrid Wilting"),
-                new spellType("Absorb Elements"),
-                new spellType("Acid Arrow"),
-                new spellType("Acid Splash"),
-                new spellType("Aganazzar's Scorcher"),
-                new spellType("Aid"),
-                new spellType("Alarm"),
-                new spellType("Alter Self"),
-                new spellType("Animal Friendship"),
-                new spellType("Animal Messenger"),
-                new spellType("Animal Shapes"),
-                new spellType("Animate Dead"),
-                new spellType("Animate Objects"),
-                new spellType("Antilife Shell"),
-                new spellType("Antimagic Field"),
-                new spellType("Antipathy/Sympathy"),
-                new spellType("Arcane Eye"),
-                new spellType("Arcane Gate"),
-                new spellType("Arcane Hand"),
-                new spellType("Arcane Lock"),
-                new spellType("Arcanist's Magic Aura"),
-                new spellType("Armor of Agathys"),
-                new spellType("Arms of Hadar"),
-                new spellType("Astral Projection"),
-                new spellType("Augury"),
-                new spellType("Aura of Life"),
-                new spellType("Aura of Purity"),
-                new spellType("Aura of Vitality"),
-                new spellType("Awaken"),
+                new SpellType("Abi-Dalzim's Horrid Wilting"),
+                new SpellType("Absorb Elements"),
+                new SpellType("Acid Arrow"),
+                new SpellType("Acid Splash"),
+                new SpellType("Aganazzar's Scorcher"),
+                new SpellType("Aid"),
+                new SpellType("Alarm"),
+                new SpellType("Alter Self"),
+                new SpellType("Animal Friendship"),
+                new SpellType("Animal Messenger"),
+                new SpellType("Animal Shapes"),
+                new SpellType("Animate Dead"),
+                new SpellType("Animate Objects"),
+                new SpellType("Antilife Shell"),
+                new SpellType("Antimagic Field"),
+                new SpellType("Antipathy/Sympathy"),
+                new SpellType("Arcane Eye"),
+                new SpellType("Arcane Gate"),
+                new SpellType("Arcane Hand"),
+                new SpellType("Arcane Lock"),
+                new SpellType("Arcanist's Magic Aura"),
+                new SpellType("Armor of Agathys"),
+                new SpellType("Arms of Hadar"),
+                new SpellType("Astral Projection"),
+                new SpellType("Augury"),
+                new SpellType("Aura of Life"),
+                new SpellType("Aura of Purity"),
+                new SpellType("Aura of Vitality"),
+                new SpellType("Awaken"),
             };
 
             return spells;
@@ -108,7 +108,7 @@ namespace C246SpellBook_V_2
          * Transfer the data from list to datatable, by checking each spell and adding it to the 
          * row under that specific column.
          */
-        private void fillDataTable(List<spellType> spells)
+        private void FillDataTable(List<SpellType> spells)
         {
             foreach (var spell in spells)
             {
@@ -130,7 +130,7 @@ namespace C246SpellBook_V_2
          * in that row. So if we had more attributes I could add row[1].ToString() and that will be the next 
          * attribute like level for instance.
          */
-        private void populateListView(DataView dv)
+        private void PopulateListView(DataView dv)
         {
             listView1.Items.Clear();
             foreach (DataRow row in dvSpells.ToTable().Rows)
@@ -151,68 +151,73 @@ namespace C246SpellBook_V_2
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
             dvSpells.RowFilter = string.Format("Name Like '%{0}%'", SearchTextBox.Text);
-            populateListView(dvSpells);
+            PopulateListView(dvSpells);
         }
 
-          private void checkBox1_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox1_CheckedChanged(object sender, EventArgs e)
           {
 
           }
-          private void checkBox2_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox2_CheckedChanged(object sender, EventArgs e)
           {
 
           }
-          private void checkBox3_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox3_CheckedChanged(object sender, EventArgs e)
           {
 
           }
-          private void checkBox4_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox4_CheckedChanged(object sender, EventArgs e)
           {
 
           }
-          private void checkBox5_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox5_CheckedChanged(object sender, EventArgs e)
           {
 
           }
-          private void checkBox6_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox6_CheckedChanged(object sender, EventArgs e)
           {
 
           }
-          private void checkBox7_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox7_CheckedChanged(object sender, EventArgs e)
           {
 
           }
-          private void checkBox8_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox8_CheckedChanged(object sender, EventArgs e)
           {
 
           }
-          private void checkBox9_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox9_CheckedChanged(object sender, EventArgs e)
           {
 
           }
-          private void checkBox10_CheckedChanged(object sender, EventArgs e)
+          private void CheckBox10_CheckedChanged(object sender, EventArgs e)
           {
 
           }
 
-        private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DuplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void aboutThisApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutThisApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
+
+        }
+
+        private void DisplayPanel_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
@@ -220,13 +225,15 @@ namespace C246SpellBook_V_2
 
 
 /*
- * This is where we will add attributes to the spellType class, like level, dame, discription, etc.
+ * This is where we will add attributes to the SpellType class, like level, dame, discription, etc.
  */
-class spellType
+class SpellType
 {
+#pragma warning disable IDE0044 // Add readonly modifier
     private string name;
+#pragma warning restore IDE0044 // Add readonly modifier
 
-    public spellType(string name)
+    public SpellType(string name)
     {
         this.name = name;
     }

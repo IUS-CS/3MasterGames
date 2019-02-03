@@ -88,7 +88,7 @@
             this.label1.Size = new System.Drawing.Size(137, 42);
             this.label1.TabIndex = 0;
             this.label1.Text = "Search";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // SearchTextBox
             // 
@@ -127,6 +127,7 @@
             this.DisplayPanel.Name = "DisplayPanel";
             this.DisplayPanel.Size = new System.Drawing.Size(651, 703);
             this.DisplayPanel.TabIndex = 4;
+            this.DisplayPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DisplayPanel_Paint);
             // 
             // label2
             // 
@@ -267,7 +268,7 @@
             this.checkBox1.TabIndex = 3;
             this.checkBox1.Text = "Level 0";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // label3
             // 
@@ -372,7 +373,7 @@
             this.duplicateSpellBookToolStripMenuItem.Name = "duplicateSpellBookToolStripMenuItem";
             this.duplicateSpellBookToolStripMenuItem.Size = new System.Drawing.Size(374, 34);
             this.duplicateSpellBookToolStripMenuItem.Text = "Duplicate Spellbook";
-            this.duplicateSpellBookToolStripMenuItem.Click += new System.EventHandler(this.duplicateSpellBookToolStripMenuItem_Click);
+            this.duplicateSpellBookToolStripMenuItem.Click += new System.EventHandler(this.DuplicateSpellBookToolStripMenuItem_Click);
             // 
             // deleteSpellbookToolStripMenuItem
             // 
@@ -431,14 +432,14 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(82, 34);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // aboutThisApplicationToolStripMenuItem
             // 
             this.aboutThisApplicationToolStripMenuItem.Name = "aboutThisApplicationToolStripMenuItem";
             this.aboutThisApplicationToolStripMenuItem.Size = new System.Drawing.Size(315, 34);
             this.aboutThisApplicationToolStripMenuItem.Text = "About This Application";
-            this.aboutThisApplicationToolStripMenuItem.Click += new System.EventHandler(this.aboutThisApplicationToolStripMenuItem_Click);
+            this.aboutThisApplicationToolStripMenuItem.Click += new System.EventHandler(this.AboutThisApplicationToolStripMenuItem_Click);
             // 
             // changeLogToolStripMenuItem
             // 
