@@ -47,10 +47,15 @@ namespace C246SpellBook_V_2
 
             //Add Columns
             listView1.Columns.Add("Name", 150);
+            listView1.Columns.Add("School", 100);
+            listView1.Columns.Add("Classes", 150);
 
             //Initialize Datatable and add columns
             dtSpells = new DataTable();
             dtSpells.Columns.Add("Name");
+            dtSpells.Columns.Add("School");
+            dtSpells.Columns.Add("Classes");
+
 
             //Fill datatable
             fillDataTable(generateData());
@@ -63,13 +68,15 @@ namespace C246SpellBook_V_2
         /*
          * Make the dtSpells at the class level so it can be used throughout the program.
          * This creates a new list named spells and generates all the spells manually, late this
-         * will need to change in order to hold more attribtes other than name.
+         * will need to change in order to hold more attributes other than name.
          */
         private List<spellType> generateData()
         {
             spells = new List<spellType>()
             {
-                new spellType("Abi-Dalzim's Horrid Wilting"),
+                new spellType("Abi-Dalzim's Horrid Wilting", "Necromancy", "Sorcerer, Wizard", "8", "1 Action", "150 ft", "Instantaneous", "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one. Nonmagical plants in the area that aren’t creatures, such as trees and shrubs, wither and die instantly."),
+                /*
+                 
                 new spellType("Absorb Elements"),
                 new spellType("Acid Arrow"),
                 new spellType("Acid Splash"),
@@ -98,6 +105,7 @@ namespace C246SpellBook_V_2
                 new spellType("Aura of Purity"),
                 new spellType("Aura of Vitality"),
                 new spellType("Awaken"),
+                */
             };
 
             return spells;
@@ -112,7 +120,8 @@ namespace C246SpellBook_V_2
         {
             foreach (var spell in spells)
             {
-                dtSpells.Rows.Add(spell.Name);
+                dtSpells.Rows.Add(spell.Name, spell.School, spell.Classes);
+                
             }
         }
 
@@ -135,7 +144,7 @@ namespace C246SpellBook_V_2
             listView1.Items.Clear();
             foreach (DataRow row in dvSpells.ToTable().Rows)
             {
-                listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString() }));
+                listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString() }));
             }
         }
 
@@ -215,6 +224,11 @@ namespace C246SpellBook_V_2
             
 
         }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
@@ -225,14 +239,57 @@ namespace C246SpellBook_V_2
 class spellType
 {
     private string name;
+    private string school;
+    private string classes;
+    private string level;
+    private string castingTime;
+    private string range;
+    private string duration;
+    private string description;
 
-    public spellType(string name)
+
+    public spellType(string name, string school, string classes, string level, string castingTime, string range, string duration, string description)
     {
         this.name = name;
+        this.school = school;
+        this.classes = classes;
+        this.level = level;
+        this.castingTime = castingTime;
+        this.range = range;
+        this.duration = duration;
+        this.description = description;
     }
 
     public string Name
     {
         get { return name; }
+    }
+    public string School
+    {
+        get { return school; }
+    }
+    public string Classes
+    {
+        get { return classes; }
+    }
+    public string Level
+    {
+        get { return level; }
+    }
+    public string CastingTime
+    {
+        get { return castingTime; }
+    }
+    public string Range
+    {
+        get { return range; }
+    }
+    public string Duration
+    {
+        get { return duration; }
+    }
+    public string Description
+    {
+        get { return description; }
     }
 }
