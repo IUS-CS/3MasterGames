@@ -75,8 +75,6 @@ namespace C246SpellBook_V_2
             spells = new List<spellType>()
             {
                 new spellType("Abi-Dalzim's Horrid Wilting", "Necromancy", "Sorcerer, Wizard", "8", "1 Action", "150 ft", "Instantaneous", "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one. Nonmagical plants in the area that aren’t creatures, such as trees and shrubs, wither and die instantly."),
-                new spellType("Abi-Dalzim's Horrid Wilting", "Necromancy", "Bard", "8", "1 Action", "150 ft", "Instantaneous", "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one. Nonmagical plants in the area that aren’t creatures, such as trees and shrubs, wither and die instantly."),
-
                 /*
                  
                 new spellType("Absorb Elements"),
@@ -205,40 +203,8 @@ namespace C246SpellBook_V_2
           {
 
           }
-          private void checkBox11_CheckedChange(object sender, EventArgs e)
-          {
 
-          }
-          private void checkBox12_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox13_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox14_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox15_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox16_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox17_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-          private void checkBox18_CheckedChanged(object sender, EventArgs e)
-          {
-
-          }
-
-          private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
+        private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -263,8 +229,7 @@ namespace C246SpellBook_V_2
         {
 
         }
-
-     }
+    }
 }
 
 
