@@ -48,9 +48,13 @@ namespace C246SpellBook_V_2
 
             //Add Columns
             listView1.Columns.Add("Name", 150);
-            listView1.Columns.Add("Level", 100);
+            listView1.Columns.Add("Level", 50);
             listView1.Columns.Add("School", 150);
-            listView1.Columns.Add("Ritual", 150);
+            listView1.Columns.Add("Ritual", 50);
+            listView1.Columns.Add("Concentration", 50);
+            listView1.Columns.Add("Classes", 350);
+
+
 
 
             //Initialize Datatable and add columns
@@ -59,6 +63,10 @@ namespace C246SpellBook_V_2
             dtSpells.Columns.Add("Level");
             dtSpells.Columns.Add("School");
             dtSpells.Columns.Add("Ritual");
+            dtSpells.Columns.Add("Concentation");
+            dtSpells.Columns.Add("Classes");
+
+
 
 
 
@@ -183,7 +191,7 @@ namespace C246SpellBook_V_2
         {
             foreach (var spell in spells)
             {
-                dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual);
+                dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes);
                 
             }
         }
@@ -207,7 +215,7 @@ namespace C246SpellBook_V_2
             listView1.Items.Clear();
             foreach (DataRow row in dvSpells.ToTable().Rows)
             {
-                listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString() }));
+                listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString() }));
             }
         }
 
