@@ -53,9 +53,7 @@ namespace C246SpellBook_V_2
             listView1.Columns.Add("Ritual", 50);
             listView1.Columns.Add("Concentration", 50);
             listView1.Columns.Add("Classes", 350);
-
-
-
+            
 
             //Initialize Datatable and add columns
             dtSpells = new DataTable();
@@ -65,9 +63,6 @@ namespace C246SpellBook_V_2
             dtSpells.Columns.Add("Ritual");
             dtSpells.Columns.Add("Concentation");
             dtSpells.Columns.Add("Classes");
-
-
-
 
 
             //Fill datatable
@@ -82,8 +77,10 @@ namespace C246SpellBook_V_2
          * Update: The generateData method starts with multiple data types to hold all the information in. This method will read in the Xml file
          * with all the spells inside it, and store them into a List spellType. This list is named spells. While the Xml file is open it will read
          * each line and compare whether its the name, level, etc. It will store it into that specific variable and hold onto that data until
-         * that spell is competed. Once it is completed it is added to the list spells with all the attributes included inside it. This method is not
-         * completed yet, because the attributes text and roll can have multiple lines inside the Xml file causing duplicates in the spell list.
+         * that spell is competed. Once it is completed it is added to the list spells with all the attributes included inside it. The pnly problem is the 
+         * text and roll. For instance, some spells have 2 to 2 text lines in the Xml file but I ended up just placing all of them into the text variable.
+         * Same goes for the roll variable. 
+         * If you have any questions please let me know, also if I did anything weird or wrong please let me know.
          */
         private List<spellType> generateData()
         {
@@ -100,6 +97,7 @@ namespace C246SpellBook_V_2
             string classes = "";
             string text = "";
             string roll = "";
+            int count = 0;
 
             XmlTextReader doc = new XmlTextReader("PHB Spells 3.4.6.xml");
             spells = new List<spellType>();
@@ -165,20 +163,27 @@ namespace C246SpellBook_V_2
                 if (doc.NodeType == XmlNodeType.Element && doc.Name == "classes")
                 {
                     classes = doc.ReadElementString();
-                    spells.Add(new spellType(name, level, school, ritual, concentration, time, range, components, duration, classes, text, roll));
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "text")
+                {
+                   text += doc.ReadElementString() + " ";
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "roll")
+                {
+                    roll += doc.ReadElementString() + ", ";
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "spell")
+                {
+                    if (count == 0)
+                        count++;
+                    else
+                        spells.Add(new spellType(name, level, school, ritual, concentration, time, range, components, duration, classes, text, roll));
+                    text = "";
+                    roll = "";
 
                 }
-                //if (doc.NodeType == XmlNodeType.Element && doc.Name == "text")
-                //{
-                //   text = doc.ReadElementString();
-                //
-                //}
-                //if (doc.NodeType == XmlNodeType.Element && doc.Name == "roll")
-                //{
-                //    roll = doc.ReadElementString();
-                //
-                //}
             }
+            spells.Add(new spellType(name, level, school, ritual, concentration, time, range, components, duration, classes, text, roll));
             return spells;
         }
 
