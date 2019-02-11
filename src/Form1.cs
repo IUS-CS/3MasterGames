@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace C246SpellBook_V_2
 {
@@ -47,13 +48,20 @@ namespace C246SpellBook_V_2
 
             //Add Columns
             listView1.Columns.Add("Name", 150);
-            listView1.Columns.Add("School", 100);
-            listView1.Columns.Add("Classes", 150);
+            listView1.Columns.Add("Level", 50);
+            listView1.Columns.Add("School", 150);
+            listView1.Columns.Add("Ritual", 50);
+            listView1.Columns.Add("Concentration", 50);
+            listView1.Columns.Add("Classes", 350);
+            
 
             //Initialize Datatable and add columns
             dtSpells = new DataTable();
             dtSpells.Columns.Add("Name");
+            dtSpells.Columns.Add("Level");
             dtSpells.Columns.Add("School");
+            dtSpells.Columns.Add("Ritual");
+            dtSpells.Columns.Add("Concentation");
             dtSpells.Columns.Add("Classes");
 
 
@@ -66,48 +74,116 @@ namespace C246SpellBook_V_2
 
 
         /*
-         * Make the dtSpells at the class level so it can be used throughout the program.
-         * This creates a new list named spells and generates all the spells manually, late this
-         * will need to change in order to hold more attributes other than name.
+         * Update: The generateData method starts with multiple data types to hold all the information in. This method will read in the Xml file
+         * with all the spells inside it, and store them into a List spellType. This list is named spells. While the Xml file is open it will read
+         * each line and compare whether its the name, level, etc. It will store it into that specific variable and hold onto that data until
+         * that spell is competed. Once it is completed it is added to the list spells with all the attributes included inside it. The pnly problem is the 
+         * text and roll. For instance, some spells have 2 to 2 text lines in the Xml file but I ended up just placing all of them into the text variable.
+         * Same goes for the roll variable. 
+         * If you have any questions please let me know, also if I did anything weird or wrong please let me know.
          */
         private List<spellType> generateData()
         {
-            spells = new List<spellType>()
-            {
-                new spellType("Abi-Dalzim's Horrid Wilting", "Necromancy", "Sorcerer, Wizard", "8", "1 Action", "150 ft", "Instantaneous", "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one. Nonmagical plants in the area that aren’t creatures, such as trees and shrubs, wither and die instantly."),
-                /*
-                 
-                new spellType("Absorb Elements"),
-                new spellType("Acid Arrow"),
-                new spellType("Acid Splash"),
-                new spellType("Aganazzar's Scorcher"),
-                new spellType("Aid"),
-                new spellType("Alarm"),
-                new spellType("Alter Self"),
-                new spellType("Animal Friendship"),
-                new spellType("Animal Messenger"),
-                new spellType("Animal Shapes"),
-                new spellType("Animate Dead"),
-                new spellType("Animate Objects"),
-                new spellType("Antilife Shell"),
-                new spellType("Antimagic Field"),
-                new spellType("Antipathy/Sympathy"),
-                new spellType("Arcane Eye"),
-                new spellType("Arcane Gate"),
-                new spellType("Arcane Hand"),
-                new spellType("Arcane Lock"),
-                new spellType("Arcanist's Magic Aura"),
-                new spellType("Armor of Agathys"),
-                new spellType("Arms of Hadar"),
-                new spellType("Astral Projection"),
-                new spellType("Augury"),
-                new spellType("Aura of Life"),
-                new spellType("Aura of Purity"),
-                new spellType("Aura of Vitality"),
-                new spellType("Awaken"),
-                */
-            };
+            string name = "";
+            string level = "";
+            string school = "";
+            bool ritual = false;
+            string ritualText = "";
+            bool concentration = false;
+            string time = "";
+            string range = "";
+            string components = "";
+            string duration = "";
+            string classes = "";
+            string text = "";
+            string roll = "";
+            int count = 0;
 
+            XmlTextReader doc = new XmlTextReader("PHB Spells 3.4.6.xml");
+            spells = new List<spellType>();
+
+            while (doc.Read())
+            {
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "name")
+                {
+                    name = doc.ReadElementString();
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "level")
+                {
+                    level = doc.ReadElementString();
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "school")
+                {
+                    school = doc.ReadElementString();
+                    if (school == "A")
+                        school = "Abjuration";
+                    if (school == "C")
+                        school = "Conjuration";
+                    if (school == "D")
+                        school = "Divination";
+                    if (school == "EN")
+                        school = "Enchantment";
+                    if (school == "EV")
+                        school = "Evocation";
+                    if (school == "I")
+                        school = "Illusion";
+                    if (school == "N")
+                        school = "Necromancy";
+                    if (school == "T")
+                        school = "Transmutation";
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "ritual")
+                {
+                    ritualText = doc.ReadElementString();
+                    if (ritualText == "YES")
+                        ritual = true;
+                    else
+                        ritual = false;
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "time")
+                {
+                    time = doc.ReadElementString();
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "time")
+                {
+                    time = doc.ReadElementString();
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "range")
+                {
+                    range = doc.ReadElementString();
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "componenets")
+                {
+                    components = doc.ReadElementString();
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "duration")
+                {
+                    duration = doc.ReadElementString();
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "classes")
+                {
+                    classes = doc.ReadElementString();
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "text")
+                {
+                   text += doc.ReadElementString() + " ";
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "roll")
+                {
+                    roll += doc.ReadElementString() + ", ";
+                }
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "spell")
+                {
+                    if (count == 0)
+                        count++;
+                    else
+                        spells.Add(new spellType(name, level, school, ritual, concentration, time, range, components, duration, classes, text, roll));
+                    text = "";
+                    roll = "";
+
+                }
+            }
+            spells.Add(new spellType(name, level, school, ritual, concentration, time, range, components, duration, classes, text, roll));
             return spells;
         }
 
@@ -120,7 +196,7 @@ namespace C246SpellBook_V_2
         {
             foreach (var spell in spells)
             {
-                dtSpells.Rows.Add(spell.Name, spell.School, spell.Classes);
+                dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes);
                 
             }
         }
@@ -144,7 +220,7 @@ namespace C246SpellBook_V_2
             listView1.Items.Clear();
             foreach (DataRow row in dvSpells.ToTable().Rows)
             {
-                listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString() }));
+                listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString() }));
             }
         }
 
@@ -234,62 +310,89 @@ namespace C246SpellBook_V_2
 
 
 /*
- * This is where we will add attributes to the spellType class, like level, dame, discription, etc.
+ * This is where we will add attributes to the spellType class, like level, name, discription, etc.
  */
 class spellType
 {
     private string name;
-    private string school;
-    private string classes;
     private string level;
-    private string castingTime;
+    private string school;
+    private bool ritual;
+    private bool concentration;
+    private string time;
     private string range;
+    private string components;
     private string duration;
-    private string description;
+    private string classes;
+    private string text;
+    private string roll;
+    
+    
+    
 
 
-    public spellType(string name, string school, string classes, string level, string castingTime, string range, string duration, string description)
+    public spellType(string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string duration, string classes, string text, string roll)
     {
         this.name = name;
-        this.school = school;
-        this.classes = classes;
         this.level = level;
-        this.castingTime = castingTime;
+        this.school = school;
+        this.ritual = ritual;
+        this.concentration = concentration;
+        this.time = time;
         this.range = range;
+        this.components = components;
         this.duration = duration;
-        this.description = description;
+        this.classes = classes;
+        this.text = text;
+        this.roll = roll;
     }
 
     public string Name
     {
         get { return name; }
     }
-    public string School
-    {
-        get { return school; }
-    }
-    public string Classes
-    {
-        get { return classes; }
-    }
     public string Level
     {
         get { return level; }
     }
-    public string CastingTime
+    public string School
     {
-        get { return castingTime; }
+        get { return school; }
+    }
+    public bool Ritual
+    {
+        get { return ritual; }
+    }
+    public bool Concentration
+    {
+        get { return concentration; }
+    }
+    public string Time
+    {
+        get { return time; }
     }
     public string Range
     {
         get { return range; }
     }
+    public string Components
+    {
+        get { return components; }
+    }
     public string Duration
     {
         get { return duration; }
     }
-    public string Description
+    public string Classes
     {
-        get { return description; }
+        get { return classes; }
+    }
+    public string Text
+    {
+        get { return text; }
+    }
+    public string Roll
+    {
+        get { return roll; }
     }
 }
