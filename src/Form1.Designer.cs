@@ -179,6 +179,7 @@
                this.checkBox18.TabIndex = 20;
                this.checkBox18.Text = "Wizard";
                this.checkBox18.UseVisualStyleBackColor = true;
+               this.checkBox18.CheckedChanged += new System.EventHandler(this.checkBox18_CheckedChanged);
                // 
                // checkBox17
                // 
@@ -189,6 +190,7 @@
                this.checkBox17.TabIndex = 19;
                this.checkBox17.Text = "Warlock";
                this.checkBox17.UseVisualStyleBackColor = true;
+               this.checkBox17.CheckedChanged += new System.EventHandler(this.checkBox17_CheckedChanged);
                // 
                // checkBox16
                // 
@@ -210,6 +212,7 @@
                this.checkBox15.TabIndex = 17;
                this.checkBox15.Text = "Ranger";
                this.checkBox15.UseVisualStyleBackColor = true;
+               this.checkBox15.CheckedChanged += new System.EventHandler(this.checkBox15_CheckedChanged);
                // 
                // checkBox14
                // 
@@ -220,6 +223,7 @@
                this.checkBox14.TabIndex = 16;
                this.checkBox14.Text = "Paladin";
                this.checkBox14.UseVisualStyleBackColor = true;
+               this.checkBox14.CheckedChanged += new System.EventHandler(this.checkBox14_CheckedChanged);
                // 
                // checkBox13
                // 
@@ -230,6 +234,7 @@
                this.checkBox13.TabIndex = 15;
                this.checkBox13.Text = "Druid";
                this.checkBox13.UseVisualStyleBackColor = true;
+               this.checkBox13.CheckedChanged += new System.EventHandler(this.checkBox13_CheckedChanged_1);
                // 
                // checkBox12
                // 
