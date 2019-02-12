@@ -223,7 +223,11 @@ namespace C246SpellBook_V_2
                 listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString() }));
             }
         }
-
+          private void getClasses(String Class)
+          {
+               dvSpells.RowFilter = string.Format("Classes Like '%{0}%'", Class);
+               populateListView(dvSpells);
+          }
 
         /*
          * This method effects the Search bar, and how it will be filtered.
@@ -279,12 +283,132 @@ namespace C246SpellBook_V_2
           {
 
           }
+          private void checkBox11_CheckedChanged(object sender, EventArgs e)
+          {
 
-        private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
+               if (checkBox11.Checked == true || checkBox16.Checked)
+               {
+                    getClasses("Bard");
+                    
+        
+               }
+               if (checkBox16.Checked && checkBox11.Checked)
+               {
+                    getClasses("Sorcerer");
+                    getClasses("Bard");
+               }
+               if (checkBox11.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+
+          }
+          private void checkBox12_CheckedChanged(object sender, EventArgs e)
+          {
+               if (checkBox12.Checked)
+               {
+                    getClasses("Cleric");
+
+               }
+               if (checkBox12.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+          }
+           private void checkBox13_CheckedChanged_1(object sender, EventArgs e)
+          {
+               if (checkBox13.Checked)
+               {
+                    getClasses("Druid");
+
+               }
+               if (checkBox13.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+          }
+
+          private void checkBox14_CheckedChanged(object sender, EventArgs e)
+          {
+               if (checkBox14.Checked)
+               {
+                    getClasses("Paladin");
+
+               }
+               if (checkBox14.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+          }
+          private void checkBox15_CheckedChanged(object sender, EventArgs e)
+          {
+               if (checkBox15.Checked)
+               {
+                    getClasses("Ranger");
+
+               }
+               if (checkBox15.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+          }
+          private void checkBox16_CheckedChanged_1(object sender, EventArgs e)
+          {
+
+               if (checkBox16.Checked)
+               {
+                    getClasses("Sorcerer");
+
+               }
+               if (checkBox16.Checked && checkBox11.Checked)
+               {
+                    getClasses("Sorcerer");
+                    getClasses("Bard");
+               }
+               if (checkBox16.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+
+          }
+          private void checkBox17_CheckedChanged(object sender, EventArgs e)
+          {
+               if (checkBox17.Checked)
+               {
+                    getClasses("Warlock");
+
+               }
+               if (checkBox17.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+          }
+          private void checkBox18_CheckedChanged(object sender, EventArgs e)
+          {
+               if (checkBox18.Checked)
+               {
+                    getClasses("Wizard");
+
+               }
+               if (checkBox18.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+          }
+
+          private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
-
+          // This shouldn't do anything but removing it breaks things 
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -305,7 +429,9 @@ namespace C246SpellBook_V_2
         {
 
         }
-    }
+
+
+     }
 }
 
 
