@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace C246SpellBook_V_2
 {
@@ -72,9 +73,12 @@ namespace C246SpellBook_V_2
          */
         private List<spellType> generateData()
         {
+
             spells = new List<spellType>()
             {
                 new spellType("Abi-Dalzim's Horrid Wilting", "Necromancy", "Sorcerer, Wizard", "8", "1 Action", "150 ft", "Instantaneous", "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one. Nonmagical plants in the area that aren’t creatures, such as trees and shrubs, wither and die instantly."),
+                new spellType("Abi-Dalzim's Horrid Wilting", "Necromancy", "Bard", "8", "1 Action", "150 ft", "Instantaneous", "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one. Nonmagical plants in the area that aren’t creatures, such as trees and shrubs, wither and die instantly."),
+
                 /*
                  
                 new spellType("Absorb Elements"),
@@ -147,7 +151,11 @@ namespace C246SpellBook_V_2
                 listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString() }));
             }
         }
-
+          private void getClasses(String Class)
+          {
+               dvSpells.RowFilter = string.Format("Classes Like '%{0}%'", Class);
+               populateListView(dvSpells);
+          }
 
         /*
          * This method effects the Search bar, and how it will be filtered.
@@ -203,8 +211,75 @@ namespace C246SpellBook_V_2
           {
 
           }
+          private void checkBox11_CheckedChanged(object sender, EventArgs e)
+          {
 
-        private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
+               if (checkBox11.Checked == true || checkBox16.Checked)
+               {
+                    getClasses("Bard");
+                    
+        
+               }
+               if (checkBox16.Checked && checkBox11.Checked)
+               {
+                    getClasses("Sorcerer");
+                    getClasses("Bard");
+               }
+               if (checkBox11.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+
+          }
+          private void checkBox12_CheckedChanged(object sender, EventArgs e)
+          {
+
+          }
+          private void checkBox13_CheckedChanged(object sender, EventArgs e)
+          {
+
+          }
+          private void checkBox14_CheckedChanged(object sender, EventArgs e)
+          {
+
+
+          }
+          private void checkBox15_CheckedChanged(object sender, EventArgs e)
+          {
+
+          }
+          private void checkBox16_CheckedChanged_1(object sender, EventArgs e)
+          {
+
+               if (checkBox16.Checked || checkBox11.Checked)
+               {
+                    getClasses("Sorcerer");
+                    getClasses("Bard");
+
+               }
+               if (checkBox16.Checked && checkBox11.Checked)
+               {
+                    getClasses("Sorcerer");
+                    getClasses("Bard");
+               }
+               if (checkBox16.Checked == false)
+               {
+                    dvSpells = new DataView(dtSpells);
+                    populateListView(dvSpells);
+               }
+
+          }
+          private void checkBox17_CheckedChanged(object sender, EventArgs e)
+          {
+
+          }
+          private void checkBox18_CheckedChanged(object sender, EventArgs e)
+          {
+
+          }
+
+          private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -229,7 +304,9 @@ namespace C246SpellBook_V_2
         {
 
         }
-    }
+
+
+     }
 }
 
 
