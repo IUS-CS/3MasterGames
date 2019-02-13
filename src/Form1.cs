@@ -263,7 +263,11 @@ namespace C246SpellBook_V_2
             dvSpells.RowFilter = string.Format("Name Like '%{0}%'", SearchTextBox.Text);
             populateListView(dvSpells);
         }
-
+          /*
+           So what is supposed to happen with these checkedchange functions is when a checkbox is checked, 
+           these functions are invoked. It will drop into the first if statement which will prompt the filter for that respective
+           level. It will then drop into the rest of them and see if any other boxes are checked and populate those filters as well
+           */
           private void checkBox1_CheckedChanged(object sender, EventArgs e)
           {
                if (checkBox1.Checked == true)
