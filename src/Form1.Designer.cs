@@ -81,6 +81,7 @@
                this.aboutThisApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.changeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.licensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+               this.button1 = new System.Windows.Forms.Button();
                this.SearchPanel.SuspendLayout();
                this.DisplayPanel.SuspendLayout();
                this.panel1.SuspendLayout();
@@ -145,6 +146,7 @@
                // 
                // panel1
                // 
+               this.panel1.Controls.Add(this.button1);
                this.panel1.Controls.Add(this.checkBox18);
                this.panel1.Controls.Add(this.checkBox17);
                this.panel1.Controls.Add(this.checkBox16);
@@ -277,6 +279,7 @@
                this.checkBox10.TabIndex = 12;
                this.checkBox10.Text = "Level 9";
                this.checkBox10.UseVisualStyleBackColor = true;
+               this.checkBox10.CheckedChanged += new System.EventHandler(this.checkBox10_CheckedChanged);
                // 
                // checkBox9
                // 
@@ -287,6 +290,7 @@
                this.checkBox9.TabIndex = 11;
                this.checkBox9.Text = "Level 8";
                this.checkBox9.UseVisualStyleBackColor = true;
+               this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
                // 
                // checkBox8
                // 
@@ -297,6 +301,7 @@
                this.checkBox8.TabIndex = 10;
                this.checkBox8.Text = "Level 7";
                this.checkBox8.UseVisualStyleBackColor = true;
+               this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
                // 
                // checkBox7
                // 
@@ -307,6 +312,7 @@
                this.checkBox7.TabIndex = 9;
                this.checkBox7.Text = "Level 6";
                this.checkBox7.UseVisualStyleBackColor = true;
+               this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
                // 
                // checkBox6
                // 
@@ -317,6 +323,7 @@
                this.checkBox6.TabIndex = 8;
                this.checkBox6.Text = "Level 5";
                this.checkBox6.UseVisualStyleBackColor = true;
+               this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
                // 
                // checkBox5
                // 
@@ -327,6 +334,7 @@
                this.checkBox5.TabIndex = 7;
                this.checkBox5.Text = "Level 4";
                this.checkBox5.UseVisualStyleBackColor = true;
+               this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
                // 
                // checkBox4
                // 
@@ -337,6 +345,7 @@
                this.checkBox4.TabIndex = 6;
                this.checkBox4.Text = "Level 3";
                this.checkBox4.UseVisualStyleBackColor = true;
+               this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
                // 
                // checkBox3
                // 
@@ -347,6 +356,7 @@
                this.checkBox3.TabIndex = 5;
                this.checkBox3.Text = "Level 2";
                this.checkBox3.UseVisualStyleBackColor = true;
+               this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
                // 
                // checkBox2
                // 
@@ -357,6 +367,7 @@
                this.checkBox2.TabIndex = 4;
                this.checkBox2.Text = "Level 1";
                this.checkBox2.UseVisualStyleBackColor = true;
+               this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
                // 
                // checkBox1
                // 
@@ -552,6 +563,17 @@
                this.licensesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
                this.licensesToolStripMenuItem.Text = "Licenses";
                // 
+               // button1
+               // 
+               this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.button1.Location = new System.Drawing.Point(20, 516);
+               this.button1.Name = "button1";
+               this.button1.Size = new System.Drawing.Size(160, 30);
+               this.button1.TabIndex = 6;
+               this.button1.Text = "Reset Filters";
+               this.button1.UseVisualStyleBackColor = true;
+               this.button1.Click += new System.EventHandler(this.button1_Click);
+               // 
                // Form1
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -634,6 +656,7 @@
           private System.Windows.Forms.CheckBox checkBox12;
           private System.Windows.Forms.CheckBox checkBox11;
           private System.Windows.Forms.Label label4;
+          private System.Windows.Forms.Button button1;
      }
 }
 
