@@ -1223,9 +1223,10 @@ namespace C246SpellBook_V_2
 
         }
 
+        // this method is trigger when the hightlighted spell is changed
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            Console.WriteLine("change spell" + e);
         }
           //This is the reset filters button. It sets the checked state for each individual checkbox to false (unchecked)
           private void button1_Click(object sender, EventArgs e)
@@ -1250,7 +1251,39 @@ namespace C246SpellBook_V_2
                checkBox18.Checked = false;
 
           }
-     }
+
+        private void editorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void changeLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void licensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DisplayPanel_Paint(object sender, PaintEventArgs e)
+        {
+            //get spesfic spell from highlighted from data veiw 
+
+            // display in panel
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            //
+        }
+    }
 }
 
 
