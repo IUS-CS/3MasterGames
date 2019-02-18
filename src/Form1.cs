@@ -1284,6 +1284,11 @@ namespace C246SpellBook_V_2
         {
             //
         }
+
+        private void Spell_Display_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

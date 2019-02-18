@@ -82,6 +82,7 @@
             this.aboutThisApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Spell_Display = new System.Windows.Forms.RichTextBox();
             this.SearchPanel.SuspendLayout();
             this.DisplayPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -133,6 +134,8 @@
             // 
             // DisplayPanel
             // 
+            this.DisplayPanel.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.DisplayPanel.Controls.Add(this.Spell_Display);
             this.DisplayPanel.Controls.Add(this.label2);
             this.DisplayPanel.Location = new System.Drawing.Point(1379, 83);
             this.DisplayPanel.Margin = new System.Windows.Forms.Padding(6);
@@ -145,7 +148,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(28, 48);
+            this.label2.Location = new System.Drawing.Point(76, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(298, 42);
@@ -608,6 +611,18 @@
             this.licensesToolStripMenuItem.Text = "Licenses";
             this.licensesToolStripMenuItem.Click += new System.EventHandler(this.licensesToolStripMenuItem_Click);
             // 
+            // Spell_Display
+            // 
+            this.Spell_Display.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Spell_Display.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Spell_Display.Enabled = false;
+            this.Spell_Display.Location = new System.Drawing.Point(3, 59);
+            this.Spell_Display.Name = "Spell_Display";
+            this.Spell_Display.Size = new System.Drawing.Size(467, 641);
+            this.Spell_Display.TabIndex = 1;
+            this.Spell_Display.Text = "this is example ";
+            this.Spell_Display.TextChanged += new System.EventHandler(this.Spell_Display_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -692,6 +707,7 @@
           private System.Windows.Forms.CheckBox checkBox11;
           private System.Windows.Forms.Label label4;
           private System.Windows.Forms.Button button1;
-     }
+        private System.Windows.Forms.RichTextBox Spell_Display;
+    }
 }
 
