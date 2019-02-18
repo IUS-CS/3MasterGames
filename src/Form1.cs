@@ -270,16 +270,16 @@ namespace C246SpellBook_V_2
            */
           private void checkBox1_CheckedChanged(object sender, EventArgs e)
           {
-               if (checkBox1.Checked == true)
+               if (checkBox1.Checked)
                {
                     getLevels("0");
 
-                    if (checkBox2.Checked == true)
+                    if (checkBox2.Checked)
                     {
                          getLevels("1");
 
                     }
-                    if (checkBox3.Checked == true)
+                    if (checkBox3.Checked)
                     {
                          getLevels("2");
 
