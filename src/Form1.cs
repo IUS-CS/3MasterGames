@@ -53,7 +53,8 @@ namespace C246SpellBook_V_2
             listView1.Columns.Add("Ritual", 50);
             listView1.Columns.Add("Concentration", 50);
             listView1.Columns.Add("Classes", 350);
-            
+            listView1.Columns.Add("Components", 350);
+
 
             //Initialize Datatable and add columns
             dtSpells = new DataTable();
@@ -63,6 +64,7 @@ namespace C246SpellBook_V_2
             dtSpells.Columns.Add("Ritual");
             dtSpells.Columns.Add("Concentation");
             dtSpells.Columns.Add("Classes");
+            dtSpells.Columns.Add("Components");
 
 
             //Fill datatable
@@ -84,108 +86,126 @@ namespace C246SpellBook_V_2
          */
         private List<spellType> generateData()
         {
+            string id = " ";
             string name = "";
             string level = "";
             string school = "";
             bool ritual = false;
             string ritualText = "";
             bool concentration = false;
+            string hasConcentration = "";
             string time = "";
             string range = "";
             string components = "";
+            string materials = "";
             string duration = "";
             string classes = "";
-            string text = "";
+            string description = "";
+            string higherLevel = "";
+            string source = "";
             string roll = "";
             int count = 0;
 
-            XmlTextReader doc = new XmlTextReader("PHB Spells 3.4.6.xml");
+            XmlTextReader doc = new XmlTextReader("SpellBookDB.xml");
             spells = new List<spellType>();
 
             while (doc.Read())
             {
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "name")
+                if (doc.NodeType == XmlNodeType.Element && doc.Name == "Spell")
                 {
-                    name = doc.ReadElementString();
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "level")
-                {
-                    level = doc.ReadElementString();
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "school")
-                {
-                    school = doc.ReadElementString();
-                    if (school == "A")
-                        school = "Abjuration";
-                    if (school == "C")
-                        school = "Conjuration";
-                    if (school == "D")
-                        school = "Divination";
-                    if (school == "EN")
-                        school = "Enchantment";
-                    if (school == "EV")
-                        school = "Evocation";
-                    if (school == "I")
-                        school = "Illusion";
-                    if (school == "N")
-                        school = "Necromancy";
-                    if (school == "T")
-                        school = "Transmutation";
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "ritual")
-                {
-                    ritualText = doc.ReadElementString();
-                    if (ritualText == "YES")
-                        ritual = true;
-                    else
-                        ritual = false;
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "time")
-                {
-                    time = doc.ReadElementString();
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "time")
-                {
-                    time = doc.ReadElementString();
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "range")
-                {
-                    range = doc.ReadElementString();
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "componenets")
-                {
-                    components = doc.ReadElementString();
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "duration")
-                {
-                    duration = doc.ReadElementString();
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "classes")
-                {
-                    classes = doc.ReadElementString();
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "text")
-                {
-                   text += doc.ReadElementString() + " ";
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "roll")
-                {
-                    roll += doc.ReadElementString() + ", ";
-                }
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "spell")
-                {
-                    if (count == 0)
-                        count++;
-                    else
-                        spells.Add(new spellType(name, level, school, ritual, concentration, time, range, components, duration, classes, text, roll));
-                    text = "";
-                    roll = "";
+                    while (doc.Read() && doc.Name != "Spell")
+                    {
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "ID")
+                        {
+                            id = doc.ReadElementString();
+                        }
 
-                }
-            }
-            spells.Add(new spellType(name, level, school, ritual, concentration, time, range, components, duration, classes, text, roll));
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Name")
+                        {
+                            name = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Level")
+                        {
+                            level = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "School")
+                        {
+                            school = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "IsRitual")
+                        {
+                            ritualText = doc.ReadElementString();
+                            if (ritualText == "true")
+                                ritual = true;
+                            else
+                                ritual = false;
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "CastingTime")
+                        {
+                            time = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Range")
+                        {
+                            range = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Component")
+                        {
+                            components += doc.ReadElementString() + ", ";
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Materials")
+                        {
+                            materials = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Duration")
+                        {
+                            duration = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "HasConcentration")
+                        {
+                            hasConcentration = doc.ReadElementString();
+                            if (hasConcentration == "true")
+                                concentration = true;
+                            else
+                                concentration = false;
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Description")
+                        {
+                            description = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "HigherLevel")
+                        {
+                            higherLevel = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Source")
+                        {
+                            source = doc.ReadElementString();
+                        }
+
+                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Class")
+                        {
+                            classes += doc.ReadElementString() + ", ";
+                        }
+
+                    }//whileRead not Spell
+                    spells.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                    classes = "";
+                    components = "";  
+                }//if = Spell
+            }//whileRead
             return spells;
-        }
+        }//generateData
 
 
         /*
@@ -196,7 +216,7 @@ namespace C246SpellBook_V_2
         {
             foreach (var spell in spells)
             {
-                dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes);
+                dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
                 
             }
         }
@@ -220,7 +240,7 @@ namespace C246SpellBook_V_2
             listView1.Items.Clear();
             foreach (DataRow row in dvSpells.ToTable().Rows)
             {
-                listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString() }));
+                listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString() }));
             }
         }
           /*
@@ -1259,6 +1279,7 @@ namespace C246SpellBook_V_2
  */
 class spellType
 {
+    private string id;
     private string name;
     private string level;
     private string school;
@@ -1267,17 +1288,21 @@ class spellType
     private string time;
     private string range;
     private string components;
+    private string materials;
     private string duration;
     private string classes;
-    private string text;
+    private string description;
+    private string higherLevel;
+    private string source;
     private string roll;
     
     
     
 
 
-    public spellType(string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string duration, string classes, string text, string roll)
+    public spellType(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source, string roll)
     {
+        this.id = id;
         this.name = name;
         this.level = level;
         this.school = school;
@@ -1286,12 +1311,19 @@ class spellType
         this.time = time;
         this.range = range;
         this.components = components;
+        this.materials = materials;
         this.duration = duration;
         this.classes = classes;
-        this.text = text;
+        this.description = description;
+        this.higherLevel = higherLevel;
+        this.source = source;
         this.roll = roll;
     }
 
+    public string ID
+    {
+        get { return id; }
+    }
     public string Name
     {
         get { return name; }
@@ -1324,6 +1356,10 @@ class spellType
     {
         get { return components; }
     }
+    public string Materials
+    {
+        get { return materials; }
+    }
     public string Duration
     {
         get { return duration; }
@@ -1332,9 +1368,17 @@ class spellType
     {
         get { return classes; }
     }
-    public string Text
+    public string Description
     {
-        get { return text; }
+        get { return description; }
+    }
+    public string HigherLevel
+    {
+        get { return higherLevel; }
+    }
+    public string Source
+    {
+        get { return source; }
     }
     public string Roll
     {
