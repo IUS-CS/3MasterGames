@@ -1226,8 +1226,27 @@ namespace C246SpellBook_V_2
         // this method is trigger when the hightlighted spell is changed
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(DisplayPanel.Text = e.ToString());
-            Console.WriteLine(spells.ToString());
+            //of type ListView.SelectedListViewItemCollection
+            var temp = listView1.SelectedItems;
+
+            //of type StringBuilder
+            var displayText = new StringBuilder();
+            foreach (ListViewItem item in temp) {
+                //only displays what is in the list veiw at the moment
+                for (var i = 0; i < 6; i++)
+                {
+                    displayText.AppendLine(item.SubItems[i].Text);
+                }
+            }
+            
+            //StringBuilder temp = listView1.SelectedItems.ToString();
+
+            ////for(int i = 0; i < listView1.SelectedItems.Count; i++)
+            ////{
+            //    temp. listView1.SelectedItems.ToString();
+            ////}
+            Spell_Display.Text = displayText.ToString();
+            //Console.WriteLine(listView1.SelectedItems);
         }
           //This is the reset filters button. It sets the checked state for each individual checkbox to false (unchecked)
           private void button1_Click(object sender, EventArgs e)
