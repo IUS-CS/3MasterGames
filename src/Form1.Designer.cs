@@ -38,6 +38,7 @@
                this.DisplayPanel = new System.Windows.Forms.Panel();
                this.label2 = new System.Windows.Forms.Label();
                this.panel1 = new System.Windows.Forms.Panel();
+               this.button1 = new System.Windows.Forms.Button();
                this.checkBox18 = new System.Windows.Forms.CheckBox();
                this.checkBox17 = new System.Windows.Forms.CheckBox();
                this.checkBox16 = new System.Windows.Forms.CheckBox();
@@ -81,7 +82,6 @@
                this.aboutThisApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.changeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.licensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-               this.button1 = new System.Windows.Forms.Button();
                this.SearchPanel.SuspendLayout();
                this.DisplayPanel.SuspendLayout();
                this.panel1.SuspendLayout();
@@ -146,7 +146,6 @@
                // 
                // panel1
                // 
-               this.panel1.Controls.Add(this.button1);
                this.panel1.Controls.Add(this.checkBox18);
                this.panel1.Controls.Add(this.checkBox17);
                this.panel1.Controls.Add(this.checkBox16);
@@ -169,8 +168,19 @@
                this.panel1.Controls.Add(this.label3);
                this.panel1.Location = new System.Drawing.Point(12, 45);
                this.panel1.Name = "panel1";
-               this.panel1.Size = new System.Drawing.Size(240, 562);
+               this.panel1.Size = new System.Drawing.Size(240, 516);
                this.panel1.TabIndex = 2;
+               // 
+               // button1
+               // 
+               this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.button1.Location = new System.Drawing.Point(32, 567);
+               this.button1.Name = "button1";
+               this.button1.Size = new System.Drawing.Size(160, 30);
+               this.button1.TabIndex = 6;
+               this.button1.Text = "Reset Filters";
+               this.button1.UseVisualStyleBackColor = true;
+               this.button1.Click += new System.EventHandler(this.button1_Click);
                // 
                // checkBox18
                // 
@@ -563,22 +573,12 @@
                this.licensesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
                this.licensesToolStripMenuItem.Text = "Licenses";
                // 
-               // button1
-               // 
-               this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.button1.Location = new System.Drawing.Point(20, 516);
-               this.button1.Name = "button1";
-               this.button1.Size = new System.Drawing.Size(160, 30);
-               this.button1.TabIndex = 6;
-               this.button1.Text = "Reset Filters";
-               this.button1.UseVisualStyleBackColor = true;
-               this.button1.Click += new System.EventHandler(this.button1_Click);
-               // 
                // Form1
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.ClientSize = new System.Drawing.Size(1015, 619);
+               this.Controls.Add(this.button1);
                this.Controls.Add(this.panel1);
                this.Controls.Add(this.DisplayPanel);
                this.Controls.Add(this.SearchPanel);
