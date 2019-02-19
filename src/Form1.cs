@@ -26,6 +26,9 @@ namespace C246SpellBook_V_2
         private DataTable dtSpells;
         private DataView dvSpells;
         private List<spellType> spells;
+        private List<spellType> BardList, ClericList, DruidList, PaladinList, RangerList, SorcererList, WarlockList, WizardList;
+        private List<spellType> Level0, Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9;
+
 
 
         /*
@@ -238,7 +241,7 @@ namespace C246SpellBook_V_2
         private void populateListView(DataView dv)
         {
             listView1.Items.Clear();
-            foreach (DataRow row in dvSpells.ToTable().Rows)
+            foreach (DataRow row in dv.ToTable().Rows)
             {
                 listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString() }));
             }
@@ -1271,25 +1274,17 @@ namespace C246SpellBook_V_2
           //This is the reset filters button. It sets the checked state for each individual checkbox to false (unchecked)
           private void button1_Click(object sender, EventArgs e)
           {
-               checkBox1.Checked = false;
-               checkBox2.Checked = false;
-               checkBox3.Checked = false;
-               checkBox4.Checked = false;
-               checkBox5.Checked = false;
-               checkBox6.Checked = false;
-               checkBox7.Checked = false;
-               checkBox8.Checked = false;
-               checkBox9.Checked = false;
-               checkBox10.Checked = false;
-               checkBox11.Checked = false;
-               checkBox12.Checked = false;
-               checkBox13.Checked = false;
-               checkBox14.Checked = false;
-               checkBox15.Checked = false;
-               checkBox16.Checked = false;
-               checkBox17.Checked = false;
-               checkBox18.Checked = false;
-
+               foreach (var checkBox in panel1.Controls.OfType<CheckBox>())
+               {
+                    if (checkBox.GetType() == typeof(CheckBox))
+                    {
+                         var checkBoxCtrl = (CheckBox)checkBox;
+                         if (checkBoxCtrl.Checked == true)
+                         {
+                              checkBoxCtrl.Checked = false;
+                         }
+                    }
+               }
           }
 
         private void editorToolStripMenuItem_Click(object sender, EventArgs e)
