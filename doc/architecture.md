@@ -1,6 +1,6 @@
 # Software Architecture Document
 
-## 1. Introduction
+## 1. Introduction to SpellViewer
 
 ### 1.1 Purpose
 
