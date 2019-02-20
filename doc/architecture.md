@@ -8,10 +8,12 @@ The purpose for this document is to provide an architectural overview of our pro
 
 ### 1.2 Structure
 
-a.) doc - Contains the documentation for our program.
-b.) src - Contains the necessary files to execute the game, Xml files to read from, and once inside make sure to
+a) doc - Contains the documentation for our program.
+
+b) src - Contains the necessary files to execute the game, Xml files to read from, and once inside make sure to
 	  copy the SpellBookDB.xml file and place it inside the bin/debug folder in order to read correctly.
-b.) Soon... Testing folder, more to come.
+
+b) Soon... Testing folder, more to come.
 
 ### 1.3 Program Intoduction
 
