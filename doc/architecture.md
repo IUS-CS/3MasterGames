@@ -20,13 +20,13 @@ known in the game. Depending on what the user wants, this program will be able t
 to obtain what spell they needed. Once the spell has been located, it can be selected and all the description of that
 spell will be displayed to the user. Any information they need at their fingertips.
 
-#### 1.4 The Future of the Program
+### 1.4 The Future of the Program
 
 Later, this program will be updated so that the user can create spells of their own and add the to the whole of the
 spell book. By doing so will write to the xml file saving all changes to their spell book. Also be able to edit any
 spell inside the spell book, being able to create your own homebrew of spells, changing anything they might want. 
 Making the program auto update with the new set of spells from newer docments and or other sources other than Dnd.
 
-! [] (DiagramSV.png)
+![](DiagramSV.PNG)
 
 
