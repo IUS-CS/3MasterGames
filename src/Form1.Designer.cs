@@ -1,41 +1,42 @@
 ﻿namespace C246SpellBook_V_2
 {
-    partial class Form1
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+     partial class Form1
+     {
+          /// <summary>
+          /// Required designer variable.
+          /// </summary>
+          private System.ComponentModel.IContainer components = null;
 
-        
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
-        
+          /// <summary>
+          /// Clean up any resources being used.
+          /// </summary>
+          /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+          protected override void Dispose(bool disposing)
+          {
+               if (disposing && (components != null))
+               {
+                    components.Dispose();
+               }
+               base.Dispose(disposing);
+          }
 
-        #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+
+          #region Windows Form Designer generated code
+
+          /// <summary>
+          /// Required method for Designer support - do not modify
+          /// the contents of this method with the code editor.
+          /// </summary>
+          private void InitializeComponent()
+          {
                this.label1 = new System.Windows.Forms.Label();
                this.SearchTextBox = new System.Windows.Forms.TextBox();
                this.SearchPanel = new System.Windows.Forms.Panel();
                this.listView1 = new System.Windows.Forms.ListView();
                this.DisplayPanel = new System.Windows.Forms.Panel();
+               this.Spell_Display = new System.Windows.Forms.RichTextBox();
                this.label2 = new System.Windows.Forms.Label();
                this.panel1 = new System.Windows.Forms.Panel();
                this.button1 = new System.Windows.Forms.Button();
@@ -120,6 +121,7 @@
                // listView1
                // 
                this.listView1.Location = new System.Drawing.Point(15, 76);
+               this.listView1.MultiSelect = false;
                this.listView1.Name = "listView1";
                this.listView1.Size = new System.Drawing.Size(433, 296);
                this.listView1.TabIndex = 1;
@@ -128,24 +130,42 @@
                // 
                // DisplayPanel
                // 
+               this.DisplayPanel.BackColor = System.Drawing.SystemColors.MenuBar;
+               this.DisplayPanel.Controls.Add(this.Spell_Display);
                this.DisplayPanel.Controls.Add(this.label2);
                this.DisplayPanel.Location = new System.Drawing.Point(752, 45);
                this.DisplayPanel.Name = "DisplayPanel";
                this.DisplayPanel.Size = new System.Drawing.Size(251, 381);
                this.DisplayPanel.TabIndex = 4;
+               this.DisplayPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DisplayPanel_Paint);
+               // 
+               // Spell_Display
+               // 
+               this.Spell_Display.BackColor = System.Drawing.Color.WhiteSmoke;
+               this.Spell_Display.BorderStyle = System.Windows.Forms.BorderStyle.None;
+               this.Spell_Display.Enabled = false;
+               this.Spell_Display.Location = new System.Drawing.Point(2, 32);
+               this.Spell_Display.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Spell_Display.Name = "Spell_Display";
+               this.Spell_Display.Size = new System.Drawing.Size(233, 347);
+               this.Spell_Display.TabIndex = 1;
+               this.Spell_Display.Text = "this is example ";
+               this.Spell_Display.TextChanged += new System.EventHandler(this.Spell_Display_TextChanged);
                // 
                // label2
                // 
                this.label2.AutoSize = true;
                this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.label2.Location = new System.Drawing.Point(15, 26);
+               this.label2.Location = new System.Drawing.Point(41, 0);
                this.label2.Name = "label2";
                this.label2.Size = new System.Drawing.Size(174, 25);
                this.label2.TabIndex = 0;
                this.label2.Text = "Spell Description";
+               this.label2.Click += new System.EventHandler(this.label2_Click);
                // 
                // panel1
                // 
+               this.panel1.Controls.Add(this.button1);
                this.panel1.Controls.Add(this.checkBox18);
                this.panel1.Controls.Add(this.checkBox17);
                this.panel1.Controls.Add(this.checkBox16);
@@ -168,13 +188,13 @@
                this.panel1.Controls.Add(this.label3);
                this.panel1.Location = new System.Drawing.Point(12, 45);
                this.panel1.Name = "panel1";
-               this.panel1.Size = new System.Drawing.Size(240, 516);
+               this.panel1.Size = new System.Drawing.Size(240, 562);
                this.panel1.TabIndex = 2;
                // 
                // button1
                // 
                this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.button1.Location = new System.Drawing.Point(32, 567);
+               this.button1.Location = new System.Drawing.Point(20, 516);
                this.button1.Name = "button1";
                this.button1.Size = new System.Drawing.Size(160, 30);
                this.button1.TabIndex = 6;
@@ -412,7 +432,7 @@
                this.menuStrip1.Name = "menuStrip1";
                this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
                this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-               this.menuStrip1.Size = new System.Drawing.Size(1015, 24);
+               this.menuStrip1.Size = new System.Drawing.Size(1100, 24);
                this.menuStrip1.TabIndex = 5;
                this.menuStrip1.Text = "menuStrip1";
                // 
@@ -427,6 +447,7 @@
                this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
                this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
                this.fileToolStripMenuItem.Text = "File";
+               this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
                // 
                // exportSpellbookToolStripMenuItem
                // 
@@ -512,6 +533,7 @@
                this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
                this.editorToolStripMenuItem.Size = new System.Drawing.Size(50, 22);
                this.editorToolStripMenuItem.Text = "Editor";
+               this.editorToolStripMenuItem.Click += new System.EventHandler(this.editorToolStripMenuItem_Click);
                // 
                // editSelectedSpellToolStripMenuItem
                // 
@@ -566,19 +588,20 @@
                this.changeLogToolStripMenuItem.Name = "changeLogToolStripMenuItem";
                this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
                this.changeLogToolStripMenuItem.Text = "Change Log";
+               this.changeLogToolStripMenuItem.Click += new System.EventHandler(this.changeLogToolStripMenuItem_Click);
                // 
                // licensesToolStripMenuItem
                // 
                this.licensesToolStripMenuItem.Name = "licensesToolStripMenuItem";
                this.licensesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
                this.licensesToolStripMenuItem.Text = "Licenses";
+               this.licensesToolStripMenuItem.Click += new System.EventHandler(this.licensesToolStripMenuItem_Click);
                // 
                // Form1
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-               this.ClientSize = new System.Drawing.Size(1015, 619);
-               this.Controls.Add(this.button1);
+               this.ClientSize = new System.Drawing.Size(1100, 643);
                this.Controls.Add(this.panel1);
                this.Controls.Add(this.DisplayPanel);
                this.Controls.Add(this.SearchPanel);
@@ -601,17 +624,17 @@
                this.ResumeLayout(false);
                this.PerformLayout();
 
-        }
+          }
 
-        #endregion
-        public bool MaximizeBox { get; set; }
-        public bool MinimizeBox { get; set; }
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox SearchTextBox;
-        private System.Windows.Forms.Panel SearchPanel;
-        private System.Windows.Forms.Panel DisplayPanel;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView listView1;
+          #endregion
+          public bool MaximizeBox { get; set; }
+          public bool MinimizeBox { get; set; }
+          private System.Windows.Forms.Label label1;
+          private System.Windows.Forms.TextBox SearchTextBox;
+          private System.Windows.Forms.Panel SearchPanel;
+          private System.Windows.Forms.Panel DisplayPanel;
+          private System.Windows.Forms.Label label2;
+          private System.Windows.Forms.ListView listView1;
           private System.Windows.Forms.Panel panel1;
           private System.Windows.Forms.CheckBox checkBox10;
           private System.Windows.Forms.CheckBox checkBox9;
@@ -624,29 +647,29 @@
           private System.Windows.Forms.CheckBox checkBox2;
           private System.Windows.Forms.CheckBox checkBox1;
           private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportSpellbookToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadSpellbookToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem resetAllDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem spellbookToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addSpellToSpellbookToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeSpellFromSpellbookToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createNewSpellbookToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem duplicateSpellBookToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteSpellbookToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutThisApplicationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem changeLogToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem licensesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editSelectedSpellToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createNewSpellToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem duplicateSelectedSpellToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteSelectedSpellToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editNonSpellDataToolStripMenuItem;
+          private System.Windows.Forms.MenuStrip menuStrip1;
+          private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem exportSpellbookToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem loadSpellbookToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem exportDataToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem importDataToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem resetAllDataToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem spellbookToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem addSpellToSpellbookToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem removeSpellFromSpellbookToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem createNewSpellbookToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem duplicateSpellBookToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem deleteSpellbookToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem editorToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem aboutThisApplicationToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem changeLogToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem licensesToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem editSelectedSpellToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem createNewSpellToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem duplicateSelectedSpellToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem deleteSelectedSpellToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem editNonSpellDataToolStripMenuItem;
           private System.Windows.Forms.CheckBox checkBox18;
           private System.Windows.Forms.CheckBox checkBox17;
           private System.Windows.Forms.CheckBox checkBox16;
@@ -657,6 +680,7 @@
           private System.Windows.Forms.CheckBox checkBox11;
           private System.Windows.Forms.Label label4;
           private System.Windows.Forms.Button button1;
+          private System.Windows.Forms.RichTextBox Spell_Display;
      }
 }
 

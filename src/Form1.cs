@@ -26,11 +26,13 @@ namespace C246SpellBook_V_2
           private DataTable dtSpells;
           private DataView dvSpells;
           private List<spellType> spells;
+
+          //For Filters
           private List<spellType> BardList, ClericList, DruidList, PaladinList, RangerList, SorcererList, WarlockList, WizardList;
-          private List<spellType> Level0, Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9;
-
-
-
+          private List<spellType> Level_0, Level_1, Level_2, Level_3, Level_4, Level_5, Level_6, Level_7, Level_8, Level_9;
+          private DataView BardView, ClericView, DruidView, PaladinView, RangerView, SorcererView, WarlockView, WizardView;
+          private DataView Level_0View, Level_1View, Level_2View, Level_3View, Level_4View, Level_5View, Level_6View, Level_7View, Level_8View, Level_9View;
+          private DataView temp0, temp1, temp2, temp3;
           /*
            * This method initializes the view of the spells, adds them to a column with its 
            * specific catagory. It also initializes the dataTable named dtSpells and adds that
@@ -75,6 +77,33 @@ namespace C246SpellBook_V_2
                dvSpells = new DataView(dtSpells);
                populateListView(dvSpells);
 
+               //For Filters
+               BardView = new DataView(dtSpells);
+               ClericView = new DataView(dtSpells);
+               DruidView = new DataView(dtSpells);
+               PaladinView = new DataView(dtSpells);
+               RangerView = new DataView(dtSpells);
+               SorcererView = new DataView(dtSpells);
+               WarlockView = new DataView(dtSpells);
+               WizardView = new DataView(dtSpells);
+               Level_0View = new DataView(dtSpells);
+               Level_1View = new DataView(dtSpells);
+               Level_2View = new DataView(dtSpells);
+               Level_3View = new DataView(dtSpells);
+               Level_4View = new DataView(dtSpells);
+               Level_5View = new DataView(dtSpells);
+               Level_6View = new DataView(dtSpells);
+               Level_7View = new DataView(dtSpells);
+               Level_8View = new DataView(dtSpells);
+               Level_9View = new DataView(dtSpells);
+               temp0 = new DataView(dtSpells);
+               temp1 = new DataView(dtSpells);
+               temp2 = new DataView(dtSpells);
+               temp3 = new DataView(dtSpells);
+
+
+
+
           }
 
 
@@ -111,6 +140,25 @@ namespace C246SpellBook_V_2
 
                XmlTextReader doc = new XmlTextReader("SpellBookDB.xml");
                spells = new List<spellType>();
+               BardList = new List<spellType>();
+               ClericList = new List<spellType>();
+               DruidList = new List<spellType>();
+               PaladinList = new List<spellType>();
+               RangerList = new List<spellType>();
+               SorcererList = new List<spellType>();
+               WarlockList = new List<spellType>();
+               WizardList = new List<spellType>();
+               Level_0 = new List<spellType>();
+               Level_1 = new List<spellType>();
+               Level_2 = new List<spellType>();
+               Level_3 = new List<spellType>();
+               Level_4 = new List<spellType>();
+               Level_5 = new List<spellType>();
+               Level_6 = new List<spellType>();
+               Level_7 = new List<spellType>();
+               Level_8 = new List<spellType>();
+               Level_9 = new List<spellType>();
+               
 
                while (doc.Read())
                {
@@ -203,11 +251,70 @@ namespace C246SpellBook_V_2
 
                          }//whileRead not Spell
                          spells.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                         switch (level)
+                         {
+                              case "0":
+                                   Level_0.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                              case "1":
+                                   Level_1.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                              case "2":
+                                   Level_2.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                              case "3":
+                                   Level_3.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                              case "4":
+                                   Level_4.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                              case "5":
+                                   Level_5.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                              case "6":
+                                   Level_6.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                              case "7":
+                                   Level_7.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                              case "8":
+                                   Level_8.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                              case "9":
+                                   Level_9.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                                   break;
+                         }
+                        if (classes.Contains("Bard")) { 
+                              BardList.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                         } // if
+                         if (classes.Contains("Cleric")) { 
+                              ClericList.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                         } // if
+                         if (classes.Contains("Druid")) { 
+                              DruidList.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                         }// if
+                         if (classes.Contains("Paladin")) { 
+                              PaladinList.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                         }
+                         if (classes.Contains("Ranger")) { 
+                              RangerList.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                         }
+                         if (classes.Contains("Sorcerer")) { 
+                              SorcererList.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                         }
+                         if (classes.Contains("Warlock")) { 
+                              WarlockList.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                         }
+                         if (classes.Contains("Wizard")) { 
+                              WizardList.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                         }// if
                          classes = "";
                          components = "";
                     }//if = Spell
                }//whileRead
+
                return spells;
+
           }//generateData
 
 
@@ -222,6 +329,7 @@ namespace C246SpellBook_V_2
                     dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
 
                }
+
           }
 
 
@@ -246,32 +354,24 @@ namespace C246SpellBook_V_2
                     listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString() }));
                }
           }
-          /*
-           These functions are supposed to be similar to the search text box, function, using a rowfilter to the dv spells
-           and comparing the parameter (either level or class) to the checked box. These are still a work in progress
-                */
-          private void getClasses(String Class)
-          {
-               dvSpells.RowFilter = string.Format("Classes Like '%{0}%'", Class);
-               populateListView(dvSpells);
-          }
-          private void getLevels(String Level)
-          {
-               dvSpells.RowFilter = string.Format("Level Like '%{0}%'", Level);
-               populateListView(dvSpells);
-          }
+
           //this function may be temporary, I'm not sure if I'll use it yet. It's purpose is currently to see if a 
           // box is still checked, and if so it wont repopulate the entire list when a box is unchecked. 
-          private bool testIfBoxesChecked()
+          private int testIfBoxesChecked()
           {
-               if (checkBox1.Checked || checkBox2.Checked || checkBox3.Checked || checkBox4.Checked || checkBox5.Checked || checkBox6.Checked || checkBox7.Checked || checkBox8.Checked || checkBox9.Checked || checkBox10.Checked || checkBox11.Checked || checkBox12.Checked || checkBox13.Checked || checkBox14.Checked || checkBox15.Checked || checkBox16.Checked || checkBox17.Checked || checkBox18.Checked)
+               int count = 0;
+               foreach (var checkBox in panel1.Controls.OfType<CheckBox>())
                {
-                    return true;
+                    if (checkBox.GetType() == typeof(CheckBox))
+                    {
+                         var checkBoxCtrl = (CheckBox)checkBox;
+                         if (checkBoxCtrl.Checked == true)
+                         {
+                              count++;
+                         }
+                    }
                }
-               else
-               {
-                    return false;
-               }
+               return count;
           }
           /*
            * This method effects the Search bar, and how it will be filtered.
@@ -293,578 +393,200 @@ namespace C246SpellBook_V_2
            */
           private void checkBox1_CheckedChanged(object sender, EventArgs e)
           {
-               if (checkBox1.Checked == true)
+               if (checkBox1.Checked == true && testIfBoxesChecked() <= 1)
                {
-                    getLevels("0");
-
-                    if (checkBox2.Checked == true)
+                    dtSpells.Clear();
+                    foreach (var spell in Level_0)
                     {
-                         getLevels("1");
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
 
                     }
-                    if (checkBox3.Checked == true)
-                    {
-                         getLevels("2");
-
-                    }
-                    if (checkBox4.Checked)
-                    {
-                         getLevels("3");
-
-                    }
-                    if (checkBox5.Checked)
-                    {
-                         getLevels("4");
-
-                    }
-                    if (checkBox6.Checked)
-                    {
-                         getLevels("5");
-
-                    }
-                    if (checkBox7.Checked)
-                    {
-                         getLevels("6");
-
-                    }
-                    if (checkBox8.Checked)
-                    {
-                         getLevels("7");
-
-                    }
-                    if (checkBox9.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox10.Checked)
-                    {
-                         getLevels("9");
-
-                    }
+                    populateListView(Level_0View);
                }
-
-               if (checkBox1.Checked == false && testIfBoxesChecked() == false)
+               
+               if (checkBox1.Checked && testIfBoxesChecked() > 1)
                {
-                    dvSpells = new DataView(dtSpells);
+                    foreach (var spell in Level_0)
+                    {
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
+
+                    }
+                    populateListView(Level_0View);
+               }
+               if(checkBox1.Checked == false && testIfBoxesChecked() < 1)
+               {
+                    dtSpells.Clear();
+                    foreach (var spell in spells)
+                    {
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
+
+                    }
                     populateListView(dvSpells);
                }
+               if (checkBox1.Checked == false && testIfBoxesChecked() >= 1)
+               {
+                    temp0.RowFilter = $"Level NOT LIKE '%0%'";
+                    populateListView(temp0);
+                    dtSpells.AcceptChanges();
+               }
+               
           }
           private void checkBox2_CheckedChanged(object sender, EventArgs e)
           {
-
-               if (checkBox2.Checked)
+               if (checkBox2.Checked == true && testIfBoxesChecked() <= 1)
                {
-                    getLevels("1");
-
-                    if (checkBox1.Checked)
+                    dtSpells.Clear();
+                    foreach (var spell in Level_1)
                     {
-                         getLevels("0");
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
 
                     }
-                    if (checkBox3.Checked)
-                    {
-                         getLevels("2");
-
-                    }
-                    if (checkBox4.Checked)
-                    {
-                         getLevels("3");
-
-                    }
-                    if (checkBox5.Checked)
-                    {
-                         getLevels("4");
-
-                    }
-                    if (checkBox6.Checked)
-                    {
-                         getLevels("5");
-
-                    }
-                    if (checkBox7.Checked)
-                    {
-                         getLevels("6");
-
-                    }
-                    if (checkBox8.Checked)
-                    {
-                         getLevels("7");
-
-                    }
-                    if (checkBox9.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox10.Checked)
-                    {
-                         getLevels("9");
-
-                    }
+                    populateListView(Level_1View);
                }
-               if (checkBox2.Checked == false && testIfBoxesChecked() == false)
+               
+               if (checkBox2.Checked && testIfBoxesChecked() > 1)
                {
-                    dvSpells = new DataView(dtSpells);
+                    foreach (var spell in Level_1)
+                    {
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
+
+                    }
+                    populateListView(Level_1View);
+               }
+
+               if (checkBox2.Checked == false && testIfBoxesChecked() < 1)
+               {
+                    dtSpells.Clear();
+                    foreach (var spell in spells)
+                    {
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
+
+                    }
                     populateListView(dvSpells);
                }
-
+               if (checkBox2.Checked == false && testIfBoxesChecked() >= 1)
+               {
+                    temp1.RowFilter = $"Level NOT LIKE '%1%'";
+                    populateListView(temp1);
+               }
           }
           private void checkBox3_CheckedChanged(object sender, EventArgs e)
           {
-               if (checkBox3.Checked)
+               if (checkBox3.Checked == true && testIfBoxesChecked() <= 1)
                {
-                    getLevels("2");
-
-                    if (checkBox2.Checked)
+                    dtSpells.Clear();
+                    foreach (var spell in Level_2)
                     {
-                         getLevels("1");
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
 
                     }
-                    if (checkBox1.Checked)
-                    {
-                         getLevels("0");
-
-                    }
-                    if (checkBox4.Checked)
-                    {
-                         getLevels("3");
-
-                    }
-                    if (checkBox5.Checked)
-                    {
-                         getLevels("4");
-
-                    }
-                    if (checkBox6.Checked)
-                    {
-                         getLevels("5");
-
-                    }
-                    if (checkBox7.Checked)
-                    {
-                         getLevels("6");
-
-                    }
-                    if (checkBox8.Checked)
-                    {
-                         getLevels("7");
-
-                    }
-                    if (checkBox9.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox10.Checked)
-                    {
-                         getLevels("9");
-
-                    }
+                    populateListView(Level_2View);
                }
-               if (checkBox3.Checked == false && testIfBoxesChecked() == false)
+
+               if (checkBox3.Checked && testIfBoxesChecked() > 1)
                {
-                    dvSpells = new DataView(dtSpells);
+                    foreach (var spell in Level_2)
+                    {
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
+
+                    }
+                    populateListView(Level_2View);
+               }
+
+               if (checkBox3.Checked == false && testIfBoxesChecked() < 1)
+               {
+                    dtSpells.Clear();
+                    foreach (var spell in spells)
+                    {
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
+
+                    }
                     populateListView(dvSpells);
+               }
+               if (checkBox3.Checked == false && testIfBoxesChecked() >= 1)
+               {
+                    temp2.RowFilter = $"Level NOT LIKE '%2%'";
+                    populateListView(temp2);
                }
           }
           private void checkBox4_CheckedChanged(object sender, EventArgs e)
           {
-               if (checkBox4.Checked)
+               
+               if (checkBox4.Checked == true && testIfBoxesChecked() <= 1)
                {
-                    getLevels("3");
-                    if (checkBox2.Checked)
+                    dtSpells.Clear();
+                    foreach (var spell in Level_3)
                     {
-                         getLevels("1");
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
 
                     }
-                    if (checkBox3.Checked)
-                    {
-                         getLevels("2");
-
-                    }
-                    if (checkBox1.Checked)
-                    {
-                         getLevels("0");
-
-                    }
-                    if (checkBox5.Checked)
-                    {
-                         getLevels("4");
-
-                    }
-                    if (checkBox6.Checked)
-                    {
-                         getLevels("5");
-
-                    }
-                    if (checkBox7.Checked)
-                    {
-                         getLevels("6");
-
-                    }
-                    if (checkBox8.Checked)
-                    {
-                         getLevels("7");
-
-                    }
-                    if (checkBox9.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox10.Checked)
-                    {
-                         getLevels("9");
-
-                    }
+                    populateListView(Level_3View);
                }
-               if (checkBox4.Checked == false && testIfBoxesChecked() == false)
+
+               if (checkBox4.Checked && testIfBoxesChecked() > 1)
                {
-                    dvSpells = new DataView(dtSpells);
+                    foreach (var spell in Level_3)
+                    {
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
+
+                    }
+                    populateListView(Level_3View);
+               }
+
+               if (checkBox4.Checked == false && testIfBoxesChecked() < 1)
+               {
+                    dtSpells.Clear();
+                    foreach (var spell in spells)
+                    {
+                         dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
+
+                    }
                     populateListView(dvSpells);
+               }
+               if (checkBox4.Checked == false && testIfBoxesChecked() >= 1)
+               {
+                    DataViewManager dvm = new DataViewManager();
+                    dvm.DataViewSettings[dtSpells].RowFilter = $"Level NOT LIKE '%3%'";
+                    populateListView(Level_3View);
                }
           }
           private void checkBox5_CheckedChanged(object sender, EventArgs e)
           {
                if (checkBox5.Checked)
                {
-                    getLevels("4");
-                    if (checkBox2.Checked)
-                    {
-                         getLevels("1");
-
-                    }
-                    if (checkBox3.Checked)
-                    {
-                         getLevels("2");
-
-                    }
-                    if (checkBox4.Checked)
-                    {
-                         getLevels("3");
-
-                    }
-                    if (checkBox1.Checked)
-                    {
-                         getLevels("0");
-
-                    }
-                    if (checkBox6.Checked)
-                    {
-                         getLevels("5");
-
-                    }
-                    if (checkBox7.Checked)
-                    {
-                         getLevels("6");
-
-                    }
-                    if (checkBox8.Checked)
-                    {
-                         getLevels("7");
-
-                    }
-                    if (checkBox9.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox10.Checked)
-                    {
-                         getLevels("9");
-
-                    }
-               }
-               if (checkBox5.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                   
                }
           }
           private void checkBox6_CheckedChanged(object sender, EventArgs e)
           {
                if (checkBox6.Checked)
                {
-                    getLevels("5");
-                    if (checkBox2.Checked)
-                    {
-                         getLevels("1");
-
-                    }
-                    if (checkBox3.Checked)
-                    {
-                         getLevels("2");
-
-                    }
-                    if (checkBox4.Checked)
-                    {
-                         getLevels("3");
-
-                    }
-                    if (checkBox5.Checked)
-                    {
-                         getLevels("4");
-
-                    }
-                    if (checkBox1.Checked)
-                    {
-                         getLevels("0");
-
-                    }
-                    if (checkBox7.Checked)
-                    {
-                         getLevels("6");
-
-                    }
-                    if (checkBox8.Checked)
-                    {
-                         getLevels("7");
-
-                    }
-                    if (checkBox9.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox10.Checked)
-                    {
-                         getLevels("9");
-
-                    }
-               }
-               if (checkBox6.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                  
                }
           }
           private void checkBox7_CheckedChanged(object sender, EventArgs e)
           {
-               if (checkBox7.Checked)
-               {
-                    getLevels("6");
-                    if (checkBox2.Checked)
-                    {
-                         getLevels("1");
-
-                    }
-                    if (checkBox3.Checked)
-                    {
-                         getLevels("2");
-
-                    }
-                    if (checkBox4.Checked)
-                    {
-                         getLevels("3");
-
-                    }
-                    if (checkBox5.Checked)
-                    {
-                         getLevels("4");
-
-                    }
-                    if (checkBox6.Checked)
-                    {
-                         getLevels("5");
-
-                    }
-                    if (checkBox1.Checked)
-                    {
-                         getLevels("0");
-
-                    }
-                    if (checkBox8.Checked)
-                    {
-                         getLevels("7");
-
-                    }
-                    if (checkBox9.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox10.Checked)
-                    {
-                         getLevels("9");
-
-                    }
-               }
-               if (checkBox7.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
-               }
+               
           }
           private void checkBox8_CheckedChanged(object sender, EventArgs e)
           {
                if (checkBox8.Checked)
                {
-                    getLevels("7");
-                    if (checkBox2.Checked)
-                    {
-                         getLevels("1");
-
-                    }
-                    if (checkBox3.Checked)
-                    {
-                         getLevels("2");
-
-                    }
-                    if (checkBox4.Checked)
-                    {
-                         getLevels("3");
-
-                    }
-                    if (checkBox5.Checked)
-                    {
-                         getLevels("4");
-
-                    }
-                    if (checkBox6.Checked)
-                    {
-                         getLevels("5");
-
-                    }
-                    if (checkBox7.Checked)
-                    {
-                         getLevels("6");
-
-                    }
-                    if (checkBox1.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox9.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox10.Checked)
-                    {
-                         getLevels("9");
-
-                    }
-               }
-               if (checkBox8.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                    
                }
           }
           private void checkBox9_CheckedChanged(object sender, EventArgs e)
           {
                if (checkBox9.Checked)
                {
-                    getLevels("8");
-                    if (checkBox2.Checked)
-                    {
-                         getLevels("1");
-
-                    }
-                    if (checkBox3.Checked)
-                    {
-                         getLevels("2");
-
-                    }
-                    if (checkBox4.Checked)
-                    {
-                         getLevels("3");
-
-                    }
-                    if (checkBox5.Checked)
-                    {
-                         getLevels("4");
-
-                    }
-                    if (checkBox6.Checked)
-                    {
-                         getLevels("5");
-
-                    }
-                    if (checkBox7.Checked)
-                    {
-                         getLevels("6");
-
-                    }
-                    if (checkBox8.Checked)
-                    {
-                         getLevels("7");
-
-                    }
-                    if (checkBox1.Checked)
-                    {
-                         getLevels("0");
-
-                    }
-                    if (checkBox10.Checked)
-                    {
-                         getLevels("9");
-
-                    }
-               }
-               if (checkBox9.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                   
                }
           }
           private void checkBox10_CheckedChanged(object sender, EventArgs e)
           {
                if (checkBox10.Checked)
                {
-                    getLevels("9");
-                    if (checkBox2.Checked)
-                    {
-                         getLevels("1");
-
-                    }
-                    if (checkBox3.Checked)
-                    {
-                         getLevels("2");
-
-                    }
-                    if (checkBox4.Checked)
-                    {
-                         getLevels("3");
-
-                    }
-                    if (checkBox5.Checked)
-                    {
-                         getLevels("4");
-
-                    }
-                    if (checkBox6.Checked)
-                    {
-                         getLevels("5");
-
-                    }
-                    if (checkBox7.Checked)
-                    {
-                         getLevels("6");
-
-                    }
-                    if (checkBox8.Checked)
-                    {
-                         getLevels("7");
-
-                    }
-                    if (checkBox9.Checked)
-                    {
-                         getLevels("8");
-
-                    }
-                    if (checkBox1.Checked)
-                    {
-                         getLevels("0");
-
-                    }
-               }
-               if (checkBox10.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                   
                }
           }
           private void checkBox11_CheckedChanged(object sender, EventArgs e)
@@ -872,49 +594,7 @@ namespace C246SpellBook_V_2
 
                if (checkBox11.Checked)
                {
-                    getClasses("Bard");
-                    if (checkBox12.Checked)
-                    {
-                         getClasses("Cleric");
-                    }
-
-                    if (checkBox13.Checked)
-                    {
-                         getClasses("Druid");
-
-                    }
-                    if (checkBox14.Checked)
-                    {
-                         getClasses("Paladin");
-
-                    }
-                    if (checkBox15.Checked)
-                    {
-                         getClasses("Ranger");
-
-                    }
-                    if (checkBox16.Checked)
-                    {
-                         getClasses("Sorcerer");
-
-                    }
-                    if (checkBox17.Checked)
-                    {
-                         getClasses("Warlock");
-
-                    }
-                    if (checkBox18.Checked)
-                    {
-                         getClasses("Wizard");
-
-                    }
-
-               }
-
-               if (checkBox11.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                    
                }
 
           }
@@ -922,88 +602,13 @@ namespace C246SpellBook_V_2
           {
                if (checkBox12.Checked)
                {
-                    getClasses("Cleric");
-
-                    if (checkBox13.Checked)
-                    {
-                         getClasses("Druid");
-
-                    }
-                    if (checkBox14.Checked)
-                    {
-                         getClasses("Paladin");
-
-                    }
-                    if (checkBox15.Checked)
-                    {
-                         getClasses("Ranger");
-
-                    }
-                    if (checkBox16.Checked)
-                    {
-                         getClasses("Sorcerer");
-
-                    }
-                    if (checkBox17.Checked)
-                    {
-                         getClasses("Warlock");
-
-                    }
-                    if (checkBox18.Checked)
-                    {
-                         getClasses("Wizard");
-
-                    }
-
-
-               }
-               if (checkBox12.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                   
                }
           }
           private void checkBox13_CheckedChanged_1(object sender, EventArgs e)
           {
                if (checkBox13.Checked)
                {
-                    getClasses("Druid");
-                    if (checkBox12.Checked)
-                    {
-                         getClasses("Cleric");
-
-                    }
-                    if (checkBox14.Checked)
-                    {
-                         getClasses("Paladin");
-
-                    }
-                    if (checkBox15.Checked)
-                    {
-                         getClasses("Ranger");
-
-                    }
-                    if (checkBox16.Checked)
-                    {
-                         getClasses("Sorcerer");
-
-                    }
-                    if (checkBox17.Checked)
-                    {
-                         getClasses("Warlock");
-
-                    }
-                    if (checkBox18.Checked)
-                    {
-                         getClasses("Wizard");
-
-                    }
-
-               }
-               if (checkBox13.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
                }
           }
 
@@ -1011,86 +616,14 @@ namespace C246SpellBook_V_2
           {
                if (checkBox14.Checked)
                {
-                    getClasses("Paladin");
-                    if (checkBox13.Checked)
-                    {
-                         getClasses("Druid");
-
-                    }
-                    if (checkBox12.Checked)
-                    {
-                         getClasses("Cleric");
-
-                    }
-                    if (checkBox15.Checked)
-                    {
-                         getClasses("Ranger");
-
-                    }
-                    if (checkBox16.Checked)
-                    {
-                         getClasses("Sorcerer");
-
-                    }
-                    if (checkBox17.Checked)
-                    {
-                         getClasses("Warlock");
-
-                    }
-                    if (checkBox18.Checked)
-                    {
-                         getClasses("Wizard");
-
-                    }
-
-               }
-               if (checkBox14.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                  
                }
           }
           private void checkBox15_CheckedChanged(object sender, EventArgs e)
           {
                if (checkBox15.Checked)
                {
-                    getClasses("Ranger");
-                    if (checkBox13.Checked)
-                    {
-                         getClasses("Druid");
 
-                    }
-                    if (checkBox14.Checked)
-                    {
-                         getClasses("Paladin");
-
-                    }
-                    if (checkBox12.Checked)
-                    {
-                         getClasses("Cleric");
-
-                    }
-                    if (checkBox16.Checked)
-                    {
-                         getClasses("Sorcerer");
-
-                    }
-                    if (checkBox17.Checked)
-                    {
-                         getClasses("Warlock");
-
-                    }
-                    if (checkBox18.Checked)
-                    {
-                         getClasses("Wizard");
-
-                    }
-
-               }
-               if (checkBox15.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
                }
           }
           private void checkBox16_CheckedChanged_1(object sender, EventArgs e)
@@ -1098,43 +631,7 @@ namespace C246SpellBook_V_2
 
                if (checkBox16.Checked)
                {
-                    getClasses("Sorcerer");
-                    if (checkBox13.Checked)
-                    {
-                         getClasses("Druid");
-
-                    }
-                    if (checkBox14.Checked)
-                    {
-                         getClasses("Paladin");
-
-                    }
-                    if (checkBox15.Checked)
-                    {
-                         getClasses("Ranger");
-
-                    }
-                    if (checkBox12.Checked)
-                    {
-                         getClasses("Cleric");
-
-                    }
-                    if (checkBox17.Checked)
-                    {
-                         getClasses("Warlock");
-
-                    }
-                    if (checkBox18.Checked)
-                    {
-                         getClasses("Wizard");
-
-                    }
-
-               }
-               if (checkBox16.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                   
                }
 
           }
@@ -1142,86 +639,14 @@ namespace C246SpellBook_V_2
           {
                if (checkBox17.Checked)
                {
-                    getClasses("Warlock");
-                    if (checkBox13.Checked)
-                    {
-                         getClasses("Druid");
-
-                    }
-                    if (checkBox14.Checked)
-                    {
-                         getClasses("Paladin");
-
-                    }
-                    if (checkBox15.Checked)
-                    {
-                         getClasses("Ranger");
-
-                    }
-                    if (checkBox16.Checked)
-                    {
-                         getClasses("Sorcerer");
-
-                    }
-                    if (checkBox12.Checked)
-                    {
-                         getClasses("Cleric");
-
-                    }
-                    if (checkBox18.Checked)
-                    {
-                         getClasses("Wizard");
-
-                    }
-
-               }
-               if (checkBox17.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                   
                }
           }
           private void checkBox18_CheckedChanged(object sender, EventArgs e)
           {
                if (checkBox18.Checked)
                {
-                    getClasses("Wizard");
-                    if (checkBox13.Checked)
-                    {
-                         getClasses("Druid");
-
-                    }
-                    if (checkBox14.Checked)
-                    {
-                         getClasses("Paladin");
-
-                    }
-                    if (checkBox15.Checked)
-                    {
-                         getClasses("Ranger");
-
-                    }
-                    if (checkBox16.Checked)
-                    {
-                         getClasses("Sorcerer");
-
-                    }
-                    if (checkBox17.Checked)
-                    {
-                         getClasses("Warlock");
-
-                    }
-                    if (checkBox12.Checked)
-                    {
-                         getClasses("Cleric");
-
-                    }
-
-               }
-               if (checkBox18.Checked == false && testIfBoxesChecked() == false)
-               {
-                    dvSpells = new DataView(dtSpells);
-                    populateListView(dvSpells);
+                    
                }
           }
 
@@ -1272,7 +697,8 @@ namespace C246SpellBook_V_2
                Spell_Display.Text = displayText.ToString();
                //Console.WriteLine(listView1.SelectedItems);
           }
-          //This is the reset filters button. It sets the checked state for each individual checkbox to false (unchecked)
+          //This is the reset filters button. It checks panel 1 where the checkboxes are located and looks for a control of checkbox type
+          // if it finds one, it checks if its checked, and if it is, it unchecks it
           private void button1_Click(object sender, EventArgs e)
           {
                foreach (var checkBox in panel1.Controls.OfType<CheckBox>())
