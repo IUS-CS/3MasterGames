@@ -9,27 +9,29 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
+//using SpellViewer;
+
 namespace C246SpellBook_V_2
 {
     /*
      * Form1 holds all the methods that effect the whole of the window.
      */
     public partial class Form1 : Form
-    {
-
-        
+    { 
         /*
-         * The three variables will be used to obtain data from the list of spells and
-         * be able to view the data that has been placed inside the list. Also List spellType is the
-         * list of spells.
+         * The Two variables will be used to obtain data from the list of spells and
+         * be able to view the data that has been placed inside the list. 
          */
         private DataTable dtSpells;
         private DataView dvSpells;
+<<<<<<< HEAD
         private List<spellType> spells;
         private List<spellType> BardList, ClericList, DruidList, PaladinList, RangerList, SorcererList, WarlockList, WizardList;
         private List<spellType> Level0, Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9;
 
 
+=======
+>>>>>>> 1a8f9847063506bd94020f7935f66037befc8b5a
 
         /*
          * This method initializes the view of the spells, adds them to a column with its 
@@ -58,7 +60,6 @@ namespace C246SpellBook_V_2
             listView1.Columns.Add("Classes", 350);
             listView1.Columns.Add("Components", 350);
 
-
             //Initialize Datatable and add columns
             dtSpells = new DataTable();
             dtSpells.Columns.Add("Name");
@@ -69,167 +70,28 @@ namespace C246SpellBook_V_2
             dtSpells.Columns.Add("Classes");
             dtSpells.Columns.Add("Components");
 
-
             //Fill datatable
-            fillDataTable(generateData());
+            fillDataTable(XmlReader.generateData());
             dvSpells = new DataView(dtSpells);
             populateListView(dvSpells);
-
         }
-
-
-        /*
-         * Update: The generateData method starts with multiple data types to hold all the information in. This method will read in the Xml file
-         * with all the spells inside it, and store them into a List spellType. This list is named spells. While the Xml file is open it will read
-         * each line and compare whether its the name, level, etc. It will store it into that specific variable and hold onto that data until
-         * that spell is competed. Once it is completed it is added to the list spells with all the attributes included inside it. The pnly problem is the 
-         * text and roll. For instance, some spells have 2 to 2 text lines in the Xml file but I ended up just placing all of them into the text variable.
-         * Same goes for the roll variable. 
-         * If you have any questions please let me know, also if I did anything weird or wrong please let me know.
-         */
-        private List<spellType> generateData()
-        {
-            string id = " ";
-            string name = "";
-            string level = "";
-            string school = "";
-            bool ritual = false;
-            string ritualText = "";
-            bool concentration = false;
-            string hasConcentration = "";
-            string time = "";
-            string range = "";
-            string components = "";
-            string materials = "";
-            string duration = "";
-            string classes = "";
-            string description = "";
-            string higherLevel = "";
-            string source = "";
-            string roll = "";
-            int count = 0;
-
-            XmlTextReader doc = new XmlTextReader("SpellBookDB.xml");
-            spells = new List<spellType>();
-
-            while (doc.Read())
-            {
-                if (doc.NodeType == XmlNodeType.Element && doc.Name == "Spell")
-                {
-                    while (doc.Read() && doc.Name != "Spell")
-                    {
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "ID")
-                        {
-                            id = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Name")
-                        {
-                            name = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Level")
-                        {
-                            level = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "School")
-                        {
-                            school = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "IsRitual")
-                        {
-                            ritualText = doc.ReadElementString();
-                            if (ritualText == "true")
-                                ritual = true;
-                            else
-                                ritual = false;
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "CastingTime")
-                        {
-                            time = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Range")
-                        {
-                            range = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Component")
-                        {
-                            components += doc.ReadElementString() + ", ";
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Materials")
-                        {
-                            materials = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Duration")
-                        {
-                            duration = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "HasConcentration")
-                        {
-                            hasConcentration = doc.ReadElementString();
-                            if (hasConcentration == "true")
-                                concentration = true;
-                            else
-                                concentration = false;
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Description")
-                        {
-                            description = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "HigherLevel")
-                        {
-                            higherLevel = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Source")
-                        {
-                            source = doc.ReadElementString();
-                        }
-
-                        if (doc.NodeType == XmlNodeType.Element && doc.Name == "Class")
-                        {
-                            classes += doc.ReadElementString() + ", ";
-                        }
-
-                    }//whileRead not Spell
-                    spells.Add(new spellType(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
-                    classes = "";
-                    components = "";  
-                }//if = Spell
-            }//whileRead
-            return spells;
-        }//generateData
-
-
+        
         /*
          * Transfer the data from list to datatable, by checking each spell and adding it to the 
          * row under that specific column.
          */
-        private void fillDataTable(List<spellType> spells)
+        private void fillDataTable(List<SpellList> spells)
         {
             foreach (var spell in spells)
             {
                 dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-                
             }
         }
-
 
         //Blank for now.
         private void Form1_Load(object sender, EventArgs e)
         {
         }
-
 
         /*
          * The DataTable method is what populates the listBox1 with the spells, another method can be created to create other attributes to the spell.
@@ -246,20 +108,23 @@ namespace C246SpellBook_V_2
                 listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString() }));
             }
         }
+
           /*
            These functions are supposed to be similar to the search text box, function, using a rowfilter to the dv spells
            and comparing the parameter (either level or class) to the checked box. These are still a work in progress
-                */
+          */
           private void getClasses(String Class)
           {
                dvSpells.RowFilter = string.Format("Classes Like '%{0}%'", Class);
                populateListView(dvSpells);
           }
+
           private void getLevels(String Level)
           {
                dvSpells.RowFilter = string.Format("Level Like '%{0}%'", Level);
                populateListView(dvSpells);
           }
+
           //this function may be temporary, I'm not sure if I'll use it yet. It's purpose is currently to see if a 
           // box is still checked, and if so it wont repopulate the entire list when a box is unchecked. 
           private bool testIfBoxesChecked()
@@ -1330,111 +1195,3 @@ namespace C246SpellBook_V_2
 /*
  * This is where we will add attributes to the spellType class, like level, name, discription, etc.
  */
-class spellType
-{
-    private string id;
-    private string name;
-    private string level;
-    private string school;
-    private bool ritual;
-    private bool concentration;
-    private string time;
-    private string range;
-    private string components;
-    private string materials;
-    private string duration;
-    private string classes;
-    private string description;
-    private string higherLevel;
-    private string source;
-    private string roll;
-    
-    
-    
-
-
-    public spellType(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source, string roll)
-    {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.school = school;
-        this.ritual = ritual;
-        this.concentration = concentration;
-        this.time = time;
-        this.range = range;
-        this.components = components;
-        this.materials = materials;
-        this.duration = duration;
-        this.classes = classes;
-        this.description = description;
-        this.higherLevel = higherLevel;
-        this.source = source;
-        this.roll = roll;
-    }
-
-    public string ID
-    {
-        get { return id; }
-    }
-    public string Name
-    {
-        get { return name; }
-    }
-    public string Level
-    {
-        get { return level; }
-    }
-    public string School
-    {
-        get { return school; }
-    }
-    public bool Ritual
-    {
-        get { return ritual; }
-    }
-    public bool Concentration
-    {
-        get { return concentration; }
-    }
-    public string Time
-    {
-        get { return time; }
-    }
-    public string Range
-    {
-        get { return range; }
-    }
-    public string Components
-    {
-        get { return components; }
-    }
-    public string Materials
-    {
-        get { return materials; }
-    }
-    public string Duration
-    {
-        get { return duration; }
-    }
-    public string Classes
-    {
-        get { return classes; }
-    }
-    public string Description
-    {
-        get { return description; }
-    }
-    public string HigherLevel
-    {
-        get { return higherLevel; }
-    }
-    public string Source
-    {
-        get { return source; }
-    }
-    public string Roll
-    {
-        get { return roll; }
-    }
-}
