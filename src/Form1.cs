@@ -17,18 +17,13 @@ namespace C246SpellBook_V_2
      * Form1 holds all the methods that effect the whole of the window.
      */
     public partial class Form1 : Form
-    {
-
-        
+    { 
         /*
-         * The three variables will be used to obtain data from the list of spells and
-         * be able to view the data that has been placed inside the list. Also List spellType is the
-         * list of spells.
+         * The Two variables will be used to obtain data from the list of spells and
+         * be able to view the data that has been placed inside the list. 
          */
         private DataTable dtSpells;
         private DataView dvSpells;
-        
-
 
         /*
          * This method initializes the view of the spells, adds them to a column with its 
@@ -57,7 +52,6 @@ namespace C246SpellBook_V_2
             listView1.Columns.Add("Classes", 350);
             listView1.Columns.Add("Components", 350);
 
-
             //Initialize Datatable and add columns
             dtSpells = new DataTable();
             dtSpells.Columns.Add("Name");
@@ -68,15 +62,12 @@ namespace C246SpellBook_V_2
             dtSpells.Columns.Add("Classes");
             dtSpells.Columns.Add("Components");
 
-
             //Fill datatable
             fillDataTable(XmlReader.generateData());
             dvSpells = new DataView(dtSpells);
             populateListView(dvSpells);
-
         }
         
-
         /*
          * Transfer the data from list to datatable, by checking each spell and adding it to the 
          * row under that specific column.
@@ -86,16 +77,13 @@ namespace C246SpellBook_V_2
             foreach (var spell in spells)
             {
                 dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-                
             }
         }
-
 
         //Blank for now.
         private void Form1_Load(object sender, EventArgs e)
         {
         }
-
 
         /*
          * The DataTable method is what populates the listBox1 with the spells, another method can be created to create other attributes to the spell.
@@ -112,20 +100,23 @@ namespace C246SpellBook_V_2
                 listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString() }));
             }
         }
+
           /*
            These functions are supposed to be similar to the search text box, function, using a rowfilter to the dv spells
            and comparing the parameter (either level or class) to the checked box. These are still a work in progress
-                */
+          */
           private void getClasses(String Class)
           {
                dvSpells.RowFilter = string.Format("Classes Like '%{0}%'", Class);
                populateListView(dvSpells);
           }
+
           private void getLevels(String Level)
           {
                dvSpells.RowFilter = string.Format("Level Like '%{0}%'", Level);
                populateListView(dvSpells);
           }
+
           //this function may be temporary, I'm not sure if I'll use it yet. It's purpose is currently to see if a 
           // box is still checked, and if so it wont repopulate the entire list when a box is unchecked. 
           private bool testIfBoxesChecked()

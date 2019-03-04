@@ -18,9 +18,9 @@ namespace C246SpellBook_V_2
             private string description;
             private string higherLevel;
             private string source;
-            private string roll;
+            
 
-            public SpellList(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source, string roll)
+            public SpellList(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source)
             {
                 this.id = id;
                 this.name = name;
@@ -37,7 +37,6 @@ namespace C246SpellBook_V_2
                 this.description = description;
                 this.higherLevel = higherLevel;
                 this.source = source;
-                this.roll = roll;
             }
 
             public string ID
@@ -99,10 +98,6 @@ namespace C246SpellBook_V_2
             public string Source
             {
                 get { return source; }
-            }
-            public string Roll
-            {
-                get { return roll; }
             }
     }
 }

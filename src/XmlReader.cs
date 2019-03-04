@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 
-
-
-
 namespace C246SpellBook_V_2
 {
-
     /*
          * Update: The XmlReader class starts with multiple data types to hold all the information in. This method will read in the Xml file
          * with all the spells inside it, and store them into a List spellType. This list is named spells. While the Xml file is open it will read
@@ -16,7 +12,6 @@ namespace C246SpellBook_V_2
          * Same goes for the roll variable. 
          * If you have any questions please let me know, also if I did anything weird or wrong please let me know.
          */
-
     class XmlReader
     {
         public static List<SpellList> spells;
@@ -39,7 +34,7 @@ namespace C246SpellBook_V_2
             string description = "";
             string higherLevel = "";
             string source = "";
-            string roll = "";
+            
 
             XmlTextReader doc = new XmlTextReader("SpellBookDB.xml");
             spells = new List<SpellList>();
@@ -134,14 +129,12 @@ namespace C246SpellBook_V_2
                         }
 
                     }//whileRead not Spell
-                    spells.Add(new SpellList(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source, roll));
+                    spells.Add(new SpellList(id, name, level, school, ritual, concentration, time, range, components, materials, duration, classes, description, higherLevel, source));
                     classes = "";
                     components = "";
                 }//if = Spell
             }//whileRead
             return spells;
         }//generateData
-
-
     }
 }
