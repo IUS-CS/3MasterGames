@@ -145,7 +145,7 @@
                this.Spell_Display.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.Spell_Display.Enabled = false;
                this.Spell_Display.Location = new System.Drawing.Point(2, 32);
-               this.Spell_Display.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Spell_Display.Margin = new System.Windows.Forms.Padding(2);
                this.Spell_Display.Name = "Spell_Display";
                this.Spell_Display.Size = new System.Drawing.Size(233, 347);
                this.Spell_Display.TabIndex = 1;

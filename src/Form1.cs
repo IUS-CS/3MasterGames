@@ -375,6 +375,7 @@ namespace C246SpellBook_V_2
                if (filterUsed == false)
                {    foundRows = dtSpells.Select(expression);
                     filterTable.Clear();
+                    filterTable.AcceptChanges();
                     foreach (DataRow row in foundRows)
                     {
                          filterTable.ImportRow(row);
@@ -384,11 +385,13 @@ namespace C246SpellBook_V_2
                     filterUsed = true;
                     dtSpells.Clear();
                     dtSpells.AcceptChanges();
-                  
+                    filterTable.AcceptChanges();
                }
                else
                {
                     foundRows = filterTable.Select(expression);
+                    dtSpells.Clear();
+                    dtSpells.AcceptChanges();
                     foreach (DataRow row in foundRows)
                     {
                          dtSpells.ImportRow(row);
@@ -397,6 +400,7 @@ namespace C246SpellBook_V_2
                     populateListView(tempView);
                     filterTable.Clear();
                     filterTable.AcceptChanges();
+                    dtSpells.AcceptChanges();
                     filterUsed = false;
                     
                }
