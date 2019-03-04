@@ -50,6 +50,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SpellList.cs" />
+    <Compile Include="XmlReader.cs" />
     <EmbeddedResource Include="OtherWindows\dataEditor.xaml.cs">
       <DependentUpon>dataEditor.xaml</DependentUpon>
     </EmbeddedResource>
