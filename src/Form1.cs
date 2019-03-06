@@ -833,7 +833,7 @@ namespace C246SpellBook_V_2
           {
                 AboutPage about = new AboutPage();
                 about.InitializeComponent();
-                //about
+                about.Show();
           }
 
           // this method is trigger when the hightlighted spell is changed
