@@ -554,6 +554,7 @@
             this.duplicateSelectedSpellToolStripMenuItem.Name = "duplicateSelectedSpellToolStripMenuItem";
             this.duplicateSelectedSpellToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.duplicateSelectedSpellToolStripMenuItem.Text = "Duplicate Selected Spell";
+            this.duplicateSelectedSpellToolStripMenuItem.Click += new System.EventHandler(this.duplicateSelectedSpellToolStripMenuItem_Click);
             // 
             // deleteSelectedSpellToolStripMenuItem
             // 
@@ -566,6 +567,7 @@
             this.editNonSpellDataToolStripMenuItem.Name = "editNonSpellDataToolStripMenuItem";
             this.editNonSpellDataToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.editNonSpellDataToolStripMenuItem.Text = "Edit Non-Spell Data";
+            this.editNonSpellDataToolStripMenuItem.Click += new System.EventHandler(this.editNonSpellDataToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 

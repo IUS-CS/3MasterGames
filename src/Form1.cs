@@ -935,6 +935,21 @@ namespace C246SpellBook_V_2
             ed.Show();
         }
 
+        private void duplicateSelectedSpellToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //for other things we will need to have a different initcalizer to load the form before editing
+            SpellEditor ed = new SpellEditor();
+            ed.InitializeComponent();
+            ed.Show();
+        }
+
+        private void editNonSpellDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataEditor DE = new DataEditor();
+            DE.InitializeComponent();
+            DE.Show();
+        }
+
         private void Spell_Display_TextChanged(object sender, EventArgs e)
           {
 
