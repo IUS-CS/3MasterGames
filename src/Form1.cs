@@ -896,7 +896,9 @@ namespace C246SpellBook_V_2
 
           private void changeLogToolStripMenuItem_Click(object sender, EventArgs e)
           {
-
+            ChangeLog log = new ChangeLog();
+            log.InitializeComponent();
+            log.Show();
           }
 
           private void licensesToolStripMenuItem_Click(object sender, EventArgs e)
