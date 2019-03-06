@@ -54,7 +54,9 @@
     <Compile Include="SpellList.cs" />
     <Compile Include="WindowView\AboutPage.cs" />
     <Compile Include="WindowView\ChangeLog.cs" />
+    <Compile Include="WindowView\DataEditor.cs" />
     <Compile Include="WindowView\Licence.cs" />
+    <Compile Include="WindowView\SpellEditor.cs" />
     <Compile Include="XmlReader.cs" />
     <EmbeddedResource Include="OtherWindows\dataEditor.xaml.cs">
       <DependentUpon>dataEditor.xaml</DependentUpon>
