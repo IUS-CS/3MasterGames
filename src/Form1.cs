@@ -852,7 +852,7 @@ namespace C246SpellBook_V_2
                //Console.WriteLine(listView1.SelectedItems);
           }
           //This is the reset filters button. It checks panel 1 where the checkboxes are located and looks for a control of checkbox type
-          // if it finds one, it checks if its checked, and if it is, it unchecks it. This also resets filterUsed to false.
+          // if it finds one, it checks if its checked, and if it is, it unchecks it. This also resets filterUsed to false. It then clears both tables and repopulates the dtSpells Table.
           private void button1_Click(object sender, EventArgs e)
           {
                foreach (var checkBox in panel1.Controls.OfType<CheckBox>())
