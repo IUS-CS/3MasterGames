@@ -19,11 +19,14 @@ namespace C246SpellBook_V_2
      {
 
 
-          /*
-           * The three variables will be used to obtain data from the list of spells and
-           * be able to view the data that has been placed inside the list. Also List spellType is the
-           * list of spells.
-           */
+        /*
+         * The three variables will be used to obtain data from the list of spells and
+         * be able to view the data that has been placed inside the list. Also List spellType is the
+         * list of spells.
+         */
+
+          //this is for sorting 
+          private int sortColumn = -1;
 
           private DataTable dtSpells;
           private DataView dvSpells;
@@ -49,16 +52,16 @@ namespace C246SpellBook_V_2
                //ListView Properties
                listView1.View = View.Details;
                listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+               
 
                //Add Columns
                listView1.Columns.Add("Name", 150);
-               listView1.Columns.Add("Level", 50);
+               listView1.Columns.Add("Level", 50, HorizontalAlignment.Center);
                listView1.Columns.Add("School", 150);
                listView1.Columns.Add("Ritual", 50);
                listView1.Columns.Add("Concentration", 50);
                listView1.Columns.Add("Classes", 350);
-               listView1.Columns.Add("Components", 350);
-
+               
 
                //Initialize Datatable and add columns
                dtSpells = new DataTable();
@@ -75,6 +78,7 @@ namespace C246SpellBook_V_2
                fillDataTable(XmlReader.generateData());
                dvSpells = new DataView(dtSpells);
                populateListView(dvSpells);
+               
                //This is almost like a temporary table. Filters will be bouncing between this table and dtSpells
                filterTable = new DataTable();
                filterTable.Columns.Add("Name");
@@ -106,7 +110,12 @@ namespace C246SpellBook_V_2
           //Blank for now.
           private void Form1_Load(object sender, EventArgs e)
           {
-          }
+            // may want to do all of the spell loading ane declaration here
+
+            //This is so that it sorts by level by default 
+            listView1.Sorting = SortOrder.Ascending;
+            listView1.Sort();
+        }
 
 
           /*
@@ -123,7 +132,12 @@ namespace C246SpellBook_V_2
                {
                     listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString() }));
                }
-          }
+
+                //This is so that it sorts by level by default whenever the listview is loaded
+                listView1.Sorting = SortOrder.Ascending;
+                listView1.Sort();
+                listView1.ListViewItemSorter = new ListViewComparer(1, listView1.Sorting);
+        }
 
           /*
            This function loops through all of our checkboxes. It loops through and looks for control type of checkbox. 
@@ -811,8 +825,28 @@ namespace C246SpellBook_V_2
                 // Set the ListViewItemSorter property to a new ListViewItemComparer 
                 // object. Setting this property immediately sorts the 
                 // ListView using the ListViewItemComparer object.
-                listView1.ListViewItemSorter = new ListViewItemComparer(e.Column);
-          }
+                //listView1.ListViewItemSorter = new ListViewComparer(e.Column);
+
+                // Determine whether the column is the same as the last column clicked.
+                if (e.Column != sortColumn)
+                {
+                    // Set the sort column to the new column.
+                    sortColumn = e.Column;
+                    // Set the sort order to ascending by default.
+                    listView1.Sorting = SortOrder.Ascending;
+                }
+                else
+                {
+                    // Determine what the last sort order was and change it.
+                    listView1.Sorting = listView1.Sorting == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                }
+
+                // Call the sort method to manually sort.
+                listView1.Sort();
+                // Set the ListViewItemSorter property to a new ListViewItemComparer
+                // object.
+                listView1.ListViewItemSorter = new ListViewComparer(e.Column, listView1.Sorting);
+        }
 
         private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
           {
