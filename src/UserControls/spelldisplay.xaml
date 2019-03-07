@@ -1,0 +1,73 @@
+<UserControl x:Class="SpellViewer.View.UserControls.SpellDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:SpellViewer.ViewModel"
+             xmlns:v="clr-namespace:SpellViewer.View"
+             xmlns:c="clr-namespace:SpellViewer.ViewModel.Converters"
+             xmlns:resx="clr-namespace:SpellViewer.Properties">
+  <FrameworkElement.Resources>
+    <c:ComponentsToStringConverter x:Key="ComponentsToStringConverter"/>
+    <c:StringIsNullToBoolConverter x:Key="StringToBoolConverter"/>
+    <c:ErrataToStringConverter x:Key="ErrataToStringConverter"/>
+  </FrameworkElement.Resources>
+  <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <DockPanel LastChildFill="true">
+        <FrameworkElement.ContextMenu>
+          <ContextMenu DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext}">
+            <MenuItem Header="Copy to Clipboard" ToolTip="{x:Static resx:ToolTips.COPY_TO_CLIPBOARD}"
+                      Command="{Binding CopyToClipboardCommand}"/>
+          </ContextMenu>
+        </FrameworkElement.ContextMenu>
+        <RichTextBox IsReadOnly="true" BorderThickness="0">
+          <FlowDocument>
+            <Paragraph>
+              <Run FontWeight="Bold" FontFamily="Lucida Bright" FontSize="18" Text="{Binding Name, Mode=OneWay}"/>
+              <LineBreak/>
+              <Run FontStyle="Italic" FontSize="14" Text="{Binding DisplayLevel, Mode=OneWay}"/>
+              <LineBreak/>
+              <LineBreak/>
+              <Run Text="Casting Time: " FontWeight="Bold" FontSize="12" FontFamily="Courier New"/>
+              <Run FontSize="12" FontFamily="Courier New" Text="{Binding CastingTime, Mode=OneWay}"/>
+              <LineBreak/>
+              <Run Text="Range: " FontWeight="Bold" FontSize="12" FontFamily="Courier New"/>
+              <Run FontSize="12" FontFamily="Courier New" Text="{Binding Range, Mode=OneWay}"/>
+              <LineBreak/>
+              <Run Text="Components: " FontWeight="Bold" FontSize="12" FontFamily="Courier New"/>
+              <Run FontSize="12" FontFamily="Courier New"
+                   Text="{Binding Path=Components, Converter={StaticResource ComponentsToStringConverter}}"/>
+              <Run FontSize="12" FontFamily="Courier New" Text="{Binding Path=Material, StringFormat=({0})}"
+                   vm:RunVisibility.Visible="{Binding Path=Material, Converter={StaticResource StringToBoolConverter}}"/>
+              <LineBreak/>
+              <Run Text="Duration: " FontWeight="Bold" FontSize="12" FontFamily="Courier New"/>
+              <Run FontSize="12" FontFamily="Courier New" Text="{Binding DisplayDuration, Mode=OneWay}"/>
+              <LineBreak/>
+              <LineBreak/>
+              <Run FontSize="12" FontFamily="Courier New" Text="{Binding Description, Mode=OneWay}"/>
+              <LineBreak/>
+              <LineBreak/>
+              <Run Text="    At Higher Levels: " FontWeight="Bold" FontStyle="Italic" FontFamily="Courier New"
+                   vm:RunVisibility.Visible="{Binding DisplayHigherLevelFlag}"/>
+              <Run FontFamily="Courier New" Text="{Binding HigherLevel, Mode=OneWay}"
+                   vm:RunVisibility.Visible="{Binding DisplayHigherLevelFlag}"/>
+              <LineBreak/>
+              <LineBreak/>
+              <Run Text="Source: " FontWeight="Bold" FontFamily="Courier New"/>
+              <Run FontFamily="Courier New" Text="{Binding SourceMaterial, Mode=OneWay}"/>
+              <LineBreak/>
+              <LineBreak/>
+              <Run Text="Errata:" FontWeight="Bold" FontStyle="Italic" FontFamily="Courier New"
+                   vm:RunVisibility.Visible="{Binding DisplayErrataFlag}"/>
+              <LineBreak/>
+              <Run FontFamily="Courier New"
+                   Text="{Binding ErrataList, Converter={StaticResource ErrataToStringConverter}}"
+                   vm:RunVisibility.Visible="{Binding DisplayErrataFlag}"/>
+            </Paragraph>
+          </FlowDocument>
+        </RichTextBox>
+      </DockPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>
