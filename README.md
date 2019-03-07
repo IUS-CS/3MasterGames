@@ -8,6 +8,10 @@ Have you got tired of flipping through your PHB looking for your spells? Do you 
 
 This application is a reboot of an old program that was infected with malware. It was a great program thus we want to recreate it, but unfortunately it has been wiped from the internet, except one copy. That last copy lives its days in a virtual container so that it doen't to harm another piece of software. We are using it to model a new redesign of  the orginal Spellviewer.
 
+### Issues
+
+   If you find a bug or you want to see something implemented, place an issue in and the team will do the best we can to accomadte your request. 
+   
 ### Building
 
 After you download the folder, you will need to make sure visual studio is installe and then click on the .sln file. Afterwhich, you will need to build the program or press start in visual studio.
