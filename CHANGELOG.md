@@ -1,0 +1,2 @@
+# Spellviewer Change Log
+
