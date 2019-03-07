@@ -145,6 +145,7 @@ namespace C246SpellBook_V_2
                }
                return count;
           }
+            
           /*
            This function is how filters are going to work for when boxes are unchecked while others are still checked. First, we create a string that we are going to use
            to filter out whatever was just unchecked. We then create a datarow array to store our results.
