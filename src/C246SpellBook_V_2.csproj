@@ -50,7 +50,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ListViewItemComparer.cs" />
+    <Compile Include="ListViewComparer.cs" />
     <Compile Include="SpellList.cs" />
     <Compile Include="WindowView\AboutPage.cs" />
     <Compile Include="WindowView\ChangeLog.cs" />
