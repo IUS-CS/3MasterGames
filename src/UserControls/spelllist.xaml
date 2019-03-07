@@ -1,0 +1,115 @@
+<UserControl x:Class="SpellViewer.View.UserControls.SpellList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+             xmlns:uc="clr-namespace:SpellViewer.View.UserControls"
+             xmlns:convert="clr-namespace:SpellViewer.ViewModel.Converters"
+             xmlns:resx="clr-namespace:SpellViewer.Properties">
+  <FrameworkElement.Resources>
+    <convert:SpellListToBoolConverter x:Key="SpellListToBool"/>
+    <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    <convert:BoolToVisibilityInverter x:Key="BoolToVisInverter"/>
+    <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type GroupItem}">
+            <Expander x:Name="exp" IsExpanded="true" Background="LightGray" Foreground="Black">
+              <HeaderedContentControl.Header>
+                <TextBlock FontWeight="Bold" TextAlignment="Left">
+                  <TextBlock.Inlines>
+                    <Run Text="Level"/>
+                    
+                    <Run Text="{Binding Path=Name, Mode=OneWay}"/>
+                  </TextBlock.Inlines>
+                </TextBlock>
+              </HeaderedContentControl.Header>
+              <ItemsPresenter/>
+            </Expander>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </FrameworkElement.Resources>
+  <DataGrid x:Name="SpellList_DataGrid" AutoGenerateColumns="false" SelectionMode="Single"
+            SelectionUnit="FullRow" CanUserAddRows="false" CanUserDeleteRows="false"
+            CanUserReorderColumns="false" CanUserResizeColumns="true" CanUserResizeRows="false"
+            CanUserSortColumns="true" VirtualizingPanel.IsVirtualizing="true"
+            VirtualizingPanel.IsVirtualizingWhenGrouping="true" ItemsSource="{Binding CVS_SpellList}"
+            SelectedItem="{Binding SelectedSpell}"
+            Tag="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}">
+    <FrameworkElement.ContextMenu>
+      <ContextMenu DataContext="{Binding Path=PlacementTarget.Tag.DataContext, RelativeSource={RelativeSource Self}}">
+        <MenuItem Header="Add to Spellbook" ToolTip="{x:Static resx:ToolTips.ADD_SPELL_TO_SPELLBOOK}"
+                  ItemsSource="{Binding SpellLists}"
+                  IsEnabled="{Binding SpellLists, Converter={StaticResource SpellListToBool}}">
+          <ItemsControl.ItemContainerStyle>
+            <Style>
+              <Setter Property="HeaderedItemsControl.Header" Value="{Binding Name}"/>
+              <Setter Property="UIElement.Visibility" Value="{Binding NotReadOnly, Converter={StaticResource BoolToVis}}"/>
+              <Setter Property="MenuItem.Command"
+                      Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=DataContext.AddSpellToSpellbookCommand}"/>
+              <Setter Property="MenuItem.CommandParameter" Value="{Binding}"/>
+              <Setter Property="MenuItem.InputGestureText" Value="{Binding Index, StringFormat=Ctrl+{0}}"/>
+            </Style>
+          </ItemsControl.ItemContainerStyle>
+        </MenuItem>
+        <MenuItem Header="Remove Spell from Spellbook" ToolTip="{x:Static resx:ToolTips.REMOVE_SPELL_FROM_SPELLBOOK}"
+                  InputGestureText="{x:Static resx:Hotkeys.REMOVE_SPELL_FROM_SPELLBOOK}"
+                  Command="{Binding RemoveSpellFromSpellbookCommand}"
+                  Visibility="{Binding ReadOnly, Converter={StaticResource BoolToVisInverter}}"/>
+        <Separator Visibility="{Binding SelectedTab.ReadOnly, Converter={StaticResource BoolToVisInverter}}"/>
+        <MenuItem Header="Add Prepared Spell" ToolTip="{x:Static resx:ToolTips.ADD_SPELL_TO_PREPARED}"
+                  InputGestureText="{x:Static resx:Hotkeys.ADD_SPELL_TO_PREPARED}"
+                  Command="{Binding AddPreparedSpellCommand}"
+                  Visibility="{Binding SelectedTab.ReadOnly, Converter={StaticResource BoolToVisInverter}}"/>
+        <MenuItem Header="Remove Prepared Spell" ToolTip="{x:Static resx:ToolTips.REMOVE_SPELL_FROM_PREPARED}"
+                  InputGestureText="{x:Static resx:Hotkeys.REMOVE_SPELL_FROM_PREPARED}"
+                  Command="{Binding RemovePreparedSpellCommand}" CommandParameter="{Binding SelectedSpell}"
+                  Visibility="{Binding SelectedTab.ReadOnly, Converter={StaticResource BoolToVisInverter}}"/>
+        <Separator Visibility="{Binding SelectedTab.ReadOnly, Converter={StaticResource BoolToVisInverter}}"/>
+        <MenuItem Header="Add Innate Spell" ToolTip="{x:Static resx:ToolTips.ADD_SPELL_TO_INNATE}"
+                  InputGestureText="{x:Static resx:Hotkeys.ADD_SPELL_TO_INNATE}"
+                  Command="{Binding AddSelectedToInnateCommand}"
+                  Visibility="{Binding SelectedTab.ReadOnly, Converter={StaticResource BoolToVisInverter}}"/>
+        <MenuItem Header="Remove Innate Spell" ToolTip="{x:Static resx:ToolTips.REMOVE_SPELL_FROM_INNATE}"
+                  InputGestureText="{x:Static resx:Hotkeys.REMOVE_SPELL_FROM_INNATE}"
+                  Command="{Binding RemoveInnateCommand}"
+                  Visibility="{Binding SelectedTab.ReadOnly, Converter={StaticResource BoolToVisInverter}}"/>
+      </ContextMenu>
+    </FrameworkElement.ContextMenu>
+    <ItemsControl.GroupStyle>
+      <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
+        <GroupStyle.Panel>
+          <ItemsPanelTemplate>
+            <DataGridRowsPresenter/>
+          </ItemsPanelTemplate>
+        </GroupStyle.Panel>
+      </GroupStyle>
+    </ItemsControl.GroupStyle>
+    <UIElement.InputBindings>
+      <KeyBinding Key="C" Modifiers="Control" Command="{Binding SelectedSpell.CopyToClipboardCommand}"/>
+      <KeyBinding Key="I" Modifiers="Control"
+                  Command="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}, Path=DataContext.AddSelectedToInnateCommand}"/>
+      <KeyBinding Key="I" Modifiers="Control+Shift"
+                  Command="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}, Path=DataContext.RemoveInnateCommand}"/>
+      <KeyBinding Key="P" Modifiers="Control"
+                  Command="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}, Path=DataContext.AddPreparedSpellCommand}"/>
+      <KeyBinding Key="P" Modifiers="Control+Shift"
+                  Command="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}, Path=DataContext.RemovePreparedSpellCommand}"
+                  CommandParameter="{Binding SelectedSpell}"/>
+      <MouseBinding Gesture="LeftDoubleClick"
+                    Command="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}, Path=DataContext.AddSpellToSpellbookCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}, Path=DataContext.SpellLists[1]}"/>
+    </UIElement.InputBindings>
+    <DataGrid.Columns>
+      <DataGridTextColumn Header="Name" Visibility="Visible" Width="220" IsReadOnly="true" Binding="{Binding Name}"/>
+      <DataGridTextColumn Header="School" Visibility="Visible" IsReadOnly="true" Binding="{Binding School}"/>
+      <DataGridCheckBoxColumn Header="Ritual" Visibility="Visible" IsReadOnly="true" Binding="{Binding Ritual, Mode=oneway}"/>
+      <DataGridCheckBoxColumn Header="Conc" Visibility="Visible" IsReadOnly="true" Binding="{Binding Concentration, Mode=oneway}"/>
+      <DataGridTextColumn Header="Classes" Visibility="Visible" IsReadOnly="true" Binding="{Binding ClassesToString}"/>
+    </DataGrid.Columns>
+  </DataGrid>
+</UserControl>

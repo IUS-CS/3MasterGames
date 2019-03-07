@@ -1,0 +1,20 @@
+<UserControl x:Class="SpellViewer.View.UserControls.NameFilter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             Background="White">
+  <DockPanel LastChildFill="true">
+    <Label Content="Search by Spell Name:" DockPanel.Dock="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+    <Button Name="ResetFilters_Button" Content="Refresh List" DockPanel.Dock="Right" VerticalAlignment="Center"
+            Width="100" Margin="5,0" Command="{Binding RefreshFiltersCommand}"/>
+    <Button Name="Search_Button" Content="Search" DockPanel.Dock="Right" VerticalAlignment="Center" Width="100"
+            Margin="5,0" Command="{Binding NameFilterCommand}"/>
+    <TextBox Name="SearchBar" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxLength="128"
+             Margin="5,0,5,0" Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+      <UIElement.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding NameFilterCommand}"/>
+      </UIElement.InputBindings>
+    </TextBox>
+  </DockPanel>
+</UserControl>
