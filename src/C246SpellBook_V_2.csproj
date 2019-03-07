@@ -50,6 +50,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ListviewColumnSorter.cs" />
     <Compile Include="ListViewComparer.cs" />
     <Compile Include="SpellList.cs" />
     <Compile Include="WindowView\AboutPage.cs" />

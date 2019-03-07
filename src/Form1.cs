@@ -61,7 +61,7 @@ namespace C246SpellBook_V_2
                listView1.Columns.Add("Ritual", 50);
                listView1.Columns.Add("Concentration", 50);
                listView1.Columns.Add("Classes", 350);
-
+               
 
                //Initialize Datatable and add columns
                dtSpells = new DataTable();
@@ -110,8 +110,12 @@ namespace C246SpellBook_V_2
           //Blank for now.
           private void Form1_Load(object sender, EventArgs e)
           {
-              // may want to do all of the spell loading ane declaration here
-          }
+            // may want to do all of the spell loading ane declaration here
+
+            //This is so that it sorts by level by default 
+            listView1.Sorting = SortOrder.Ascending;
+            listView1.Sort();
+        }
 
 
           /*
@@ -128,7 +132,12 @@ namespace C246SpellBook_V_2
                {
                     listView1.Items.Add(new ListViewItem(new String[] { row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString() }));
                }
-          }
+
+                //This is so that it sorts by level by default whenever the listview is loaded
+                listView1.Sorting = SortOrder.Ascending;
+                listView1.Sort();
+                listView1.ListViewItemSorter = new ListViewComparer(1, listView1.Sorting);
+        }
 
           /*
            This function loops through all of our checkboxes. It loops through and looks for control type of checkbox. 
