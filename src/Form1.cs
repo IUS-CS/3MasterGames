@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using C246SpellBook_V_2.WindowView;
 
 namespace C246SpellBook_V_2
 {
@@ -804,7 +805,16 @@ namespace C246SpellBook_V_2
                }
           }
 
-          private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
+          // ColumnClick event handler.
+          private void ColumnClick(object o, ColumnClickEventArgs e)
+          {
+                // Set the ListViewItemSorter property to a new ListViewItemComparer 
+                // object. Setting this property immediately sorts the 
+                // ListView using the ListViewItemComparer object.
+                listView1.ListViewItemSorter = new ListViewItemComparer(e.Column);
+          }
+
+        private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
           {
 
           }
@@ -821,8 +831,9 @@ namespace C246SpellBook_V_2
 
           private void aboutThisApplicationToolStripMenuItem_Click(object sender, EventArgs e)
           {
-
-
+                AboutPage about = new AboutPage();
+                about.InitializeComponent();
+                about.Show();
           }
 
           // this method is trigger when the hightlighted spell is changed
@@ -841,15 +852,10 @@ namespace C246SpellBook_V_2
                          displayText.AppendLine(item.SubItems[i].Text);
                     }
                }
-
-               //StringBuilder temp = listView1.SelectedItems.ToString();
-
-               ////for(int i = 0; i < listView1.SelectedItems.Count; i++)
-               ////{
-               //    temp. listView1.SelectedItems.ToString();
-               ////}
+               
                Spell_Display.Text = displayText.ToString();
                //Console.WriteLine(listView1.SelectedItems);
+
           }
           //This is the reset filters button. It checks panel 1 where the checkboxes are located and looks for a control of checkbox type
           // if it finds one, it checks if its checked, and if it is, it unchecks it. This also resets filterUsed to false.
@@ -890,12 +896,16 @@ namespace C246SpellBook_V_2
 
           private void changeLogToolStripMenuItem_Click(object sender, EventArgs e)
           {
-
+                ChangeLog log = new ChangeLog();
+                log.InitializeComponent();
+                log.Show();
           }
 
           private void licensesToolStripMenuItem_Click(object sender, EventArgs e)
           {
-
+                Licence lic = new Licence();
+                lic.InitializeComponent();
+                lic.Show();
           }
 
           private void DisplayPanel_Paint(object sender, PaintEventArgs e)
@@ -910,7 +920,37 @@ namespace C246SpellBook_V_2
                //
           }
 
-          private void Spell_Display_TextChanged(object sender, EventArgs e)
+        private void createNewSpellToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpellEditor ed = new SpellEditor();
+            ed.InitializeComponent();
+            ed.Show();
+        }
+
+        private void editSelectedSpellToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //for other things we will need to have a different initcalizer to load the form before editing
+            SpellEditor ed = new SpellEditor();
+            ed.InitializeComponent();
+            ed.Show();
+        }
+
+        private void duplicateSelectedSpellToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //for other things we will need to have a different initcalizer to load the form before editing
+            SpellEditor ed = new SpellEditor();
+            ed.InitializeComponent();
+            ed.Show();
+        }
+
+        private void editNonSpellDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataEditor DE = new DataEditor();
+            DE.InitializeComponent();
+            DE.Show();
+        }
+
+        private void Spell_Display_TextChanged(object sender, EventArgs e)
           {
 
           }
