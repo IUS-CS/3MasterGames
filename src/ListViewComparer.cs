@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SortOrder = System.Data.SqlClient.SortOrder;
+
 
 namespace C246SpellBook_V_2
 {
@@ -13,6 +13,7 @@ namespace C246SpellBook_V_2
     {
         private int col;
         private SortOrder order;
+
         public  ListViewComparer()
         {
             col = 0;
@@ -21,6 +22,7 @@ namespace C246SpellBook_V_2
 
         public ListViewComparer(int column, SortOrder order)
         {
+            //Console.Out.WriteLine(column);
             col = column;
             this.order = order;
         }

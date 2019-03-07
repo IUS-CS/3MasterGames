@@ -56,12 +56,11 @@ namespace C246SpellBook_V_2
 
                //Add Columns
                listView1.Columns.Add("Name", 150);
-               listView1.Columns.Add("Level", 50);
+               listView1.Columns.Add("Level", 50, HorizontalAlignment.Center);
                listView1.Columns.Add("School", 150);
                listView1.Columns.Add("Ritual", 50);
                listView1.Columns.Add("Concentration", 50);
                listView1.Columns.Add("Classes", 350);
-               listView1.Columns.Add("Components", 350);
 
 
                //Initialize Datatable and add columns
@@ -79,6 +78,7 @@ namespace C246SpellBook_V_2
                fillDataTable(XmlReader.generateData());
                dvSpells = new DataView(dtSpells);
                populateListView(dvSpells);
+               
                //This is almost like a temporary table. Filters will be bouncing between this table and dtSpells
                filterTable = new DataTable();
                filterTable.Columns.Add("Name");
@@ -836,7 +836,7 @@ namespace C246SpellBook_V_2
                 listView1.Sort();
                 // Set the ListViewItemSorter property to a new ListViewItemComparer
                 // object.
-                this.listView1.ListViewItemSorter = new ListViewComparer(e.Column, listView1.Sorting);
+                listView1.ListViewItemSorter = new ListViewComparer(e.Column, listView1.Sorting);
         }
 
         private void duplicateSpellBookToolStripMenuItem_Click(object sender, EventArgs e)
