@@ -1,6 +1,6 @@
 # Spellviewer Change Log
 
-All notable changes to this project will be documented in this file. In this format:
+All notable changes to this project will be documented the file CHANGELOG. In this format:
 
 ## Verison 
   ### Major Changes
