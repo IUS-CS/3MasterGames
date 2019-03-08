@@ -30,9 +30,10 @@ namespace C246SpellBook_V_2
 
           private DataTable dtSpells;
           private DataView dvSpells;
+          private DataTable DisplayTable;
 
-          //For Filters
-          private DataTable filterTable;
+        //For Filters
+        private DataTable filterTable;
           private DataView filterView, tempView;
           private bool filterUsed = false;
           /*
@@ -74,10 +75,31 @@ namespace C246SpellBook_V_2
                dtSpells.Columns.Add("Components");
 
 
-               //Fill datatable
-               fillDataTable(XmlReader.generateData());
-               dvSpells = new DataView(dtSpells);
-               populateListView(dvSpells);
+                //Data table with all info for display
+                DisplayTable = new DataTable();
+                DisplayTable.Columns.Add("ID");
+                DisplayTable.Columns.Add("Name");
+                DisplayTable.Columns.Add("Level");
+                DisplayTable.Columns.Add("School");
+                DisplayTable.Columns.Add("Ritual");
+                DisplayTable.Columns.Add("Concentation");
+                DisplayTable.Columns.Add("Classes");
+                DisplayTable.Columns.Add("Range");
+                DisplayTable.Columns.Add("Components");
+                DisplayTable.Columns.Add("Materials");
+                DisplayTable.Columns.Add("Duration");
+                DisplayTable.Columns.Add("Description");
+                DisplayTable.Columns.Add("Higher Level");
+                DisplayTable.Columns.Add("Source");
+                DisplayTable.PrimaryKey = new DataColumn[] { DisplayTable.Columns["ID"]};
+                
+                //Fill DisplayTable
+                fillDataTableAll(XmlReader.generateData());;
+
+                //Fill dt datatable
+                fillDataTable(XmlReader.generateData());
+                dvSpells = new DataView(dtSpells);
+                populateListView(dvSpells);
                
                //This is almost like a temporary table. Filters will be bouncing between this table and dtSpells
                filterTable = new DataTable();
@@ -100,15 +122,29 @@ namespace C246SpellBook_V_2
           {
                foreach (var spell in spells)
                {
-                    dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
+                   DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, 
+                                            spell.Ritual, spell.Concentration, spell.Classes, 
+                                            spell.Range, spell.Components, spell.Materials,
+                                            spell.Duration, spell.Description, spell.HigherLevel, 
+                                            spell.Source);
 
                }
 
           }
 
+        private void fillDataTableAll(List<SpellList> spells)
+        {
+            foreach (var spell in spells)
+            {
+                dtSpells.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
 
-          //Blank for now.
-          private void Form1_Load(object sender, EventArgs e)
+            }
+
+        }
+
+
+        //Blank for now.
+        private void Form1_Load(object sender, EventArgs e)
           {
             // may want to do all of the spell loading ane declaration here
 
@@ -874,23 +910,28 @@ namespace C246SpellBook_V_2
           // this method is trigger when the hightlighted spell is changed
           private void listView1_SelectedIndexChanged(object sender, EventArgs e)
           {
-               //of type ListView.SelectedListViewItemCollection
-               var temp = listView1.SelectedItems;
+            /* Old pulling from listview
+             //of type ListView.SelectedListViewItemCollection
+             var temp = listView1.SelectedItems;
 
-               //of type StringBuilder
-               var displayText = new StringBuilder();
-               foreach (ListViewItem item in temp)
-               {
-                    //only displays what is in the list veiw at the moment
-                    for (var i = 0; i < 6; i++)
-                    {
-                         displayText.AppendLine(item.SubItems[i].Text);
-                    }
-               }
-               
-               Spell_Display.Text = displayText.ToString();
-               //Console.WriteLine(listView1.SelectedItems);
+             //of type StringBuilder
+             var displayText = new StringBuilder();
+             foreach (ListViewItem item in temp)
+             {
+                  //only displays what is in the list veiw at the moment
+                  for (var i = 0; i < 6; i++)
+                  {
+                       displayText.AppendLine(item.SubItems[i].Text);
+                  }
+             }
 
+             Spell_Display.Text = displayText.ToString();
+             //Console.WriteLine(listView1.SelectedItems);
+             */
+
+            var temp = listView1.SelectedItems;
+
+           
           }
           //This is the reset filters button. It checks panel 1 where the checkboxes are located and looks for a control of checkbox type
           // if it finds one, it checks if its checked, and if it is, it unchecks it. This also resets filterUsed to false.

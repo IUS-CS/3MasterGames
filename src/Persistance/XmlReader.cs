@@ -9,7 +9,6 @@ namespace C246SpellBook_V_2
          * each line and compare whether its the name, level, etc. It will store it into that specific variable and hold onto that data until
          * that spell is competed. Once it is completed it is added to the list spells with all the attributes included inside it. The pnly problem is the 
          * text and roll. For instance, some spells have 2 to 2 text lines in the Xml file but I ended up just placing all of them into the text variable.
-         * Same goes for the roll variable. 
          * If you have any questions please let me know, also if I did anything weird or wrong please let me know.
          */
     class XmlReader
