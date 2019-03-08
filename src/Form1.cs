@@ -56,6 +56,8 @@ namespace C246SpellBook_V_2
                
 
                //Add Columns
+               //hidden id column for searching in the DB
+               listView1.Columns.Add("ID", 0);
                listView1.Columns.Add("Name", 150);
                listView1.Columns.Add("Level", 50, HorizontalAlignment.Center);
                listView1.Columns.Add("School", 150);
@@ -93,12 +95,13 @@ namespace C246SpellBook_V_2
                 DisplayTable.Columns.Add("Source");
                 DisplayTable.PrimaryKey = new DataColumn[] { DisplayTable.Columns["ID"]};
                 
-                //Fill DisplayTable
-                fillDataTableAll(XmlReader.generateData());;
+                //Fill DisplayTable 
+                fillDataTableAll(XmlReader.generateData());
 
                 //Fill dt datatable
-                fillDataTable(XmlReader.generateData());
-                dvSpells = new DataView(dtSpells);
+                //fillDataTable(XmlReader.generateData());
+                //dvSpells = new DataView(dtSpells);
+                dvSpells = new DataView(DisplayTable);
                 populateListView(dvSpells);
                
                //This is almost like a temporary table. Filters will be bouncing between this table and dtSpells
@@ -118,7 +121,7 @@ namespace C246SpellBook_V_2
            * Transfer the data from list to datatable, by checking each spell and adding it to the 
            * row under that specific column.
            */
-          private void fillDataTable(List<SpellList> spells)
+          private void fillDataTableAll(List<SpellList> spells)
           {
                foreach (var spell in spells)
                {
@@ -132,7 +135,7 @@ namespace C246SpellBook_V_2
 
           }
 
-        private void fillDataTableAll(List<SpellList> spells)
+        private void fillDataTable(List<SpellList> spells)
         {
             foreach (var spell in spells)
             {
