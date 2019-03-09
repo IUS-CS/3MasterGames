@@ -316,13 +316,14 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                 //        foreach (var spell in XmlReader.Level_0)
-                 //        {
-                 //       DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                 // , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-                 //
-                 //   }
-                 //        populateListView(dvSpells);
+                    DisplayTable.Clear();
+                         foreach (var spell in XmlReader.Level_0)
+                         {
+                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
+                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
+
+                    }
+                         populateListView(dvSpells);
                     }
                     if (filterTable.Rows.Count != 0)
                     {
@@ -370,7 +371,8 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                         foreach (var spell in XmlReader.Level_1)
+                    DisplayTable.Clear();
+                    foreach (var spell in XmlReader.Level_1)
                          {
                         DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
@@ -424,7 +426,8 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                         foreach (var spell in XmlReader.Level_2)
+                    DisplayTable.Clear();
+                    foreach (var spell in XmlReader.Level_2)
                          {
                         DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
@@ -478,7 +481,8 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                         foreach (var spell in XmlReader.Level_3)
+                    DisplayTable.Clear();
+                    foreach (var spell in XmlReader.Level_3)
                          {
                         DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
@@ -532,7 +536,8 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                         foreach (var spell in XmlReader.Level_4)
+                    DisplayTable.Clear();
+                    foreach (var spell in XmlReader.Level_4)
                          {
                         DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
@@ -586,7 +591,8 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                         foreach (var spell in XmlReader.Level_5)
+                    DisplayTable.Clear();
+                    foreach (var spell in XmlReader.Level_5)
                          {
                         DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
@@ -640,7 +646,8 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                         foreach (var spell in XmlReader.Level_6)
+                    DisplayTable.Clear();
+                    foreach (var spell in XmlReader.Level_6)
                          {
                         DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
@@ -694,7 +701,8 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                         foreach (var spell in XmlReader.Level_7)
+                    DisplayTable.Clear();
+                    foreach (var spell in XmlReader.Level_7)
                          {
                         DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
@@ -748,7 +756,8 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                         foreach (var spell in XmlReader.Level_8)
+                    DisplayTable.Clear();
+                    foreach (var spell in XmlReader.Level_8)
                          {
                         DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
@@ -802,7 +811,8 @@ namespace C246SpellBook_V_2
                {
                     if (DisplayTable.Rows.Count != 0)
                     {
-                         foreach (var spell in XmlReader.Level_9)
+                    DisplayTable.Clear();
+                    foreach (var spell in XmlReader.Level_9)
                          {
                         DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
