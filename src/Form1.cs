@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -67,6 +68,9 @@ namespace C246SpellBook_V_2
                
 
                //Initialize Datatable and add columns
+
+               //useing a new database with all information
+               /*
                dtSpells = new DataTable();
                dtSpells.Columns.Add("Name");
                dtSpells.Columns.Add("Level");
@@ -75,11 +79,13 @@ namespace C246SpellBook_V_2
                dtSpells.Columns.Add("Concentation");
                dtSpells.Columns.Add("Classes");
                dtSpells.Columns.Add("Components");
-
+               */
 
                 //Data table with all info for display
                 DisplayTable = new DataTable();
                 DisplayTable.Columns.Add("ID");
+                //set primary key
+                DisplayTable.PrimaryKey = new DataColumn[] { DisplayTable.Columns["ID"] };
                 DisplayTable.Columns.Add("Name");
                 DisplayTable.Columns.Add("Level");
                 DisplayTable.Columns.Add("School");
@@ -93,7 +99,7 @@ namespace C246SpellBook_V_2
                 DisplayTable.Columns.Add("Description");
                 DisplayTable.Columns.Add("Higher Level");
                 DisplayTable.Columns.Add("Source");
-                DisplayTable.PrimaryKey = new DataColumn[] { DisplayTable.Columns["ID"]};
+                
                 
                 //Fill DisplayTable 
                 fillDataTableAll(XmlReader.generateData());
@@ -175,7 +181,8 @@ namespace C246SpellBook_V_2
                 //This is so that it sorts by level by default whenever the listview is loaded
                 listView1.Sorting = SortOrder.Ascending;
                 listView1.Sort();
-                listView1.ListViewItemSorter = new ListViewComparer(1, listView1.Sorting);
+                // 2 because id is hidden
+                listView1.ListViewItemSorter = new ListViewComparer(2, listView1.Sorting);
         }
 
           /*
@@ -913,29 +920,85 @@ namespace C246SpellBook_V_2
           // this method is trigger when the hightlighted spell is changed
           private void listView1_SelectedIndexChanged(object sender, EventArgs e)
           {
-            /* Old pulling from listview
-             //of type ListView.SelectedListViewItemCollection
-             var temp = listView1.SelectedItems;
+            /* // Old pulling from listview
+              //of type ListView.SelectedListViewItemCollection
+              var temp = listView1.SelectedItems;
 
-             //of type StringBuilder
-             var displayText = new StringBuilder();
-             foreach (ListViewItem item in temp)
-             {
-                  //only displays what is in the list veiw at the moment
-                  for (var i = 0; i < 6; i++)
-                  {
-                       displayText.AppendLine(item.SubItems[i].Text);
-                  }
-             }
+              //of type StringBuilder
+              var displayText = new StringBuilder();
+              foreach (ListViewItem item in temp)
+              {
+                   //only displays what is in the list veiw at the moment
+                   for (var i = 1; i <= 6; i++)
+                   {
+                        displayText.AppendLine(item.SubItems[i].Text);
+                   }
+              }
 
-             Spell_Display.Text = displayText.ToString();
-             //Console.WriteLine(listView1.SelectedItems);
-             */
+              Spell_Display.Text = displayText.ToString();
+              //Console.WriteLine(listView1.SelectedItems);
+              */
 
-            var temp = listView1.SelectedItems;
+            var spellIndex =  listView1.SelectedIndices;
 
-           
-          }
+            // error handling for when selected items are being changed
+            // the count is checked to see if an actual index is being passed
+            if (spellIndex.Count != 0)
+            {
+                //get index from spellindex
+                var index = spellIndex[0];
+
+                //get the key name 
+                string key = listView1.Items[index].Text;
+               
+                //temporary dataRow to allow display of data
+                var tempRow = DisplayTable.Rows.Find(key);
+
+                //create a text holder
+                var displayText = new StringBuilder();
+
+
+                /* to output all without formating */
+                for (int i = 1; i < 14; i++)
+                {
+                    Console.WriteLine(tempRow[i]);
+                    displayText.AppendLine(tempRow[i].ToString());
+                }
+
+                Spell_Display.Text = displayText.ToString();
+
+            }
+            
+
+            // Console.WriteLine(temp2.SubItems[0]);
+            /*
+            foreach (var item in temp)
+            {
+                Console.WriteLine(item);
+            }
+            //Console.WriteLine(temp[1]);
+            */
+
+            //DataRow row = DisplayTable.Rows.Find(temp[0]);
+
+            // Spell_Display.Text = row.ToString();
+
+            //  var spell = dvSpells.Find(temp);
+
+            /*
+            var displayText = new StringBuilder();
+            foreach (DataRow item in spell)
+            {
+                
+                    displayText.AppendLine(item.ToString());
+                
+            }
+
+            Spell_Display.Text = displayText.ToString();
+            */
+
+
+        }
           //This is the reset filters button. It checks panel 1 where the checkboxes are located and looks for a control of checkbox type
           // if it finds one, it checks if its checked, and if it is, it unchecks it. This also resets filterUsed to false.
           private void button1_Click(object sender, EventArgs e)
