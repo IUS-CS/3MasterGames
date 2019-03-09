@@ -50,16 +50,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ListviewColumnSorter.cs" />
-    <Compile Include="ListViewComparer.cs" />
-    <Compile Include="SpellList.cs" />
-    <Compile Include="WindowView\AboutPage.cs" />
-    <Compile Include="WindowView\ChangeLog.cs" />
-    <Compile Include="WindowView\DataEditor.cs" />
-    <Compile Include="WindowView\Licence.cs" />
-    <Compile Include="WindowView\SpellEditor.cs" />
-    <Compile Include="XmlReader.cs" />
-    <EmbeddedResource Include="OtherWindows\dataEditor.xaml.cs">
+    <Compile Include="Model\ListviewColumnSorter.cs" />
+    <Compile Include="Model\ListViewComparer.cs" />
+    <Compile Include="Model\SpellList.cs" />
+    <Compile Include="View\AboutPage.cs" />
+    <Compile Include="View\ChangeLog.cs" />
+    <Compile Include="View\DataEditor.cs" />
+    <Compile Include="View\Licence.cs" />
+    <Compile Include="View\SpellEditor.cs" />
+    <Compile Include="Persistance\XmlReader.cs" />
+    <EmbeddedResource Include="View\OtherWindows\dataEditor.xaml.cs">
       <DependentUpon>dataEditor.xaml</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Form1.cs">
@@ -68,7 +68,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="OtherWindows\spellEditor.xaml.cs">
+    <EmbeddedResource Include="View\OtherWindows\spellEditor.xaml.cs">
       <DependentUpon>spellEditor.xaml</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Program.cs" />
@@ -108,27 +108,27 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="OtherWindows\AboutPage.xaml">
+    <Page Include="View\OtherWindows\AboutPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OtherWindows\Changelog.xaml">
+    <Page Include="View\OtherWindows\Changelog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OtherWindows\dataEditor.xaml">
+    <Page Include="View\OtherWindows\dataEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OtherWindows\Licenses.xaml">
+    <Page Include="View\OtherWindows\Licenses.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OtherWindows\spellEditor.xaml">
+    <Page Include="View\OtherWindows\spellEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OtherWindows\UpdateW.xaml">
+    <Page Include="View\OtherWindows\UpdateW.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

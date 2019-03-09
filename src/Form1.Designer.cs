@@ -118,7 +118,7 @@
             this.SearchPanel.Location = new System.Drawing.Point(410, 69);
             this.SearchPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SearchPanel.Name = "SearchPanel";
-            this.SearchPanel.Size = new System.Drawing.Size(676, 865);
+            this.SearchPanel.Size = new System.Drawing.Size(909, 1057);
             this.SearchPanel.TabIndex = 3;
             // 
             // listView1
@@ -129,21 +129,21 @@
             this.listView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(633, 723);
+            this.listView1.Size = new System.Drawing.Size(863, 907);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ColumnClick);
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged);
             // 
             // DisplayPanel
             // 
             this.DisplayPanel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.DisplayPanel.Controls.Add(this.Spell_Display);
             this.DisplayPanel.Controls.Add(this.label2);
-            this.DisplayPanel.Location = new System.Drawing.Point(1128, 69);
+            this.DisplayPanel.Location = new System.Drawing.Point(1352, 69);
             this.DisplayPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DisplayPanel.Name = "DisplayPanel";
-            this.DisplayPanel.Size = new System.Drawing.Size(462, 865);
+            this.DisplayPanel.Size = new System.Drawing.Size(486, 1057);
             this.DisplayPanel.TabIndex = 4;
             this.DisplayPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DisplayPanel_Paint);
             // 
@@ -151,12 +151,13 @@
             // 
             this.Spell_Display.BackColor = System.Drawing.Color.WhiteSmoke;
             this.Spell_Display.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Spell_Display.Enabled = false;
-            this.Spell_Display.Location = new System.Drawing.Point(29, 75);
+            this.Spell_Display.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Spell_Display.Location = new System.Drawing.Point(28, 75);
             this.Spell_Display.Name = "Spell_Display";
-            this.Spell_Display.Size = new System.Drawing.Size(405, 508);
+            this.Spell_Display.ReadOnly = true;
+            this.Spell_Display.Size = new System.Drawing.Size(430, 949);
             this.Spell_Display.TabIndex = 1;
-            this.Spell_Display.Text = "this is example ";
+            this.Spell_Display.Text = "";
             this.Spell_Display.TextChanged += new System.EventHandler(this.Spell_Display_TextChanged);
             // 
             // label2
@@ -197,7 +198,7 @@
             this.panel1.Location = new System.Drawing.Point(18, 69);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(360, 865);
+            this.panel1.Size = new System.Drawing.Size(360, 1057);
             this.panel1.TabIndex = 2;
             // 
             // button1
@@ -462,7 +463,7 @@
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1650, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1874, 33);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -635,7 +636,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1650, 989);
+            this.ClientSize = new System.Drawing.Size(1874, 1140);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.DisplayPanel);
             this.Controls.Add(this.SearchPanel);
@@ -648,6 +649,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SpellBook_V_1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SearchPanel.ResumeLayout(false);
             this.SearchPanel.PerformLayout();

@@ -24,7 +24,7 @@ namespace C246SpellBook_V_2.WindowView
             if (this._contentLoaded)
                 return;
             this._contentLoaded = true;
-            Application.LoadComponent((object)this, new Uri("/C246SpellBook_V_2;component/OtherWindows/Licenses.xaml", UriKind.Relative));
+            Application.LoadComponent((object)this, new Uri("/C246SpellBook_V_2;component/View/OtherWindows/Licenses.xaml", UriKind.Relative));
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
