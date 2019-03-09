@@ -976,7 +976,6 @@ namespace C246SpellBook_V_2
                 displayText.AppendLine(spell[i].ToString());
             }
             */
-                //ID #0
               //name #1
               displayText.AppendLine(spell[1].ToString());
 
