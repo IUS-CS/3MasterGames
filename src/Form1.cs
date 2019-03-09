@@ -1005,16 +1005,39 @@ namespace C246SpellBook_V_2
             //add a space
             displayText.AppendLine();
 
-            // time #6
+            // time #7
             displayText.AppendLine("Casting Time: "+spell[7]);
 
-            //Range #7
+            //Range #8
             displayText.AppendLine("Range: " + spell[8]);
 
-            //Componets #8 & Materials #9
-            displayText.AppendLine("Components: " + spell[9] + "(" + spell[10]+ ")");
+            //Componets #9 & Materials #10
+            displayText.Append("Components: " + spell[9]);
 
-            // concentration #5 & ritual #4 & Duration #10   
+            var temp = spell[9].ToString();
+
+            var materialChecker = temp.Split(new[] { "," }, StringSplitOptions.None);
+
+            bool hasMat= false;
+            for (int i = 0; i < materialChecker.Length; i++)
+            {
+                if (materialChecker[i] == " Material" || materialChecker[i] == "Material")
+                {
+                    hasMat = true;
+                }
+            }
+
+            if (hasMat)
+            {
+                displayText.AppendLine("(" + spell[10] + ")" );
+            }
+            else
+            {
+                displayText.AppendLine();
+            }
+                 
+
+            // concentration #5 & ritual #4 & Duration #11  
             displayText.Append("Duration: ");
 
             if (spell[4].Equals("true") && spell[5].Equals("true"))
@@ -1037,19 +1060,19 @@ namespace C246SpellBook_V_2
             //add a space
             displayText.AppendLine();
 
-            //description #11
+            //description #12
             displayText.AppendLine(spell[12].ToString());
 
             //add a space
             displayText.AppendLine();
 
-            //higher level #12
+            //higher level #13
             displayText.AppendLine("At Higher Levels: " + spell[13]);
 
             //add a space
             displayText.AppendLine();
 
-            //Source #13
+            //Source #14
             displayText.AppendLine("Source: " + spell[14]);
 
             return displayText.ToString();
