@@ -9,7 +9,6 @@ namespace C246SpellBook_V_2
          * each line and compare whether its the name, level, etc. It will store it into that specific variable and hold onto that data until
          * that spell is competed. Once it is completed it is added to the list spells with all the attributes included inside it. The pnly problem is the 
          * text and roll. For instance, some spells have 2 to 2 text lines in the Xml file but I ended up just placing all of them into the text variable.
-         * Same goes for the roll variable. 
          * If you have any questions please let me know, also if I did anything weird or wrong please let me know.
          */
     class XmlReader
@@ -19,23 +18,23 @@ namespace C246SpellBook_V_2
           public static List<SpellList> spells;
         public static List<SpellList> generateData()
         {
-               string id = " ";
-               string name = "";
-               string level = "";
-               string school = "";
-               bool ritual = false;
+               string id = " ";//0
+               string name = "";//1
+               string level = "";//2
+               string school = "";//3
+               bool ritual = false;//4
                string ritualText = "";
-               bool concentration = false;
+               bool concentration = false;//5
                string hasConcentration = "";
-               string time = "";
-               string range = "";
-               string components = "";
-               string materials = "";
-               string duration = "";
-               string classes = "";
-               string description = "";
-               string higherLevel = "";
-               string source = "";
+               string time = "";//6
+               string range = "";//7
+               string components = "";//8
+               string materials = "";//9
+               string duration = "";//10
+               string classes = "";//11
+               string description = "";//12
+               string higherLevel = "";//13
+               string source = "";//14
                
                XmlTextReader doc = new XmlTextReader("SpellBookDB.xml");
                spells = new List<SpellList>();

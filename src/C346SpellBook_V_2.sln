@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C246SpellBook_V_2", "C246SpellBook_V_2.csproj", "{4D5F8C4A-9252-4729-897C-3695E0373561}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C346SpellBook_V_2", "C346SpellBook_V_2.csproj", "{4D5F8C4A-9252-4729-897C-3695E0373561}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

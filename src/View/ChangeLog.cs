@@ -10,11 +10,11 @@ using System.Windows.Markup;
 
 namespace C246SpellBook_V_2.WindowView
 {
-    public class AboutPage : Window, IComponentConnector
+    public class ChangeLog : Window, IComponentConnector
     {
         private bool _contentLoaded;
 
-        public AboutPage()
+        public ChangeLog()
         {
             this.InitializeComponent();
         }
@@ -24,7 +24,7 @@ namespace C246SpellBook_V_2.WindowView
             if (this._contentLoaded)
                 return;
             this._contentLoaded = true;
-            Application.LoadComponent((object)this, new Uri("/C246SpellBook_V_2;component/OtherWindows/AboutPage.xaml", UriKind.Relative));
+            Application.LoadComponent((object)this, new Uri("/C246SpellBook_V_2;component/View/OtherWindows/Changelog.xaml", UriKind.Relative));
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
