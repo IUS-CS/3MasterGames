@@ -92,6 +92,7 @@ namespace C246SpellBook_V_2
                 DisplayTable.Columns.Add("Ritual");
                 DisplayTable.Columns.Add("Concentation");
                 DisplayTable.Columns.Add("Classes");
+                DisplayTable.Columns.Add("Time");
                 DisplayTable.Columns.Add("Range");
                 DisplayTable.Columns.Add("Components");
                 DisplayTable.Columns.Add("Materials");
@@ -132,7 +133,7 @@ namespace C246SpellBook_V_2
                foreach (var spell in spells)
                {
                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, 
-                                            spell.Ritual, spell.Concentration, spell.Classes, 
+                                            spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
                                             spell.Range, spell.Components, spell.Materials,
                                             spell.Duration, spell.Description, spell.HigherLevel, 
                                             spell.Source);
@@ -918,7 +919,7 @@ namespace C246SpellBook_V_2
           }
 
           // this method is trigger when the hightlighted spell is changed
-          private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+          private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
           {
             /* // Old pulling from listview
               //of type ListView.SelectedListViewItemCollection
@@ -938,7 +939,7 @@ namespace C246SpellBook_V_2
               Spell_Display.Text = displayText.ToString();
               //Console.WriteLine(listView1.SelectedItems);
               */
-
+              // get changed index
             var spellIndex =  listView1.SelectedIndices;
 
             // error handling for when selected items are being changed
@@ -952,56 +953,110 @@ namespace C246SpellBook_V_2
                 string key = listView1.Items[index].Text;
                
                 //temporary dataRow to allow display of data
-                var tempRow = DisplayTable.Rows.Find(key);
+                var spellRow = DisplayTable.Rows.Find(key);
 
-                //create a text holder
-                var displayText = new StringBuilder();
-
-
-                /* to output all without formating */
-                for (int i = 1; i < 14; i++)
-                {
-                    Console.WriteLine(tempRow[i]);
-                    displayText.AppendLine(tempRow[i].ToString());
-                }
-
-                Spell_Display.Text = displayText.ToString();
+                //call the formatter
+                Spell_Display.Text = Format(spellRow);
 
             }
-            
-
-            // Console.WriteLine(temp2.SubItems[0]);
-            /*
-            foreach (var item in temp)
-            {
-                Console.WriteLine(item);
-            }
-            //Console.WriteLine(temp[1]);
-            */
-
-            //DataRow row = DisplayTable.Rows.Find(temp[0]);
-
-            // Spell_Display.Text = row.ToString();
-
-            //  var spell = dvSpells.Find(temp);
-
-            /*
-            var displayText = new StringBuilder();
-            foreach (DataRow item in spell)
-            {
-                
-                    displayText.AppendLine(item.ToString());
-                
-            }
-
-            Spell_Display.Text = displayText.ToString();
-            */
-
-
         }
-          //This is the reset filters button. It checks panel 1 where the checkboxes are located and looks for a control of checkbox type
-          // if it finds one, it checks if its checked, and if it is, it unchecks it. This also resets filterUsed to false.
-          private void button1_Click(object sender, EventArgs e)
+
+
+            //format the string to be outputted on the display
+          public string Format(DataRow spell)
+          {
+
+              //create a text holder
+              var displayText = new StringBuilder();
+
+            /* to output all without formating 
+            for (int i = 1; i < 14; i++)
+            {
+                Console.WriteLine(spell[i]);
+                displayText.AppendLine(spell[i].ToString());
+            }
+            */
+                //ID #0
+              //name #1
+              displayText.AppendLine(spell[1].ToString());
+
+            //add a space
+            displayText.AppendLine();
+
+            switch (spell[2].ToString())
+              {
+                case "0":  //school #3 & Level #2
+                    displayText.AppendLine(spell[3] + " Cantrip");
+                    break;
+                case "1": //Level #2 & school #3
+                    displayText.AppendLine(spell[2]+"st-level "+spell[3]);
+                    break;
+                case "2"://Level #2 & school #3
+                    displayText.AppendLine(spell[2] + "nd-level " + spell[3]);
+                    break;
+                case "3"://Level #2 & school #3
+                    displayText.AppendLine(spell[2] + "rd-level " + spell[3]);
+                    break;
+                default://Level #2 & school #3
+                    displayText.AppendLine(spell[2] + "th-level " + spell[3]);
+                    break;
+            }
+
+            //add a space
+            displayText.AppendLine();
+
+            // time #6
+            displayText.AppendLine("Casting Time: "+spell[7]);
+
+            //Range #7
+            displayText.AppendLine("Range: " + spell[8]);
+
+            //Componets #8 & Materials #9
+            displayText.AppendLine("Components: " + spell[9] + "(" + spell[10]+ ")");
+
+            // concentration #5 & ritual #4 & Duration #10   
+            displayText.Append("Duration: ");
+
+            if (spell[4].Equals("true") && spell[5].Equals("true"))
+            {
+                displayText.AppendLine("Ritual & Concentration, up to " + spell[11]);
+            }
+            else if (spell[4].Equals("false") && spell[5].Equals("true"))
+            {
+                displayText.AppendLine("Concentration, up to " + spell[11]);
+            }
+            else if (spell[4].Equals("true") && spell[5].Equals("false"))
+            {
+                displayText.AppendLine("Ritual or " + spell[11]);
+            }
+            else
+            {
+                displayText.AppendLine(spell[11].ToString());
+            }
+
+            //add a space
+            displayText.AppendLine();
+
+            //description #11
+            displayText.AppendLine(spell[12].ToString());
+
+            //add a space
+            displayText.AppendLine();
+
+            //higher level #12
+            displayText.AppendLine("At Higher Levels: " + spell[13]);
+
+            //add a space
+            displayText.AppendLine();
+
+            //Source #13
+            displayText.AppendLine("Source: " + spell[14]);
+
+            return displayText.ToString();
+          }
+        //This is the reset filters button. It checks panel 1 where the checkboxes are located and looks for a control of checkbox type
+        // if it finds one, it checks if its checked, and if it is, it unchecks it. This also resets filterUsed to false.
+        private void button1_Click(object sender, EventArgs e)
           {
                foreach (var checkBox in panel1.Controls.OfType<CheckBox>())
                {

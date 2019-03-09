@@ -18,23 +18,23 @@ namespace C246SpellBook_V_2
           public static List<SpellList> spells;
         public static List<SpellList> generateData()
         {
-               string id = " ";
-               string name = "";
-               string level = "";
-               string school = "";
-               bool ritual = false;
+               string id = " ";//0
+               string name = "";//1
+               string level = "";//2
+               string school = "";//3
+               bool ritual = false;//4
                string ritualText = "";
-               bool concentration = false;
+               bool concentration = false;//5
                string hasConcentration = "";
-               string time = "";
-               string range = "";
-               string components = "";
-               string materials = "";
-               string duration = "";
-               string classes = "";
-               string description = "";
-               string higherLevel = "";
-               string source = "";
+               string time = "";//6
+               string range = "";//7
+               string components = "";//8
+               string materials = "";//9
+               string duration = "";//10
+               string classes = "";//11
+               string description = "";//12
+               string higherLevel = "";//13
+               string source = "";//14
                
                XmlTextReader doc = new XmlTextReader("SpellBookDB.xml");
                spells = new List<SpellList>();
