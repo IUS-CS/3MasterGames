@@ -82,24 +82,24 @@ namespace C246SpellBook_V_2
                */
 
                 //Data table with all info for display
-                DisplayTable = new DataTable();
-                DisplayTable.Columns.Add("ID");
+                dtSpells = new DataTable();
+                dtSpells.Columns.Add("ID");
                 //set primary key
-                DisplayTable.PrimaryKey = new DataColumn[] { DisplayTable.Columns["ID"] };
-                DisplayTable.Columns.Add("Name");
-                DisplayTable.Columns.Add("Level");
-                DisplayTable.Columns.Add("School");
-                DisplayTable.Columns.Add("Ritual");
-                DisplayTable.Columns.Add("Concentation");
-                DisplayTable.Columns.Add("Classes");
-                DisplayTable.Columns.Add("Time");
-                DisplayTable.Columns.Add("Range");
-                DisplayTable.Columns.Add("Components");
-                DisplayTable.Columns.Add("Materials");
-                DisplayTable.Columns.Add("Duration");
-                DisplayTable.Columns.Add("Description");
-                DisplayTable.Columns.Add("Higher Level");
-                DisplayTable.Columns.Add("Source");
+                dtSpells.PrimaryKey = new DataColumn[] { dtSpells.Columns["ID"] };
+                dtSpells.Columns.Add("Name");
+                dtSpells.Columns.Add("Level");
+                dtSpells.Columns.Add("School");
+                dtSpells.Columns.Add("Ritual");
+                dtSpells.Columns.Add("Concentation");
+                dtSpells.Columns.Add("Classes");
+                dtSpells.Columns.Add("Time");
+                dtSpells.Columns.Add("Range");
+                dtSpells.Columns.Add("Components");
+                dtSpells.Columns.Add("Materials");
+                dtSpells.Columns.Add("Duration");
+                dtSpells.Columns.Add("Description");
+                dtSpells.Columns.Add("Higher Level");
+                dtSpells.Columns.Add("Source");
                 
                 
                 //Fill DisplayTable 
@@ -108,19 +108,27 @@ namespace C246SpellBook_V_2
                 //Fill dt datatable
                 //fillDataTable(XmlReader.generateData());
                 //dvSpells = new DataView(dtSpells);
-                dvSpells = new DataView(DisplayTable);
+                dvSpells = new DataView(dtSpells);
                 populateListView(dvSpells);
                
                //This is almost like a temporary table. Filters will be bouncing between this table and dtSpells
                filterTable = new DataTable();
+               filterTable.Columns.Add("ID");
                filterTable.Columns.Add("Name");
                filterTable.Columns.Add("Level");
                filterTable.Columns.Add("School");
                filterTable.Columns.Add("Ritual");
                filterTable.Columns.Add("Concentation");
                filterTable.Columns.Add("Classes");
+               filterTable.Columns.Add("Time");
+               filterTable.Columns.Add("Range");
                filterTable.Columns.Add("Components");
-          }
+               filterTable.Columns.Add("Materials");
+               filterTable.Columns.Add("Duration");
+               filterTable.Columns.Add("Description");
+               filterTable.Columns.Add("Higher Level");
+               filterTable.Columns.Add("Source");
+        }
 
 
 
@@ -132,7 +140,7 @@ namespace C246SpellBook_V_2
           {
                foreach (var spell in spells)
                {
-                   DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, 
+                   dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, 
                                             spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
                                             spell.Range, spell.Components, spell.Materials,
                                             spell.Duration, spell.Description, spell.HigherLevel, 
@@ -224,7 +232,7 @@ namespace C246SpellBook_V_2
                string expression = $"Level NOT LIKE '%{filter}%'";
                DataRow[] foundRows;
                if (filterUsed == false)
-               {    foundRows = DisplayTable.Select(expression);
+               {    foundRows = dtSpells.Select(expression);
                     filterTable.Clear();
                     filterTable.AcceptChanges();
                     foreach (DataRow row in foundRows)
@@ -234,25 +242,24 @@ namespace C246SpellBook_V_2
                     filterView = new DataView(filterTable);
                     populateListView(filterView);
                     filterUsed = true;
-                    DisplayTable.Clear();
-                    DisplayTable.AcceptChanges();
+                    //dtSpells.Clear();
+                    dtSpells.AcceptChanges();
                     filterTable.AcceptChanges();
                }
                else
                {
                     foundRows = filterTable.Select(expression);
-                    DisplayTable.Clear();
-                    DisplayTable.AcceptChanges();
-                // The code errors here because the DisplayTable cannot be null for the ID section.
-                    //foreach (DataRow row in foundRows)
-                    //{
-                    //     DisplayTable.ImportRow(row);
-                    //}
-                    tempView = new DataView(DisplayTable);
+                    dtSpells.Clear();
+                    dtSpells.AcceptChanges();
+                    foreach (DataRow row in foundRows)
+                    {
+                         dtSpells.ImportRow(row);
+                    }
+                    tempView = new DataView(dtSpells);
                     populateListView(tempView);
                     filterTable.Clear();
                     filterTable.AcceptChanges();
-                    DisplayTable.AcceptChanges();
+                    dtSpells.AcceptChanges();
                     filterUsed = false;
                     
                }
@@ -275,7 +282,7 @@ namespace C246SpellBook_V_2
            */
           private void SearchTextBox_TextChanged(object sender, EventArgs e)
           {
-               if (DisplayTable.Rows.Count != 0)
+               if (dtSpells.Rows.Count != 0)
                {
                     dvSpells.RowFilter = string.Format("Name Like '%{0}%'", SearchTextBox.Text);
                     populateListView(dvSpells);
@@ -302,26 +309,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox1.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_0)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
                
                if (checkBox1.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
                          foreach (var spell in XmlReader.Level_0)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -329,20 +339,25 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_0)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
                if(checkBox1.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -357,26 +372,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox2.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_1)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
                
                if (checkBox2.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.Level_1)
+                         foreach (var spell in XmlReader.Level_1)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -384,21 +402,26 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_1)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
 
                if (checkBox2.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -412,26 +435,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox3.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_2)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
 
                if (checkBox3.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.Level_2)
+                         foreach (var spell in XmlReader.Level_2)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -439,21 +465,26 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_2)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
 
                if (checkBox3.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -467,26 +498,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox4.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_3)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
 
                if (checkBox4.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.Level_3)
+                         foreach (var spell in XmlReader.Level_3)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -494,21 +528,26 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_3)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
 
                if (checkBox4.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -522,26 +561,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox5.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_4)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
 
                if (checkBox5.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.Level_4)
+                         foreach (var spell in XmlReader.Level_4)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -549,21 +591,26 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_4)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
 
                if (checkBox5.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -577,26 +624,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox6.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_5)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
 
                if (checkBox6.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.Level_5)
+                         foreach (var spell in XmlReader.Level_5)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -604,21 +654,26 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_5)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
 
                if (checkBox6.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -632,26 +687,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox7.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_6)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
 
                if (checkBox7.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.Level_6)
+                         foreach (var spell in XmlReader.Level_6)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -659,21 +717,26 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_6)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
 
                if (checkBox7.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -687,26 +750,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox8.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_7)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
 
                if (checkBox8.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.Level_7)
+                         foreach (var spell in XmlReader.Level_7)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -714,21 +780,26 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_7)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
 
                if (checkBox8.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -742,26 +813,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox9.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_8)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
 
                if (checkBox9.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.Level_8)
+                         foreach (var spell in XmlReader.Level_8)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -769,21 +843,26 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_8)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
 
                if (checkBox9.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -797,26 +876,29 @@ namespace C246SpellBook_V_2
                int count = testIfBoxesChecked();
                if (checkBox10.Checked == true && count <= 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.Level_9)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
 
                if (checkBox10.Checked && count > 1)
                {
-                    if (DisplayTable.Rows.Count != 0)
+                    if (dtSpells.Rows.Count != 0)
                     {
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.Level_9)
+                         foreach (var spell in XmlReader.Level_9)
                          {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                  , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                        dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
                     }
                          populateListView(dvSpells);
                     }
@@ -824,21 +906,26 @@ namespace C246SpellBook_V_2
                     {
                          foreach (var spell in XmlReader.Level_9)
                          {
-                              filterTable.Rows.Add(spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Components);
-
-                         }
+                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                    spell.Range, spell.Components, spell.Materials,
+                                                                    spell.Duration, spell.Description, spell.HigherLevel,
+                                                                    spell.Source);
+                    }
                          populateListView(filterView);
                     }
                }
 
                if (checkBox10.Checked == false && count < 1)
                {
-                    DisplayTable.Clear();
+                    dtSpells.Clear();
                     foreach (var spell in XmlReader.spells)
                     {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                   , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+                    dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                spell.Range, spell.Components, spell.Materials,
+                                                                spell.Duration, spell.Description, spell.HigherLevel,
+                                                                spell.Source);
                 }
                     populateListView(dvSpells);
                }
@@ -994,7 +1081,7 @@ namespace C246SpellBook_V_2
                 string key = listView1.Items[index].Text;
                
                 //temporary dataRow to allow display of data
-                var spellRow = DisplayTable.Rows.Find(key);
+                var spellRow = dtSpells.Rows.Find(key);
 
                 //call the formatter
                 Spell_Display.Text = Format(spellRow);
@@ -1134,12 +1221,14 @@ namespace C246SpellBook_V_2
                }
                filterUsed = false;
                filterTable.Clear();
-               DisplayTable.Clear();
+               dtSpells.Clear();
                foreach (var spell in XmlReader.spells)
                {
-                    DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, spell.Ritual, spell.Concentration, spell.Classes, spell.Time
-                        , spell.Range, spell.Components, spell.Materials, spell.Duration, spell.Description, spell.HigherLevel, spell.Source);
-
+dtSpells.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, 
+                                            spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                            spell.Range, spell.Components, spell.Materials,
+                                            spell.Duration, spell.Description, spell.HigherLevel, 
+                                            spell.Source);
                }
                populateListView(dvSpells);
 
