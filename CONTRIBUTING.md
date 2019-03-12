@@ -28,17 +28,23 @@ Changes that are cosmetic in nature and do not add anything substantial to the s
 
 #### **Do you want to contribute to the Rails documentation?**
 
-* Please contact Zac at zac16530@gmail.com.
+* Please contact zac16530@gmail.com.
 
 * We use visual Studio with sonarlint to create our code. We expect everyone to use Pascel case and to tag all public methods of a class with at least summary, parameater, and return.
 
 Example
-/// <summary>  
-///  This class performs an important function.  
-/// <param name="name">description</param>   
-/// <returns>description</returns>  
-public void method(){}
 
-Thanks! :heart: :heart: :heart:
+        <summary>  
+          This class performs an important function.  
+        </summary>
+        <param name="name">
+          description of what the pramaters are doing.
+        </param>   
+        <returns> 
+          description of what is being returned.
+        </returns>  
+        public void method(){}
+
+Thanks!
 
 3MasterGames
