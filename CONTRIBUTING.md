@@ -16,7 +16,7 @@
 
 #### **Did you fix whitespace, format code, or make a purely cosmetic patch?**
 
-Changes that are cosmetic in nature and do not add anything substantial to the stability, functionality, or testability of Spellviewer will generally not be accepted (read more about [our rationales behind this decision]()).
+Changes that are cosmetic in nature and do not add anything substantial to the stability, functionality, or testability of Spellviewer will generally not be accepted (read more about [our rationales behind this decision](https://github.com/IUS-CS/3MasterGames/edit/Cliftonz-patch-3/CONTRIBUTING.md)).
 
 #### **Do you intend to add a new feature or change an existing one?**
 
@@ -24,11 +24,20 @@ Changes that are cosmetic in nature and do not add anything substantial to the s
 
 #### **Do you have questions about the source code?**
 
-* Ask any question @ ____.
+* Ask any question to zac16530@gmail.com.
 
 #### **Do you want to contribute to the Rails documentation?**
 
-* Contact ______.
+* Please contact Zac at zac16530@gmail.com.
+
+* We use visual Studio with sonarlint to create our code. We expect everyone to use Pascel case and to tag all public methods of a class with at least summary, parameater, and return.
+
+Example
+/// <summary>  
+///  This class performs an important function.  
+/// <param name="name">description</param>   
+/// <returns>description</returns>  
+public void method(){}
 
 Thanks! :heart: :heart: :heart:
 
