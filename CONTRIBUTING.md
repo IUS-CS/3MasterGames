@@ -34,15 +34,15 @@ Changes that are cosmetic in nature and do not add anything substantial to the s
 
 Example
 
-        <summary>  
-          This class performs an important function.  
-        </summary>
-        <param name="name">
-          description of what the pramaters are doing.
-        </param>   
-        <returns> 
-          description of what is being returned.
-        </returns>  
+        ///<summary>  
+        ///  This class performs an important function.  
+        ///</summary>
+        ///<param name="name">
+        ///  description of what the pramaters are doing.
+        ///</param>   
+        ///<returns> 
+        ///  description of what is being returned.
+        ///</returns>  
         public void method(){}
 
 Thanks!
