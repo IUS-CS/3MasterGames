@@ -125,7 +125,7 @@
             this.listView1.Location = new System.Drawing.Point(15, 76);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(577, 591);
+            this.listView1.Size = new System.Drawing.Size(577, 525);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ColumnClick);
@@ -138,7 +138,7 @@
             this.DisplayPanel.Controls.Add(this.label2);
             this.DisplayPanel.Location = new System.Drawing.Point(901, 45);
             this.DisplayPanel.Name = "DisplayPanel";
-            this.DisplayPanel.Size = new System.Drawing.Size(324, 687);
+            this.DisplayPanel.Size = new System.Drawing.Size(324, 590);
             this.DisplayPanel.TabIndex = 4;
             this.DisplayPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DisplayPanel_Paint);
             // 
@@ -151,7 +151,7 @@
             this.Spell_Display.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Spell_Display.Name = "Spell_Display";
             this.Spell_Display.ReadOnly = true;
-            this.Spell_Display.Size = new System.Drawing.Size(287, 617);
+            this.Spell_Display.Size = new System.Drawing.Size(287, 560);
             this.Spell_Display.TabIndex = 1;
             this.Spell_Display.Text = "";
             this.Spell_Display.TextChanged += new System.EventHandler(this.Spell_Display_TextChanged);
@@ -637,8 +637,6 @@
           }
 
           #endregion
-          public bool MaximizeBox { get; set; }
-          public bool MinimizeBox { get; set; }
           private System.Windows.Forms.Label label1;
           private System.Windows.Forms.TextBox SearchTextBox;
           private System.Windows.Forms.Panel SearchPanel;
