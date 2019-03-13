@@ -254,6 +254,7 @@ namespace C246SpellBook_V_2
                if (!filterUsed)
                {    foundRows = DisplayTable.Select(expression);
                     filterTable.Clear();
+                    
                     filterTable.AcceptChanges();
                     foreach (DataRow row in foundRows)
                     {
@@ -262,7 +263,7 @@ namespace C246SpellBook_V_2
                     filterView = new DataView(filterTable);
                     PopulateListView(filterView);
                     filterUsed = true;
-                    //DisplayTable.Clear();
+                    DisplayTable.Clear();
                     DisplayTable.AcceptChanges();
                     filterTable.AcceptChanges();
                }
