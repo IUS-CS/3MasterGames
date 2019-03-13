@@ -36,7 +36,7 @@ namespace C246SpellBook_V_2
                string higherLevel = "";//13
                string source = "";//14
                
-               XmlTextReader doc = new XmlTextReader("SpellBookDB.xml");
+               XmlTextReader doc = new XmlTextReader("..\\..\\Text_XmlFiles\\SpellBookDB.xml");
                spells = new List<SpellList>();
                BardList = new List<SpellList>();
                ClericList = new List<SpellList>();

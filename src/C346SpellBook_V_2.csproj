@@ -50,6 +50,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DisplayFormatter.cs" />
     <Compile Include="Model\ListviewColumnSorter.cs" />
     <Compile Include="Model\ListViewComparer.cs" />
     <Compile Include="Model\SpellList.cs" />
@@ -133,6 +134,5 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
