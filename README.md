@@ -18,7 +18,7 @@ If you find a bug or you want to see something implemented, place an issue in an
 
 2) In addition to downloading visual studio, for the time being you will need to locate the XML file named SpellBookDB.xml and copy it. The location is in the src folder. After copying the file, place it inside the location /src/bin/Debug. This helps the program load the list of spells. This will be updated in the future, to make it easier for the user.
 
-3) Also, if you want the exe go to the release tab.
+3) Also, if you want the exe go to the release tab. Make sure the SpellbookDB.xml file and the exe file are in the same folder.
 
 ### Future Expansions 
 
