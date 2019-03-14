@@ -30,7 +30,6 @@ namespace C246SpellBook_V_2
           //this is for sorting 
           private int sortColumn = -1;
 
-          private DataTable dtSpells;
           private DataTable tempSpells;
           private DataView dvSpells;
           private DataTable DisplayTable;
@@ -74,19 +73,6 @@ namespace C246SpellBook_V_2
 
 
                //Initialize Datatable and add columns
-
-               //useing a new database with all information
-               /*
-               dtSpells = new DataTable();
-               dtSpells.Columns.Add("Name");
-               dtSpells.Columns.Add("Level");
-               dtSpells.Columns.Add("School");
-               dtSpells.Columns.Add("Ritual");
-               dtSpells.Columns.Add("Concentation");
-               dtSpells.Columns.Add("Classes");
-               dtSpells.Columns.Add("Components");
-               */
-
                 //Data table with all info for display
                 DisplayTable = new DataTable();
                 DisplayTable.Columns.Add("ID");
