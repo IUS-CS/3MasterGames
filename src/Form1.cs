@@ -94,8 +94,7 @@ namespace C246SpellBook_V_2
                 DisplayTable.Columns.Add("Source");
 
 
-            formatter.SetDataTable(ref DisplayTable);
-            formatter.SetDisplay(ref Spell_Display);
+            formatter.SetDataTable( DisplayTable);
 
 
             tempSpells = new DataTable();
@@ -572,8 +571,8 @@ namespace C246SpellBook_V_2
 
                 //get the key name 
                 string key = listView1.Items[index].Text;
-               
-                formatter.DisplayData(key);
+  
+                Spell_Display.Text = formatter.FormatData(key);
             }
         }
 

@@ -10,42 +10,29 @@ namespace C246SpellBook_V_2.Logic
     {
         internal DataTable DisplayTableReference;
 
-        internal RichTextBox Display;
-
         ///<summary>  
         ///  This method sets the local DisplayTable.
         ///</summary>
         ///<param name="displayTable">
         ///  Referance to the data table that holds all the data.
         ///</param>   
-        public void SetDataTable(ref DataTable displayTable)
+        public void SetDataTable(DataTable displayTable)
         {
             DisplayTableReference = displayTable;
         }
-
-        ///<summary>  
-        ///  This method sets the local reference to the output box.  
-        ///</summary>
-        ///<param name="display">
-        ///  Reference to the output RichTextBox.
-        public void SetDisplay(ref RichTextBox display)
-        {
-            this.Display = display;
-        }
-
         ///<summary>  
         ///  Takes a key and searches thru the data Table te find the unique spell
         ///</summary>
         ///<param name="key">
         ///  Tho key is a unique spell identifier.
         ///</param> 
-        public void DisplayData(string key)
+        public string FormatData(string key)
         {
             //temporary dataRow to allow display of data
             var spellRow = DisplayTableReference.Rows.Find(key);
 
             //call the formatter
-            Display.Text = Format(spellRow);
+            return Format(spellRow);
         }
 
         //format the string to be outputted on the display
@@ -227,7 +214,6 @@ namespace C246SpellBook_V_2.Logic
                     temp += spell[i];
                 }
             }
-
         }
     }
 }

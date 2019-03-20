@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using C246SpellBook_V_2.Logic;
 
 namespace _346SpellBook.Tests
 {
@@ -9,6 +10,8 @@ namespace _346SpellBook.Tests
         [TestMethod]
         public void TestMethod1()
         {
+            Class1 x = new Class1();
+            x.Id = "";
         }
     }
 }
