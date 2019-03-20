@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using C246SpellBook_V_2.Model;
+using C246SpellBook_V_2.Logic;
 using C246SpellBook_V_2.WindowView;
 
 namespace C246SpellBook_V_2

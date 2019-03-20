@@ -3,7 +3,8 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace C246SpellBook_V_2.Model
+namespace C246SpellBook_V_2.Logic
+
 {
     internal class DisplayFormatter
     {
