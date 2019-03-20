@@ -1,4 +1,7 @@
 # Spellviewer Change Log
+## Version 0.6.2.1
+  ### Minor Changes
+    - Made the class easier to test 
 
 ## Version 0.6.2
   ### Major Changes
