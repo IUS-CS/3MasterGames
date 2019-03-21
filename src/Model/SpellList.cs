@@ -1,10 +1,10 @@
 ﻿
 namespace C246SpellBook_V_2
 {
-    public class SpellList
+    class SpellList
     {
 
-        private SpellList(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source)
+        public SpellList(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source)
             {
                 ID = id;
                 Name = name;
@@ -23,20 +23,20 @@ namespace C246SpellBook_V_2
                 Source = source;
             }
 
-        private string ID { get; set; }
-        private string Name { get; set; }
-        private string Level { get; set; }
-        private string School { get; set; }
-        private bool Ritual { get; set; }
-        private bool Concentration { get; set; }
-        private string Time { get; set; }
-        private string Range { get; set; }
-        private string Components { get; set; }
-        private string Materials { get; set; }
-        private string Duration { get; set; }
-        private string Classes { get; set; }
-        private string Description { get; set; }
-        private string HigherLevel { get; set; }
-        private string Source { get; set; }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Level { get; set; }
+        public string School { get; set; }
+        public bool Ritual { get; set; }
+        public bool Concentration { get; set; }
+        public string Time { get; set; }
+        public string Range { get; set; }
+        public string Components { get; set; }
+        public string Materials { get; set; }
+        public string Duration { get; set; }
+        public string Classes { get; set; }
+        public string Description { get; set; }
+        public string HigherLevel { get; set; }
+        public string Source { get; set; }
     }
 }

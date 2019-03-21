@@ -72,7 +72,7 @@ namespace C246SpellBook_V_2
                
 
 
-               //Initialize Datatable and add columns
+                //Initialize Datatable and add columns
                 //Data table with all info for display
                 DisplayTable = new DataTable();
                 DisplayTable.Columns.Add("ID");
@@ -380,60 +380,62 @@ namespace C246SpellBook_V_2
                 UseFilterTable(filterTableNumber);
             }
         }
-        
 
-
-        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_CheckedChangedClass(object sender, EventArgs e, CheckBox checkBox, List<SpellList> spellClass, string filterTableClass)
         {
 
             int count = TestIfBoxesChecked();
-            if (checkBox11.Checked && count <= 1)
+            if (checkBox.Checked && count <= 1)
             {
                 DisplayTable.Clear();
-                foreach (var spell in XmlReader.BardList)
+                foreach (var spell in spellClass)
                 {
                     DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
                                                                 spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
                                                                 spell.Range, spell.Components, spell.Materials,
                                                                 spell.Duration, spell.Description, spell.HigherLevel,
                                                                 spell.Source);
+
                 }
                 PopulateListView(dvSpells);
             }
 
-            if (checkBox11.Checked && count > 1)
+            if (checkBox.Checked && count > 1)
             {
-                    tempSpells = DisplayTable.Copy();
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.BardList)
+                if (DisplayTable.Rows.Count != 0)
+                {
+                    foreach (var spell in spellClass)
                     {
 
-                        if(tempSpells.Rows.Contains(spell.ID))
-                        {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
-                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
-                                                                    spell.Range, spell.Components, spell.Materials,
-                                                                    spell.Duration, spell.Description, spell.HigherLevel,
-                                                                    spell.Source);
-                        }
+                        bool contains = DisplayTable.AsEnumerable().Any(row => spell.ID == row.Field<string>("ID"));
+                        if (!contains)
+                            DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                        spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                        spell.Range, spell.Components, spell.Materials,
+                                                                        spell.Duration, spell.Description, spell.HigherLevel,
+                                                                        spell.Source);
+                        
+                        
+
                     }
                     PopulateListView(dvSpells);
-            }
+                }
                 if (filterTable.Rows.Count != 0)
                 {
-                    foreach (var spell in XmlReader.BardList)
+                    foreach (var spell in spellClass)
                     {
-                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
-                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
-                                                                    spell.Range, spell.Components, spell.Materials,
-                                                                    spell.Duration, spell.Description, spell.HigherLevel,
-                                                                    spell.Source);
+                        
+                            filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                   spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                   spell.Range, spell.Components, spell.Materials,
+                                                                   spell.Duration, spell.Description, spell.HigherLevel,
+                                                                   spell.Source);
+
                     }
                     PopulateListView(filterView);
                 }
-            
-
-            if (!checkBox11.Checked && count < 1)
+            }
+            if (!checkBox.Checked && count < 1)
             {
                 DisplayTable.Clear();
                 foreach (var spell in XmlReader.spells)
@@ -443,66 +445,16 @@ namespace C246SpellBook_V_2
                                                                 spell.Range, spell.Components, spell.Materials,
                                                                 spell.Duration, spell.Description, spell.HigherLevel,
                                                                 spell.Source);
+
                 }
                 PopulateListView(dvSpells);
             }
-            if (!checkBox11.Checked && count >= 1)
+            if (!checkBox.Checked && count >= 1)
             {
-                UseFilterTable("Bard");
+                UseFilterTable(filterTableClass);
             }
+        }
 
-          }
-          private void checkBox12_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox12.Checked)
-               {
-                   
-               }
-          }
-          private void checkBox13_CheckedChanged_1(object sender, EventArgs e)
-          {
-               if (checkBox13.Checked)
-               {
-               }
-          }
-
-          private void checkBox14_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox14.Checked)
-               {
-                  
-               }
-          }
-          private void checkBox15_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox15.Checked)
-               {
-
-               }
-          }
-          private void checkBox16_CheckedChanged_1(object sender, EventArgs e)
-          {
-
-               if (checkBox16.Checked)
-               {
-                   
-               }
-
-          }
-          private void checkBox17_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox17.Checked)
-               {
-                   
-               }
-          }
-          private void checkBox18_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox18.Checked)
-               {
-                    
-               }
-          }
 
           // ColumnClick event handler.
           private void ColumnClick(object o, ColumnClickEventArgs e)

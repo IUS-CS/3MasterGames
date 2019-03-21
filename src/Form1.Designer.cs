@@ -215,7 +215,7 @@
             this.checkBox18.TabIndex = 20;
             this.checkBox18.Text = "Wizard";
             this.checkBox18.UseVisualStyleBackColor = true;
-            this.checkBox18.CheckedChanged += new System.EventHandler(this.checkBox18_CheckedChanged);
+            this.checkBox18.CheckedChanged += new System.EventHandler((sender, e) => checkBox_CheckedChangedClass(sender, e, checkBox18, XmlReader.WizardList, "Wizard"));
             // 
             // checkBox17
             // 
@@ -226,7 +226,7 @@
             this.checkBox17.TabIndex = 19;
             this.checkBox17.Text = "Warlock";
             this.checkBox17.UseVisualStyleBackColor = true;
-            this.checkBox17.CheckedChanged += new System.EventHandler(this.checkBox17_CheckedChanged);
+            this.checkBox17.CheckedChanged += new System.EventHandler((sender, e) => checkBox_CheckedChangedClass(sender, e, checkBox17, XmlReader.WarlockList, "Warlock"));
             // 
             // checkBox16
             // 
@@ -237,7 +237,7 @@
             this.checkBox16.TabIndex = 18;
             this.checkBox16.Text = "Sorcerer";
             this.checkBox16.UseVisualStyleBackColor = true;
-            this.checkBox16.CheckedChanged += new System.EventHandler(this.checkBox16_CheckedChanged_1);
+            this.checkBox16.CheckedChanged += new System.EventHandler((sender, e) => checkBox_CheckedChangedClass(sender, e, checkBox16, XmlReader.SorcererList, "Sorcerer"));
             // 
             // checkBox15
             // 
@@ -248,7 +248,7 @@
             this.checkBox15.TabIndex = 17;
             this.checkBox15.Text = "Ranger";
             this.checkBox15.UseVisualStyleBackColor = true;
-            this.checkBox15.CheckedChanged += new System.EventHandler(this.checkBox15_CheckedChanged);
+            this.checkBox15.CheckedChanged += new System.EventHandler((sender, e) => checkBox_CheckedChangedClass(sender, e, checkBox15, XmlReader.RangerList, "Ranger"));
             // 
             // checkBox14
             // 
@@ -259,7 +259,7 @@
             this.checkBox14.TabIndex = 16;
             this.checkBox14.Text = "Paladin";
             this.checkBox14.UseVisualStyleBackColor = true;
-            this.checkBox14.CheckedChanged += new System.EventHandler(this.checkBox14_CheckedChanged);
+            this.checkBox14.CheckedChanged += new System.EventHandler((sender, e) => checkBox_CheckedChangedClass(sender, e, checkBox14, XmlReader.PaladinList, "Paladin"));
             // 
             // checkBox13
             // 
@@ -270,7 +270,7 @@
             this.checkBox13.TabIndex = 15;
             this.checkBox13.Text = "Druid";
             this.checkBox13.UseVisualStyleBackColor = true;
-            this.checkBox13.CheckedChanged += new System.EventHandler(this.checkBox13_CheckedChanged_1);
+            this.checkBox13.CheckedChanged += new System.EventHandler((sender, e) => checkBox_CheckedChangedClass(sender, e, checkBox13, XmlReader.DruidList, "Druid"));
             // 
             // checkBox12
             // 
@@ -281,7 +281,7 @@
             this.checkBox12.TabIndex = 14;
             this.checkBox12.Text = "Cleric";
             this.checkBox12.UseVisualStyleBackColor = true;
-            this.checkBox12.CheckedChanged += new System.EventHandler(this.checkBox12_CheckedChanged);
+            this.checkBox12.CheckedChanged += new System.EventHandler((sender, e) => checkBox_CheckedChangedClass(sender, e, checkBox12, XmlReader.ClericList, "Cleric"));
             // 
             // checkBox11
             // 
@@ -292,8 +292,7 @@
             this.checkBox11.TabIndex = 13;
             this.checkBox11.Text = "Bard";
             this.checkBox11.UseVisualStyleBackColor = true;
-            this.checkBox11.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
-            // 
+            this.checkBox11.CheckedChanged += new System.EventHandler((sender, e) => checkBox_CheckedChangedClass(sender, e, checkBox11, XmlReader.BardList, "Bard"));            // 
             // label4
             // 
             this.label4.AutoSize = true;
