@@ -1,103 +1,50 @@
 ﻿
-namespace C246SpellBook_V_2
+namespace C246SpellBook_V_2.Model
 {
-    class SpellList
+    public class SpellList
     {
-            private string id;
-            private string name;
-            private string level;
-            private string school;
-            private bool ritual;
-            private bool concentration;
-            private string time;
-            private string range;
-            private string components;
-            private string materials;
-            private string duration;
-            private string classes;
-            private string description;
-            private string higherLevel;
-            private string source;
-            
 
-            public SpellList(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source)
+        public SpellList() { }
+
+        ///<summary>  
+        ///  This method creates the spellList class attributes that make up a spell.
+        ///</summary>
+        ///<param name="id", "name", "level", "school", "ritual", "concentration", "time", "range", "components", "materials", "duration", "classes", "description", "higherLevel", "source">
+        ///  All the attributes required for a spell.
+        ///</param>   
+        public SpellList(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source)
             {
-                this.id = id;
-                this.name = name;
-                this.level = level;
-                this.school = school;
-                this.ritual = ritual;
-                this.concentration = concentration;
-                this.time = time;
-                this.range = range;
-                this.components = components;
-                this.materials = materials;
-                this.duration = duration;
-                this.classes = classes;
-                this.description = description;
-                this.higherLevel = higherLevel;
-                this.source = source;
+                ID = id;
+                Name = name;
+                Level = level;
+                School = school;
+                Ritual = ritual;
+                Concentration = concentration;
+                Time = time;
+                Range = range;
+                Components = components;
+                Materials = materials;
+                Duration = duration;
+                Classes = classes;
+                Description = description;
+                HigherLevel = higherLevel;
+                Source = source;
             }
 
-            public string ID
-            {
-                get { return id; }
-            }
-            public string Name
-            {
-                get { return name; }
-            }
-            public string Level
-            {
-                get { return level; }
-            }
-            public string School
-            {
-                get { return school; }
-            }
-            public bool Ritual
-            {
-                get { return ritual; }
-            }
-            public bool Concentration
-            {
-                get { return concentration; }
-            }
-            public string Time
-            {
-                get { return time; }
-            }
-            public string Range
-            {
-                get { return range; }
-            }
-            public string Components
-            {
-                get { return components; }
-            }
-            public string Materials
-            {
-                get { return materials; }
-            }
-            public string Duration
-            {
-                get { return duration; }
-            }
-            public string Classes
-            {
-                get { return classes; }
-            }
-            public string Description
-            {
-                get { return description; }
-            }
-            public string HigherLevel
-            {
-                get { return higherLevel; }
-            }
-            public string Source
-            {
-                get { return source; }
-            }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Level { get; set; }
+        public string School { get; set; }
+        public bool Ritual { get; set; }
+        public bool Concentration { get; set; }
+        public string Time { get; set; }
+        public string Range { get; set; }
+        public string Components { get; set; }
+        public string Materials { get; set; }
+        public string Duration { get; set; }
+        public string Classes { get; set; }
+        public string Description { get; set; }
+        public string HigherLevel { get; set; }
+        public string Source { get; set; }
     }
 }

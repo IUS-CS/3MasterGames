@@ -1,5 +1,15 @@
 # Spellviewer Change Log
 
+## Version 0.6.3
+ ### Major Changes
+   - Recreated the classes layout so it would act the same as levels.
+   - Created the correct testing folder with a few tests inside for creating a spell.
+ ### Minor Changes
+   - Added an if statement inside useFilterTable, that way classes an be used. It needs to be updated, im trying to figure out how to use it affectively with removing spells.
+   - Cleaned up the SpellList class.
+ ### Bug Fixes
+   - This isnt so much a fix, but the DiplayTable.clear(); is causig a few issues inside the useFilterClass. When multiple checkboxes are selected it causes the display to become null. we need to find a way around it or keep it commented out for now.
+
 ## Version 0.6.2
   ### Major Changes
     - Spells are now displayed in a predetermined format. 

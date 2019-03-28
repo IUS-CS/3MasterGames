@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace C246SpellBook_V_2
+namespace C246SpellBook_V_2.Model
 {
     class ListViewComparer : IComparer
     {

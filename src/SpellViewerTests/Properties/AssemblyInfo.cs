@@ -2,18 +2,18 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("346SpellBook.Tests")]
+[assembly: AssemblyTitle("SpellViewerTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("346SpellBook.Tests")]
+[assembly: AssemblyProduct("SpellViewerTests")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("7dc6e3f6-0bf7-4638-9820-f14842e60c9c")]
+[assembly: Guid("b4aeb267-68ac-4053-9b97-82970a0bb5b1")]
 
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]

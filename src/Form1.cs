@@ -72,7 +72,7 @@ namespace C246SpellBook_V_2
                
 
 
-               //Initialize Datatable and add columns
+                //Initialize Datatable and add columns
                 //Data table with all info for display
                 DisplayTable = new DataTable();
                 DisplayTable.Columns.Add("ID");
@@ -220,47 +220,52 @@ namespace C246SpellBook_V_2
                }
                return count;
           }
-            
-          /*
-           This function is how filters are going to work for when boxes are unchecked while others are still checked. First, we create a string that we are going to use
-           to filter out whatever was just unchecked. We then create a datarow array to store our results.
-           There's a boolean variable called filterUsed. It is by default set to false, since we aren't using a filter by default. If we aren't using a filter, we populate our
-           foundRows array with anything not using the current level. So if our parameter is "5", then it will fill the array with any rows that don't have a level of 5. It will first
-           clear the table, then put everything thats in the array, into the table. It will then create a new dataview and populate that dataview. It'll change filterUsed to true, then
-           clear our old dtSpells table and we accept changes so that way the elements are completely removed.
-           If filters are in use, we basically do the same thing, except with filterTable. We populate our dataRow array with everything that's not the parameter, and 
-           move everything from that array, into the datatable dtSpells. We then populate that array, clear filterTable, and accept changes on filterTable. filterUsed gets set to
-           false, so that way itll go back up to populating filterTable next time this function is called.
-           If the user unchecks all boxes without clicking the reset button, it will set filterUsed back to false
-                */
-          private void UseFilterTable(string filter)
+
+
+        ///<summary>  
+        ///  I added a Regex matching system, that way the program can determine whether it is a level (int) or a class (string).
+        ///  I added an if statement after to differ between level, and class. Right now we need to figure out the best way to clear out a class, and add its prior classes back in. When multiple
+        ///  checkboxes are selected with classes and you remove one, it will remove all references to that class but we need some if bard is selected for instance and we remove wizard, we need all instances of
+        ///  bard to stay even if a wizard is able to use it. 
+        ///  Again I commented out DisplayTable.clear(); because it causes an error when multiple boxes are selected and then some are deselected. It causes the display to become null. We do not wnat that. 
+        ///  A revision is needed. I am also working on trying to make this method shorter and universal with all filters.
+        ///</summary>
+        ///<param name="filter">
+        ///  Referance to which type of filter that is selected.
+        ///</param>  
+        private void UseFilterTable(string filter)
           {
-               string expression = $"Level NOT LIKE '%{filter}%'";
-               DataRow[] foundRows;
-               if (!filterUsed)
-               {    foundRows = DisplayTable.Select(expression);
+
+            if (Regex.IsMatch(filter, @"^\d+$"))
+            {
+
+                string expression = $"Level NOT LIKE '%{filter}%'";
+                DataRow[] foundRows;
+                if (!filterUsed)
+                {
+                    foundRows = DisplayTable.Select(expression);
                     filterTable.Clear();
-                    
+
                     filterTable.AcceptChanges();
                     foreach (DataRow row in foundRows)
                     {
-                         filterTable.ImportRow(row);
+                        filterTable.ImportRow(row);
                     }
                     filterView = new DataView(filterTable);
                     PopulateListView(filterView);
                     filterUsed = true;
-                    DisplayTable.Clear();
+                    //DisplayTable.Clear();
                     DisplayTable.AcceptChanges();
                     filterTable.AcceptChanges();
-               }
-               else
-               {
+                }
+                else
+                {
                     foundRows = filterTable.Select(expression);
                     DisplayTable.Clear();
                     DisplayTable.AcceptChanges();
                     foreach (DataRow row in foundRows)
                     {
-                         DisplayTable.ImportRow(row);
+                        DisplayTable.ImportRow(row);
                     }
                     tempView = new DataView(DisplayTable);
                     PopulateListView(tempView);
@@ -268,12 +273,56 @@ namespace C246SpellBook_V_2
                     filterTable.AcceptChanges();
                     DisplayTable.AcceptChanges();
                     filterUsed = false;
-                    
-               }
-               if(TestIfBoxesChecked() == 0)
-               {
+
+                }
+                if (TestIfBoxesChecked() == 0)
+                {
                     filterUsed = false;
-               }
+                }
+            }
+            else
+            {
+                string expression = $"Classes NOT LIKE '%{filter}%'";
+                DataRow[] foundRows;
+                if (!filterUsed)
+                {
+                    foundRows = DisplayTable.Select(expression);
+                    filterTable.Clear();
+
+                    filterTable.AcceptChanges();
+                    foreach (DataRow row in foundRows)
+                    {
+                        filterTable.ImportRow(row);
+                    }
+                    filterView = new DataView(filterTable);
+                    PopulateListView(filterView);
+                    filterUsed = true;
+                    //DisplayTable.Clear();
+                    DisplayTable.AcceptChanges();
+                    filterTable.AcceptChanges();
+                }
+                else
+                {
+                    foundRows = filterTable.Select(expression);
+                    DisplayTable.Clear();
+                    DisplayTable.AcceptChanges();
+                    foreach (DataRow row in foundRows)
+                    {
+                        DisplayTable.ImportRow(row);
+                    }
+                    tempView = new DataView(DisplayTable);
+                    PopulateListView(tempView);
+                    filterTable.Clear();
+                    filterTable.AcceptChanges();
+                    DisplayTable.AcceptChanges();
+                    filterUsed = false;
+
+                }
+                if (TestIfBoxesChecked() == 0)
+                {
+                    filterUsed = false;
+                }
+            }
           }
 
           /*
@@ -338,7 +387,9 @@ namespace C246SpellBook_V_2
 
                     foreach (var spell in spellLevel)
                     {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, 
+                        bool contains = DisplayTable.AsEnumerable().Any(row => spell.ID == row.Field<string>("ID"));
+                        if (!contains)
+                            DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, 
                                                                     spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
                                                                     spell.Range, spell.Components, spell.Materials,
                                                                     spell.Duration, spell.Description, spell.HigherLevel, 
@@ -380,60 +431,72 @@ namespace C246SpellBook_V_2
                 UseFilterTable(filterTableNumber);
             }
         }
-        
 
 
-        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        ///<summary>  
+        ///  This method works the same as the level filter above, it handles by how many checkboxes have been selected or deselected. By calling from the Designer class, it can determine which checkbox
+        ///  was selected and how many are selected prior by the count variable. Detpending on how many are selected it filters through some if statements and filters accordingly. If only 1 box is selected and
+        ///  then deslected then it will clear that list and imprort the original. If multiple boxes are selected and a deselect is triggered it will call the useFilterTable, this is where out issue occurs. 
+        ///  We need to revise this, because as of now it clears anything to do with that checkbox that is deselected and other checkboxes selected might need that spell to stay in the list.
+        ///</summary>
+        ///<param name="sender", "e", "checkbox", "spellClass", "filterTableClass">
+        ///  Referances to the values in the desgner class that determines which checkbox is activated.
+        ///</param>  
+        private void checkBox_CheckedChangedClass(object sender, EventArgs e, CheckBox checkBox, List<SpellList> spellClass, string filterTableClass)
         {
 
             int count = TestIfBoxesChecked();
-            if (checkBox11.Checked && count <= 1)
+            if (checkBox.Checked && count <= 1)
             {
                 DisplayTable.Clear();
-                foreach (var spell in XmlReader.BardList)
+                foreach (var spell in spellClass)
                 {
                     DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
                                                                 spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
                                                                 spell.Range, spell.Components, spell.Materials,
                                                                 spell.Duration, spell.Description, spell.HigherLevel,
                                                                 spell.Source);
+
                 }
                 PopulateListView(dvSpells);
             }
 
-            if (checkBox11.Checked && count > 1)
+            if (checkBox.Checked && count > 1)
             {
-                    tempSpells = DisplayTable.Copy();
-                    DisplayTable.Clear();
-                    foreach (var spell in XmlReader.BardList)
+                if (DisplayTable.Rows.Count != 0)
+                {
+                    foreach (var spell in spellClass)
                     {
 
-                        if(tempSpells.Rows.Contains(spell.ID))
-                        {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
-                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
-                                                                    spell.Range, spell.Components, spell.Materials,
-                                                                    spell.Duration, spell.Description, spell.HigherLevel,
-                                                                    spell.Source);
-                        }
+                        bool contains = DisplayTable.AsEnumerable().Any(row => spell.ID == row.Field<string>("ID"));
+                        if (!contains)
+                            DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                        spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                        spell.Range, spell.Components, spell.Materials,
+                                                                        spell.Duration, spell.Description, spell.HigherLevel,
+                                                                        spell.Source);
+                        
+                        
+
                     }
                     PopulateListView(dvSpells);
-            }
+                }
                 if (filterTable.Rows.Count != 0)
                 {
-                    foreach (var spell in XmlReader.BardList)
+                    foreach (var spell in spellClass)
                     {
-                        filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
-                                                                    spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
-                                                                    spell.Range, spell.Components, spell.Materials,
-                                                                    spell.Duration, spell.Description, spell.HigherLevel,
-                                                                    spell.Source);
+                        
+                            filterTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School,
+                                                                   spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
+                                                                   spell.Range, spell.Components, spell.Materials,
+                                                                   spell.Duration, spell.Description, spell.HigherLevel,
+                                                                   spell.Source);
+
                     }
                     PopulateListView(filterView);
                 }
-            
-
-            if (!checkBox11.Checked && count < 1)
+            }
+            if (!checkBox.Checked && count < 1)
             {
                 DisplayTable.Clear();
                 foreach (var spell in XmlReader.spells)
@@ -443,66 +506,15 @@ namespace C246SpellBook_V_2
                                                                 spell.Range, spell.Components, spell.Materials,
                                                                 spell.Duration, spell.Description, spell.HigherLevel,
                                                                 spell.Source);
+
                 }
                 PopulateListView(dvSpells);
             }
-            if (!checkBox11.Checked && count >= 1)
+            if (!checkBox.Checked && count >= 1)
             {
-                UseFilterTable("Bard");
+                UseFilterTable(filterTableClass);
             }
-
-          }
-          private void checkBox12_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox12.Checked)
-               {
-                   
-               }
-          }
-          private void checkBox13_CheckedChanged_1(object sender, EventArgs e)
-          {
-               if (checkBox13.Checked)
-               {
-               }
-          }
-
-          private void checkBox14_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox14.Checked)
-               {
-                  
-               }
-          }
-          private void checkBox15_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox15.Checked)
-               {
-
-               }
-          }
-          private void checkBox16_CheckedChanged_1(object sender, EventArgs e)
-          {
-
-               if (checkBox16.Checked)
-               {
-                   
-               }
-
-          }
-          private void checkBox17_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox17.Checked)
-               {
-                   
-               }
-          }
-          private void checkBox18_CheckedChanged(object sender, EventArgs e)
-          {
-               if (checkBox18.Checked)
-               {
-                    
-               }
-          }
+        }
 
           // ColumnClick event handler.
           private void ColumnClick(object o, ColumnClickEventArgs e)

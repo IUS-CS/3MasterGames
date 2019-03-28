@@ -1,5 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
+using C246SpellBook_V_2.Model;
+using C246SpellBook_V_2.WindowView;
 
 namespace C246SpellBook_V_2
 {
@@ -11,11 +22,13 @@ namespace C246SpellBook_V_2
          * text and roll. For instance, some spells have 2 to 2 text lines in the Xml file but I ended up just placing all of them into the text variable.
          * If you have any questions please let me know, also if I did anything weird or wrong please let me know.
          */
+        
     class XmlReader
     {
-          public static List<SpellList> BardList, ClericList, DruidList, PaladinList, RangerList, SorcererList, WarlockList, WizardList;
-          public static List<SpellList> Level_0, Level_1, Level_2, Level_3, Level_4, Level_5, Level_6, Level_7, Level_8, Level_9;
-          public static List<SpellList> spells;
+        
+        public static List<SpellList> BardList, ClericList, DruidList, PaladinList, RangerList, SorcererList, WarlockList, WizardList;
+        public static List<SpellList> Level_0, Level_1, Level_2, Level_3, Level_4, Level_5, Level_6, Level_7, Level_8, Level_9;
+        public static List<SpellList> spells;
         public static List<SpellList> generateData()
         {
                string id = " ";//0
@@ -219,8 +232,11 @@ namespace C246SpellBook_V_2
                     }//if = Spell
                }//whileRead
 
-               return spells;
+            return spells;
 
-          }//generateData
-     }
+
+
+
+        }//generateData
+    }
 }
