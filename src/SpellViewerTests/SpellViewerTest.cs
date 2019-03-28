@@ -10,6 +10,12 @@ namespace SpellViewerTests
     [TestClass]
     public class SpellViewerTest
     {
+        ///<summary>  
+        ///  This test evaluates the process of adding the attributes to the spell, and checking if it has completed it correctly.
+        ///</summary>
+        ///<param>
+        ///  No param required
+        ///</param>   
         [TestMethod]
         public void AddingAttribute_ToASpell()
         {
@@ -62,6 +68,12 @@ namespace SpellViewerTests
             Assert.AreEqual(expectedClasses, actualClasses);
         }
 
+        ///<summary>  
+        ///  This test evaluates the process of adding a null spell, and checks if it can add a null spell.
+        ///</summary>
+        ///<param>
+        ///  No param required
+        ///</param>   
         [TestMethod]
         public void AddingNullSpell_ToSpellList()
         {
@@ -76,6 +88,12 @@ namespace SpellViewerTests
             Assert.AreEqual(sList[0], null);
         }
 
+        ///<summary>  
+        ///  This test evaluates the process of adding a spell with attributes, and checking if it has completed it correctly.
+        ///</summary>
+        ///<param>
+        ///  No param required
+        ///</param>   
         [TestMethod]
         public void AddingSpell_ToSpellList()
         {
@@ -122,6 +140,12 @@ namespace SpellViewerTests
             Assert.AreEqual(sList[0], spell);
         }
 
+        ///<summary>  
+        ///  This test evaluates if you can add multiple spells to the spellList. Then checks if they are added in order.
+        ///</summary>
+        ///<param>
+        ///  No param required
+        ///</param>   
         [TestMethod]
         public void AddingMultipleSpells_ToSpellList()
         {

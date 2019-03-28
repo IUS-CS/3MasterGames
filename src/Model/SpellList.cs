@@ -6,6 +6,12 @@ namespace C246SpellBook_V_2.Model
 
         public SpellList() { }
 
+        ///<summary>  
+        ///  This method creates the spellList class attributes that make up a spell.
+        ///</summary>
+        ///<param name="id", "name", "level", "school", "ritual", "concentration", "time", "range", "components", "materials", "duration", "classes", "description", "higherLevel", "source">
+        ///  All the attributes required for a spell.
+        ///</param>   
         public SpellList(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source)
             {
                 ID = id;

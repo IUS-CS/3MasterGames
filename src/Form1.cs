@@ -220,20 +220,20 @@ namespace C246SpellBook_V_2
                }
                return count;
           }
-            
-          /*
-           This function is how filters are going to work for when boxes are unchecked while others are still checked. First, we create a string that we are going to use
-           to filter out whatever was just unchecked. We then create a datarow array to store our results.
-           There's a boolean variable called filterUsed. It is by default set to false, since we aren't using a filter by default. If we aren't using a filter, we populate our
-           foundRows array with anything not using the current level. So if our parameter is "5", then it will fill the array with any rows that don't have a level of 5. It will first
-           clear the table, then put everything thats in the array, into the table. It will then create a new dataview and populate that dataview. It'll change filterUsed to true, then
-           clear our old dtSpells table and we accept changes so that way the elements are completely removed.
-           If filters are in use, we basically do the same thing, except with filterTable. We populate our dataRow array with everything that's not the parameter, and 
-           move everything from that array, into the datatable dtSpells. We then populate that array, clear filterTable, and accept changes on filterTable. filterUsed gets set to
-           false, so that way itll go back up to populating filterTable next time this function is called.
-           If the user unchecks all boxes without clicking the reset button, it will set filterUsed back to false
-                */
-          private void UseFilterTable(string filter)
+
+
+        ///<summary>  
+        ///  I added a Regex matching system, that way the program can determine whether it is a level (int) or a class (string).
+        ///  I added an if statement after to differ between level, and class. Right now we need to figure out the best way to clear out a class, and add its prior classes back in. When multiple
+        ///  checkboxes are selected with classes and you remove one, it will remove all references to that class but we need some if bard is selected for instance and we remove wizard, we need all instances of
+        ///  bard to stay even if a wizard is able to use it. 
+        ///  Again I commented out DisplayTable.clear(); because it causes an error when multiple boxes are selected and then some are deselected. It causes the display to become null. We do not wnat that. 
+        ///  A revision is needed. I am also working on trying to make this method shorter and universal with all filters.
+        ///</summary>
+        ///<param name="filter">
+        ///  Referance to which type of filter that is selected.
+        ///</param>  
+        private void UseFilterTable(string filter)
           {
 
             if (Regex.IsMatch(filter, @"^\d+$"))
@@ -432,6 +432,16 @@ namespace C246SpellBook_V_2
             }
         }
 
+
+        ///<summary>  
+        ///  This method works the same as the level filter above, it handles by how many checkboxes have been selected or deselected. By calling from the Designer class, it can determine which checkbox
+        ///  was selected and how many are selected prior by the count variable. Detpending on how many are selected it filters through some if statements and filters accordingly. If only 1 box is selected and
+        ///  then deslected then it will clear that list and imprort the original. If multiple boxes are selected and a deselect is triggered it will call the useFilterTable, this is where out issue occurs. 
+        ///  We need to revise this, because as of now it clears anything to do with that checkbox that is deselected and other checkboxes selected might need that spell to stay in the list.
+        ///</summary>
+        ///<param name="sender", "e", "checkbox", "spellClass", "filterTableClass">
+        ///  Referances to the values in the desgner class that determines which checkbox is activated.
+        ///</param>  
         private void checkBox_CheckedChangedClass(object sender, EventArgs e, CheckBox checkBox, List<SpellList> spellClass, string filterTableClass)
         {
 
