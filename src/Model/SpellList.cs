@@ -1,8 +1,10 @@
 ﻿
-namespace C246SpellBook_V_2
+namespace C246SpellBook_V_2.Model
 {
-    class SpellList
+    public class SpellList
     {
+
+        public SpellList() { }
 
         public SpellList(string id, string name, string level, string school, bool ritual, bool concentration, string time, string range, string components, string materials, string duration, string classes, string description, string higherLevel, string source)
             {

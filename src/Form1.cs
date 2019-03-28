@@ -235,32 +235,37 @@ namespace C246SpellBook_V_2
                 */
           private void UseFilterTable(string filter)
           {
-               string expression = $"Level NOT LIKE '%{filter}%'";
-               DataRow[] foundRows;
-               if (!filterUsed)
-               {    foundRows = DisplayTable.Select(expression);
+
+            if (Regex.IsMatch(filter, @"^\d+$"))
+            {
+
+                string expression = $"Level NOT LIKE '%{filter}%'";
+                DataRow[] foundRows;
+                if (!filterUsed)
+                {
+                    foundRows = DisplayTable.Select(expression);
                     filterTable.Clear();
-                    
+
                     filterTable.AcceptChanges();
                     foreach (DataRow row in foundRows)
                     {
-                         filterTable.ImportRow(row);
+                        filterTable.ImportRow(row);
                     }
                     filterView = new DataView(filterTable);
                     PopulateListView(filterView);
                     filterUsed = true;
-                    DisplayTable.Clear();
+                    //DisplayTable.Clear();
                     DisplayTable.AcceptChanges();
                     filterTable.AcceptChanges();
-               }
-               else
-               {
+                }
+                else
+                {
                     foundRows = filterTable.Select(expression);
                     DisplayTable.Clear();
                     DisplayTable.AcceptChanges();
                     foreach (DataRow row in foundRows)
                     {
-                         DisplayTable.ImportRow(row);
+                        DisplayTable.ImportRow(row);
                     }
                     tempView = new DataView(DisplayTable);
                     PopulateListView(tempView);
@@ -268,12 +273,56 @@ namespace C246SpellBook_V_2
                     filterTable.AcceptChanges();
                     DisplayTable.AcceptChanges();
                     filterUsed = false;
-                    
-               }
-               if(TestIfBoxesChecked() == 0)
-               {
+
+                }
+                if (TestIfBoxesChecked() == 0)
+                {
                     filterUsed = false;
-               }
+                }
+            }
+            else
+            {
+                string expression = $"Classes NOT LIKE '%{filter}%'";
+                DataRow[] foundRows;
+                if (!filterUsed)
+                {
+                    foundRows = DisplayTable.Select(expression);
+                    filterTable.Clear();
+
+                    filterTable.AcceptChanges();
+                    foreach (DataRow row in foundRows)
+                    {
+                        filterTable.ImportRow(row);
+                    }
+                    filterView = new DataView(filterTable);
+                    PopulateListView(filterView);
+                    filterUsed = true;
+                    //DisplayTable.Clear();
+                    DisplayTable.AcceptChanges();
+                    filterTable.AcceptChanges();
+                }
+                else
+                {
+                    foundRows = filterTable.Select(expression);
+                    DisplayTable.Clear();
+                    DisplayTable.AcceptChanges();
+                    foreach (DataRow row in foundRows)
+                    {
+                        DisplayTable.ImportRow(row);
+                    }
+                    tempView = new DataView(DisplayTable);
+                    PopulateListView(tempView);
+                    filterTable.Clear();
+                    filterTable.AcceptChanges();
+                    DisplayTable.AcceptChanges();
+                    filterUsed = false;
+
+                }
+                if (TestIfBoxesChecked() == 0)
+                {
+                    filterUsed = false;
+                }
+            }
           }
 
           /*
@@ -338,7 +387,9 @@ namespace C246SpellBook_V_2
 
                     foreach (var spell in spellLevel)
                     {
-                        DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, 
+                        bool contains = DisplayTable.AsEnumerable().Any(row => spell.ID == row.Field<string>("ID"));
+                        if (!contains)
+                            DisplayTable.Rows.Add(spell.ID, spell.Name, spell.Level, spell.School, 
                                                                     spell.Ritual, spell.Concentration, spell.Classes, spell.Time,
                                                                     spell.Range, spell.Components, spell.Materials,
                                                                     spell.Duration, spell.Description, spell.HigherLevel, 
@@ -454,7 +505,6 @@ namespace C246SpellBook_V_2
                 UseFilterTable(filterTableClass);
             }
         }
-
 
           // ColumnClick event handler.
           private void ColumnClick(object o, ColumnClickEventArgs e)

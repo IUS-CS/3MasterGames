@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
 
-namespace C246SpellBook_V_2
+namespace C246SpellBook_V_2.Model
 {
     /// <summary>
     /// This class is an implementation of the 'IComparer' interface.
