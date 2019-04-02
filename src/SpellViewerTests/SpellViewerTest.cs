@@ -214,19 +214,166 @@ namespace SpellViewerTests
             Assert.AreEqual(sList[1], spell2);
         }
 
-
         [TestMethod]
-        public void format_a_spell()
+        public void LevelAppend_0_Abjuration()
         {
             //Arrange 
+            var level = "0";
 
+            var school = "Abjuration";
 
+            var formatter = new displayFormatter();
+
+            var expected = "Abjuration Cantrip\r\n\r\n";
             //Act
 
+            var result = formatter.LevelAppend(level, school);
 
             //Assert
 
+            Assert.AreEqual(expected, result);
+        }
 
+
+        [TestMethod]
+        public void LevelAppend_1_Abjuration()
+        {
+            //Arrange 
+            var level = "1";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "1st-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+
+        [TestMethod]
+        public void LevelAppend_2_Abjuration()
+        {
+            //Arrange 
+            var level = "2";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "2nd-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void LevelAppend_3_Abjuration()
+        {
+            //Arrange 
+            var level = "3";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "3rd-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void LevelAppend_9_Abjuration()
+        {
+            //Arrange 
+            var level = "9";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "9th-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void LevelAppend_chicken_Abjuration()
+        {
+            //Arrange 
+            var level = "6";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "6th-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MaterialCheck_V_S_NM()
+        {
+            //Arrange 
+            var componets = "Verbal, Somatic, ";
+
+            var materials = "";
+
+            var formatter = new displayFormatter();
+
+            var expected = "\r\n";
+            //Act
+
+            var result = formatter.MaterialCheck(componets, materials);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MaterialCheck_V_NM()
+        {
+            //Arrange 
+            var componets = "Material";
+
+            var materials = "a chicken egg";
+
+            var formatter = new displayFormatter();
+
+            var expected = "(a chicken egg)\r\n";
+            //Act
+
+            var result = formatter.MaterialCheck(componets, materials);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
         }
     }
 }
