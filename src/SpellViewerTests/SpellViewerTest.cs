@@ -40,7 +40,7 @@ namespace SpellViewerTests
             string expectedClasses = "Wizard";
             string expectedDuration = "1 hour";
             SpellList spell = new SpellList();
-           
+
             spell.ID = ID;
             spell.Name = Name;
             spell.Level = Level;
@@ -203,7 +203,8 @@ namespace SpellViewerTests
 
             //Act
             sList.Add(spell);
-            SpellList spell2 = new SpellList(ID2, Name2, Level2, School2, Ritual2, Concentration2, Time2, Range2, Components2, Materials2, Duration2, Classes2, Description2, HigherLevel2, Source2);
+            SpellList spell2 = new SpellList(ID2, Name2, Level2, School2, Ritual2, Concentration2, Time2, Range2,
+                Components2, Materials2, Duration2, Classes2, Description2, HigherLevel2, Source2);
             sList.Add(spell2);
             int count = sList.Count;
 
@@ -212,6 +213,20 @@ namespace SpellViewerTests
             Assert.AreEqual(sList[0], spell);
             Assert.AreEqual(sList[1], spell2);
         }
-    }
 
+
+        [TestMethod]
+        public void format_a_spell()
+        {
+            //Arrange 
+
+
+            //Act
+
+
+            //Assert
+
+
+        }
+    }
 }
