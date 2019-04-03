@@ -165,7 +165,7 @@ namespace C246SpellBook_V_2.Model
 
             if (hasMat)
             {
-                text.AppendLine("(" + spell10 + ")");
+                text.AppendLine(" (" + spell10 + ")");
             }
             else
             {
