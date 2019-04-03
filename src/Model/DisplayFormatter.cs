@@ -5,50 +5,17 @@ using System.Windows.Forms;
 
 namespace C246SpellBook_V_2.Model
 {
-    internal class DisplayFormatter
+    public class displayFormatter
     {
-        internal DataTable DisplayTableReference;
-
-        internal RichTextBox Display;
-
-        ///<summary>  
-        ///  This method sets the local DisplayTable.
-        ///</summary>
-        ///<param name="displayTable">
-        ///  Referance to the data table that holds all the data.
-        ///</param>   
-        public void SetDataTable(ref DataTable displayTable)
-        {
-            DisplayTableReference = displayTable;
-        }
-
-        ///<summary>  
-        ///  This method sets the local reference to the output box.  
-        ///</summary>
-        ///<param name="display">
-        ///  Reference to the output RichTextBox.
-        public void SetDisplay(ref RichTextBox display)
-        {
-            this.Display = display;
-        }
 
         ///<summary>  
         ///  Takes a key and searches thru the data Table te find the unique spell
         ///</summary>
-        ///<param name="key">
+        ///<param name="spell">
         ///  Tho key is a unique spell identifier.
         ///</param> 
-        public void DisplayData(string key)
-        {
-            //temporary dataRow to allow display of data
-            var spellRow = DisplayTableReference.Rows.Find(key);
-
-            //call the formatter
-            Display.Text = Format(spellRow);
-        }
-
-        //format the string to be outputted on the display
-        private static string Format(DataRow spell)
+       //format the string to be outputted on the display
+        public string Format(DataRow spell)
         {
             /**
              * Representation within the spell DataRow
@@ -77,29 +44,7 @@ namespace C246SpellBook_V_2.Model
             //line spacing after the name 
             displayText.AppendLine();
 
-            //switch on the spells level
-            switch (spell[2].ToString())
-            {
-                //remember spell[3] is the spell's school
-                case "0":
-                    displayText.AppendLine(spell[3] + " Cantrip");
-                    break;
-                case "1":
-                    displayText.AppendLine(spell[2] + "st-level " + spell[3]);
-                    break;
-                case "2":
-                    displayText.AppendLine(spell[2] + "nd-level " + spell[3]);
-                    break;
-                case "3":
-                    displayText.AppendLine(spell[2] + "rd-level " + spell[3]);
-                    break;
-                default:
-                    displayText.AppendLine(spell[2] + "th-level " + spell[3]);
-                    break;
-            }
-
-            //add a line space
-            displayText.AppendLine();
+            displayText.Append(LevelAppend(spell[2].ToString(), spell[3].ToString()));
 
             //Displays the casting time of the spell
             displayText.AppendLine("Casting Time: " + spell[7]);
@@ -110,34 +55,14 @@ namespace C246SpellBook_V_2.Model
             //Componets #9 & Materials #10
             displayText.Append("Components: " + spell[9]);
 
-            MaterialCheck(ref displayText, spell[9].ToString());
+            displayText.Append(MaterialCheck(spell[9].ToString(), spell[10].ToString()));
 
             displayText.Append("Duration: ");
 
-            //spell[4] --> ritual attr.
-            //spell[5] --> concentration attr.
-            if (spell[4].Equals("true") && spell[5].Equals("true"))
-            {
-                displayText.AppendLine("Ritual & Concentration, up to " + spell[11]);
-            }
-            else if (spell[4].Equals("false") && spell[5].Equals("true"))
-            {
-                displayText.AppendLine("Concentration, up to " + spell[11]);
-            }
-            else if (spell[4].Equals("true") && spell[5].Equals("false"))
-            {
-                displayText.AppendLine("Ritual or " + spell[11]);
-            }
-            else
-            {
-                displayText.AppendLine(spell[11].ToString());
-            }
-
-            //add a line space
-            displayText.AppendLine();
+            displayText.Append(RitAndCon(spell[4].ToString(), spell[5].ToString(), spell[11].ToString()));
 
             //Displays the spell's description
-            NewlineParser(ref displayText, spell[12].ToString());
+            displayText.Append(NewlineParser(spell[12].ToString()));
 
             //add a line space
             displayText.AppendLine();
@@ -161,10 +86,72 @@ namespace C246SpellBook_V_2.Model
             return displayText.ToString();
         }
 
-
-        private static void MaterialCheck(ref StringBuilder text, string spell)
+        public string RitAndCon(string spell4, string spell5, string spell11)
         {
-            var materialChecker = spell.Split(new[] { "," }, StringSplitOptions.None);
+
+            StringBuilder text = new StringBuilder();
+
+            //spell[4] --> ritual attr.
+            //spell[5] --> concentration attr.
+            if (spell4.Equals("true") && spell5.Equals("true"))
+            {
+                text.AppendLine("Ritual & Concentration, up to " + spell11);
+            }
+            else if (spell4.Equals("false") && spell5.Equals("true"))
+            {
+                text.AppendLine("Concentration, up to " + spell11);
+            }
+            else if (spell4.Equals("true") && spell5.Equals("false"))
+            {
+                text.AppendLine("Ritual or " + spell11);
+            }
+            else
+            {
+                text.AppendLine(spell11);
+            }
+
+            //add a line space
+            text.AppendLine();
+
+            return text.ToString();
+        }
+
+        public string LevelAppend(string spell2, string spell3)
+        {
+            StringBuilder text = new StringBuilder();
+            
+            switch (spell2)
+            {
+                //remember spell[3] is the spell's school
+                case "0":
+                    text.AppendLine(spell3 + " Cantrip");
+                    break;
+                case "1":
+                    text.AppendLine(spell2 + "st-level " + spell3);
+                    break;
+                case "2":
+                    text.AppendLine(spell2 + "nd-level " + spell3);
+                    break;
+                case "3":
+                    text.AppendLine(spell2 + "rd-level " + spell3);
+                    break;
+                default:
+                    text.AppendLine(spell2 + "th-level " + spell3);
+                    break;
+            }
+
+            //add a line space
+            text.AppendLine();
+
+            return text.ToString();
+
+        }
+        
+        public string MaterialCheck(string spell9, string spell10)
+        {
+            StringBuilder text = new StringBuilder();
+
+            var materialChecker = spell9.Split(new[] { "," }, StringSplitOptions.None);
 
             var hasMat = false;
 
@@ -178,12 +165,14 @@ namespace C246SpellBook_V_2.Model
 
             if (hasMat)
             {
-                text.AppendLine("(" + spell[10] + ")");
+                text.AppendLine(" (" + spell10 + ")");
             }
             else
             {
                 text.AppendLine();
             }
+
+            return text.ToString();
         }
 
         /**
@@ -192,8 +181,10 @@ namespace C246SpellBook_V_2.Model
          * format method to properly display a spell's description.
          */
 
-        private static void NewlineParser(ref StringBuilder text, string spell)
+        public string NewlineParser(string spell)
         {
+            StringBuilder text = new StringBuilder();
+
             //will hold the spell description read up until a '\n' is found
             var temp = "";
             for (var i = 0; i < spell.Length; i++)
@@ -227,6 +218,7 @@ namespace C246SpellBook_V_2.Model
                 }
             }
 
+            return text.ToString();
         }
     }
 }

@@ -33,8 +33,6 @@ namespace C246SpellBook_V_2
           private DataTable tempSpells;
           private DataView dvSpells;
           private DataTable DisplayTable;
-
-          DisplayFormatter formatter = new DisplayFormatter();
             
            
         //For Filters
@@ -92,10 +90,6 @@ namespace C246SpellBook_V_2
                 DisplayTable.Columns.Add("Description");
                 DisplayTable.Columns.Add("Higher Level");
                 DisplayTable.Columns.Add("Source");
-
-
-            formatter.SetDataTable(ref DisplayTable);
-            formatter.SetDisplay(ref Spell_Display);
 
 
             tempSpells = new DataTable();
@@ -571,8 +565,9 @@ namespace C246SpellBook_V_2
           // this method is trigger when the hightlighted spell is changed
           private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
           {
-            
-              // get changed index
+            var format = new displayFormatter();
+
+            // get changed index
             var spellIndex =  listView1.SelectedIndices;
 
             // error handling for when selected items are being changed
@@ -584,8 +579,10 @@ namespace C246SpellBook_V_2
 
                 //get the key name 
                 string key = listView1.Items[index].Text;
-               
-                formatter.DisplayData(key);
+
+                var spellRow = DisplayTable.Rows.Find(key);
+
+                Spell_Display.Text = format.Format(spellRow);
             }
         }
 

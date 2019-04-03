@@ -40,7 +40,7 @@ namespace SpellViewerTests
             string expectedClasses = "Wizard";
             string expectedDuration = "1 hour";
             SpellList spell = new SpellList();
-           
+
             spell.ID = ID;
             spell.Name = Name;
             spell.Level = Level;
@@ -203,7 +203,8 @@ namespace SpellViewerTests
 
             //Act
             sList.Add(spell);
-            SpellList spell2 = new SpellList(ID2, Name2, Level2, School2, Ritual2, Concentration2, Time2, Range2, Components2, Materials2, Duration2, Classes2, Description2, HigherLevel2, Source2);
+            SpellList spell2 = new SpellList(ID2, Name2, Level2, School2, Ritual2, Concentration2, Time2, Range2,
+                Components2, Materials2, Duration2, Classes2, Description2, HigherLevel2, Source2);
             sList.Add(spell2);
             int count = sList.Count;
 
@@ -212,6 +213,207 @@ namespace SpellViewerTests
             Assert.AreEqual(sList[0], spell);
             Assert.AreEqual(sList[1], spell2);
         }
-    }
 
+        [TestMethod]
+        public void LevelAppend_0_Abjuration()
+        {
+            //Arrange 
+            var level = "0";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "Abjuration Cantrip\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+
+        [TestMethod]
+        public void LevelAppend_1_Abjuration()
+        {
+            //Arrange 
+            var level = "1";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "1st-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+
+        [TestMethod]
+        public void LevelAppend_2_Abjuration()
+        {
+            //Arrange 
+            var level = "2";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "2nd-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void LevelAppend_3_Abjuration()
+        {
+            //Arrange 
+            var level = "3";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "3rd-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void LevelAppend_9_Abjuration()
+        {
+            //Arrange 
+            var level = "9";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "9th-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void LevelAppend_chicken_Abjuration()
+        {
+            //Arrange 
+            var level = "6";
+
+            var school = "Abjuration";
+
+            var formatter = new displayFormatter();
+
+            var expected = "6th-level Abjuration\r\n\r\n";
+            //Act
+
+            var result = formatter.LevelAppend(level, school);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MaterialCheck_V_S_NM()
+        {
+            //Arrange 
+            var componets = "Verbal, Somatic, ";
+
+            var materials = "";
+
+            var formatter = new displayFormatter();
+
+            var expected = "\r\n";
+            //Act
+
+            var result = formatter.MaterialCheck(componets, materials);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MaterialCheck_V_NM()
+        {
+            //Arrange 
+            var componets = "Material";
+
+            var materials = "a chicken egg";
+
+            var formatter = new displayFormatter();
+
+            var expected = " (a chicken egg)\r\n";
+            //Act
+
+            var result = formatter.MaterialCheck(componets, materials);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MaterialCheck_V_S_M()
+        {
+            //Arrange 
+            var componets = "Verbal, Somatic, Material";
+
+            var materials = "a chicken egg";
+
+            var formatter = new displayFormatter();
+
+            var expected = " (a chicken egg)\r\n";
+            //Act
+
+            var result = formatter.MaterialCheck(componets, materials);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+
+        /*
+        [TestMethod]
+        public void NewlineParser_long()
+        {
+            //Arrange 
+            var description = "  You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.\\n This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).";
+
+            var formatter = new displayFormatter();
+
+            var expected =    "  You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.\n\r\n  This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).\n";
+            //Act
+
+            var result = formatter.NewlineParser(description);
+
+            //Assert
+
+            Assert.AreEqual(expected, result);
+        }
+        */
+    }
 }
