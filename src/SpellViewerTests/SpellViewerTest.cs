@@ -65,7 +65,7 @@ namespace SpellViewerTests
             // Assert
             Assert.AreEqual(expectedName, actualName);
             Assert.AreEqual(expectedClasses, actualClasses);
-            Assert.AreEqual(expectedClasses, actualClasses);
+            Assert.AreEqual(expectedDuration, actualDuration);
         }
 
         ///<summary>  
@@ -228,7 +228,7 @@ namespace SpellViewerTests
             //Act
 
             var result = formatter.LevelAppend(level, school);
-
+            
             //Assert
 
             Assert.AreEqual(expected, result);
