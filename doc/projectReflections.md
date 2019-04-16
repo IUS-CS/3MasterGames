@@ -1,8 +1,7 @@
 # Project Reflections
 
 ## John:
-
-### This project was a good learning experience for me. We started this project going in witht the mind of using C# a
+This project was a good learning experience for me. We started this project going in witht the mind of using C# a
 language that none of us had alot of experience with. We encountered a few hiccups throughout the program, such as
 the organization of our code. Instead of creating an organized program, and seperating logic, UI, infrastructure, and etc. 
 we started to write the code more or less all together. By doing, this we now know the struggle and how painful it is
