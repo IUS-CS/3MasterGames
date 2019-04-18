@@ -21,3 +21,9 @@ and returns a formated string. The issue I found with this is that we had our wh
 our database was all over our code base. After this semester, I plan to make this project open source and continue working on it.
 
 ## Brandon
+I thoroughly enjoyed this project and this class altogether probably taught me the most since I’ve started school. I learned a new language, and taught myself how to 
+do good research to use tools I’ve never used before. Most of the project I worked on was filters. I created the UI for filters and I successfully implemented the 
+filters for levels. One of the issues we ran into with this is filters with classes, whenever you have multiple filters checked, such as “bard” and “wizard”, it only
+shows you classes with both bard and wizard. I believe this is because our classes were just one long, giant string and we probably should’ve refined how classes were
+put into our spell class. Other than that I also worked on putting all of the spells into lists for the filter, and created the main filter function, the reset button,
+and the function that tests if any checkboxes are checked. 
